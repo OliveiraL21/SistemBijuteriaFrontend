@@ -1,0 +1,7 @@
+<div class="w-full flex justify-content-center" [formGroup]="form">
+  <p-floatLabel>
+    <input type="text" pInputText [id]="controlData.id" [formControlName]="controlData.controlName"
+      [disabled]="controlData.disabled">
+    <label [for]="controlData.forLabel">{{controlData.label}}</label>
+  </p-floatLabel>
+</div>
