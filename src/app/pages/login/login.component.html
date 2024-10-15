@@ -1,6 +1,6 @@
-<div class=" h-auto w-full flex justify-content-center">
-  <form [formGroup]="form" style="background-color:  red;">
-    <p-card header="Login">
+<div class="w-full flex justify-content-center">
+  <form [formGroup]="form">
+    <p-card header="Login" class="max-w-20rem">
       <app-input-text [form]="form" [controlData]="getCustomInputUsername()"></app-input-text>
       <app-input-password [form]="form" [controlData]="getCustomPassword()"></app-input-password>
       <app-custom-button [custom]="getCustomButton()"></app-custom-button>
