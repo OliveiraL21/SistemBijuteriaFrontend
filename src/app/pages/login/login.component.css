@@ -1,7 +1,15 @@
 .login-backgroud {
-  background-image: url('../../../../assets/images/2831650.jpg') !important;
+  background-image: url('../../../assets/images/2831650.jpg') !important;
 }
 
 .p-inputtext {
   width: '100%' !important;
+}
+
+.system-icon {
+  background-image: url('../../../assets/images/diamond-ring.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 150px;
 }
