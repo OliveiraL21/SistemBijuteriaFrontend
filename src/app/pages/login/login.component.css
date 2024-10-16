@@ -1,3 +1,7 @@
 .login-backgroud {
   background-image: url('../../../../assets/images/2831650.jpg') !important;
 }
+
+.p-inputtext {
+  width: '100%' !important;
+}
