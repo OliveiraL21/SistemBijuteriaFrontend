@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   getCustomButton(): CustomButton {
-    return new CustomButton("Logar");
+    return new CustomButton("Logar", true, 'w-full bg-indigo-600');
   }
 
   initForm(): void {

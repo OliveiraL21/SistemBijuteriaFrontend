@@ -18,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputPasswordComponent } from '../../components/input-password/input-password.component';
 import { CustomButtonComponent } from '../../components/custom-button/custom-button.component';
+import { StyleClassModule } from 'primeng/styleclass';
+import { ImageModule } from 'primeng/image';
 
 
 
@@ -45,6 +47,8 @@ import { CustomButtonComponent } from '../../components/custom-button/custom-but
     FormsModule,
     ReactiveFormsModule,
     FloatLabelModule,
+    StyleClassModule,
+    ImageModule,
   ],
   exports: [
     CommonModule,
@@ -67,6 +71,8 @@ import { CustomButtonComponent } from '../../components/custom-button/custom-but
     SelectComponent,
     InputPasswordComponent,
     CustomButtonComponent,
+    StyleClassModule,
+    ImageModule
   ]
 })
 export class SharedModule { }

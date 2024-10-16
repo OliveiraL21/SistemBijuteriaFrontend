@@ -1,9 +1,13 @@
-<div class="w-full flex justify-content-center">
-  <form [formGroup]="form">
-    <p-card header="Login" class="max-w-20rem">
+<div class="w-screen h-screen flex justify-content-center align-items-center login-backgroud">
+  <p-card class="w-25rem h-20rem flex justify-content-center align-items-center">
+    <div clas="w-full flex justify-content-center align-items-center">
+      <p-image src="../../../../assets/images/ring_icon.png" alt="logo do sistema" width="250" />
+      <h2 class="text-center p-4 text-5xl">Bijus da Manu</h2>
+    </div>
+    <form [formGroup]="form" class="mt-2">
       <app-input-text [form]="form" [controlData]="getCustomInputUsername()"></app-input-text>
       <app-input-password [form]="form" [controlData]="getCustomPassword()"></app-input-password>
       <app-custom-button [custom]="getCustomButton()"></app-custom-button>
-    </p-card>
-  </form>
+    </form>
+  </p-card>
 </div>
