@@ -1,4 +1,9 @@
 <div class="w-screen h-screen flex justify-content-center align-items-center login-backgroud">
+  <p-toast position="top-right" key="tr"></p-toast>
+  <p-blockUI [blocked]="loading">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
   <p-card class="w-25rem h-20rem flex justify-content-center align-items-center">
     <div clas="w-full flex-column justify-content-center align-items-center">
       <div class="w-full system-icon"></div>
@@ -7,7 +12,7 @@
     <form [formGroup]="form" class="mt-2">
       <app-input-text [form]="form" [controlData]="getCustomInputUsername()"></app-input-text>
       <app-input-password [form]="form" [controlData]="getCustomPassword()"></app-input-password>
-      <app-custom-button [custom]="getCustomButton()"></app-custom-button>
+      <app-custom-button [custom]="getCustomButton()" (onClickEvent)="logar()"></app-custom-button>
     </form>
   </p-card>
 </div>

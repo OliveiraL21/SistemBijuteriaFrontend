@@ -20,6 +20,9 @@ import { InputPasswordComponent } from '../../components/input-password/input-pa
 import { CustomButtonComponent } from '../../components/custom-button/custom-button.component';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ImageModule } from 'primeng/image';
+import { CustomToastComponent } from '../../components/toast/custom-toast/custom-toast.component';
+import { BlockUI, BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 
@@ -29,6 +32,7 @@ import { ImageModule } from 'primeng/image';
     SelectComponent,
     InputPasswordComponent,
     CustomButtonComponent,
+    CustomToastComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +53,9 @@ import { ImageModule } from 'primeng/image';
     FloatLabelModule,
     StyleClassModule,
     ImageModule,
+    ToastModule,
+    BlockUIModule,
+    ProgressSpinnerModule,
   ],
   exports: [
     CommonModule,
@@ -72,7 +79,11 @@ import { ImageModule } from 'primeng/image';
     InputPasswordComponent,
     CustomButtonComponent,
     StyleClassModule,
-    ImageModule
+    ImageModule,
+    ToastModule,
+    CustomToastComponent,
+    BlockUIModule,
+    ProgressSpinnerModule,
   ]
 })
 export class SharedModule { }
