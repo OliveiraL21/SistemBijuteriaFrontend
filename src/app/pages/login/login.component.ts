@@ -6,6 +6,8 @@ import { CustomButton } from '../../models/custonsModels/CustomButtonData/Custom
 import { UtilsRepository } from '../../common/helpers/utilsRepository/UtilsRepository';
 import { MessageService } from 'primeng/api';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,8 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   loading: boolean = false;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService, private service: LoginService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private service: LoginService, private route: Router,
+    private tokenService: TokenService) { }
 
   getCustomInputUsername(): CustomInputText {
     return new CustomInputText('username', '', 'username', 'Username', 'username', false);
@@ -56,7 +59,8 @@ export class LoginComponent implements OnInit {
           console.log(response);
           this.loading = false;
           this.showMessage('success', 'Login', `${response.message}`);
-          localStorage.setItem('token', response.acessToken);
+          this.tokenService.setToken(response.accessToken);
+          this.route.navigateByUrl('cliente/lista');
         },
         error: (error: any) => {
           this.loading = false;
