@@ -5,6 +5,7 @@ import { CustomPassword } from '../../models/custonsModels/CustomPasswordData/Cu
 import { CustomButton } from '../../models/custonsModels/CustomButtonData/CustomButton';
 import { UtilsRepository } from '../../common/helpers/utilsRepository/UtilsRepository';
 import { MessageService } from 'primeng/api';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   loading: boolean = false;
 
-  constructor(private fb: FormBuilder, private messageService: MessageService) { }
+  constructor(private fb: FormBuilder, private messageService: MessageService, private service: LoginService) { }
 
   getCustomInputUsername(): CustomInputText {
     return new CustomInputText('username', '', 'username', 'Username', 'username', false);
@@ -49,7 +50,19 @@ export class LoginComponent implements OnInit {
   logar(): void {
     this.loading = true;
     if (this.form.valid) {
-
+      let data = this.form.value;
+      this.service.login(data).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.loading = false;
+          this.showMessage('success', 'Login', `${response.message}`);
+          localStorage.setItem('token', response.acessToken);
+        },
+        error: (error: any) => {
+          this.loading = false;
+          this.showMessage('error', 'Login', `${error.message}`);
+        }
+      })
     } else {
       UtilsRepository.getRequiredFieldsInvalid(this.form);
       this.showMessage('error', 'Login', 'Por favor informe os campos obrigatórios');

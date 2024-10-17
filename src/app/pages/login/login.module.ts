@@ -8,7 +8,7 @@ import { LoginRoutingModule } from './login-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    LoginRoutingModule
+    LoginRoutingModule,
   ],
   declarations: [LoginComponent],
   exports: [

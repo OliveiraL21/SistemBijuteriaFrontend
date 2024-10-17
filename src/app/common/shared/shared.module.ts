@@ -23,6 +23,7 @@ import { ImageModule } from 'primeng/image';
 import { CustomToastComponent } from '../../components/toast/custom-toast/custom-toast.component';
 import { BlockUI, BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -56,6 +57,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ToastModule,
     BlockUIModule,
     ProgressSpinnerModule,
+    HttpClientModule,
   ],
   exports: [
     CommonModule,
@@ -84,6 +86,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     CustomToastComponent,
     BlockUIModule,
     ProgressSpinnerModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }
