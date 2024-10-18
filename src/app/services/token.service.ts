@@ -10,16 +10,16 @@ export class TokenService {
     localStorage.setItem('token', token);
   }
 
-  getToken(): string {
-    return localStorage.getItem('token') ?? '';
+  getToken(): string | undefined {
+    return localStorage.getItem('token') ?? undefined;
   }
 
   removeToken(): void {
     localStorage.removeItem('token');
   }
 
-  possuiToken() {
-    return !!this.getToken();
+  possuiToken(): boolean {
+    return this.getToken() !== undefined ? true : false;
   }
 
   clearStorage() {

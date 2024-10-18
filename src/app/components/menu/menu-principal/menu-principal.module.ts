@@ -12,6 +12,9 @@ import { SharedModule } from '../../../common/shared/shared.module';
   imports: [
     CommonModule,
     SharedModule
+  ],
+  exports: [
+    MenuPrincipalComponent
   ]
 })
 export class MenuPrincipalModule { }

@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './common/shared/shared.module';
 import { MenuPrincipalComponent } from './components/menu/menu-principal/menu-principal.component';
+import { LoginModule } from "./pages/login/login.module";
+import { MenuPrincipalModule } from './components/menu/menu-principal/menu-principal.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -13,9 +16,11 @@ import { MenuPrincipalComponent } from './components/menu/menu-principal/menu-pr
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    LoginModule,
+    MenuPrincipalModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

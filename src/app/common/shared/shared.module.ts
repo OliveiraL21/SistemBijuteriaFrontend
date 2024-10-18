@@ -26,7 +26,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { MenuPrincipalComponent } from '../../components/menu/menu-principal/menu-principal.component';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -62,7 +66,9 @@ import { MessageService } from 'primeng/api';
     ProgressSpinnerModule,
     HttpClientModule,
     MessageModule,
-    RippleModule
+    RippleModule,
+    MenuModule,
+    PanelMenuModule,
   ],
   exports: [
     CommonModule,
@@ -93,10 +99,13 @@ import { MessageService } from 'primeng/api';
     ProgressSpinnerModule,
     HttpClientModule,
     MessageModule,
-    RippleModule
+    RippleModule,
+    MenuModule,
+    PanelMenuModule,
   ],
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ]
 })
 export class SharedModule { }

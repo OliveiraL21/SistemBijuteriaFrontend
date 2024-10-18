@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   showMessage(type: string, title: string, message: string) {
-    this.messageService.add({ severity: type, summary: title, detail: message });
+    this.messageService.clear();
+    this.messageService.add({ severity: type, summary: title, detail: message, key: "tr", life: 3000 });
   }
 
   initForm(): void {
@@ -57,9 +58,16 @@ export class LoginComponent implements OnInit {
         next: (response: any) => {
           console.log(response);
           this.loading = false;
-          this.showMessage('success', 'Login', `${response.message}`);
-          this.tokenService.setToken(response.accessToken);
-          this.route.navigateByUrl('cliente/lista');
+
+          if (response.authenticated) {
+            this.showMessage('success', 'Login', `${response.message}`);
+            this.tokenService.setToken(response.accessToken);
+            this.route.navigateByUrl('cliente/lista');
+          } else {
+            this.showMessage('error', 'Login', `${response.message}`);
+          }
+
+
         },
         error: (error: any) => {
           this.loading = false;

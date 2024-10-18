@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from './services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Bijuteria da Manu';
+  authenticated: boolean = false;
+
+  constructor(private tokenService: TokenService) {
+    this.authenticated = this.tokenService.possuiToken();
+  }
+
+  ngOnInit() {
+    console.log(this.authenticated)
+  }
 }

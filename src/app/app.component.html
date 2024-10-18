@@ -1,3 +1,10 @@
 <main class="w-full h-screen">
-  <router-outlet></router-outlet>
+  <div *ngIf="authenticated == false">
+    <app-login></app-login>
+  </div>
+  <div *ngIf="authenticated">
+    <app-menu-principal></app-menu-principal>
+    <router-outlet></router-outlet>
+  </div>
+
 </main>
