@@ -26,6 +26,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
 import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -93,6 +94,9 @@ import { RippleModule } from 'primeng/ripple';
     HttpClientModule,
     MessageModule,
     RippleModule
+  ],
+  providers: [
+    MessageService
   ]
 })
 export class SharedModule { }

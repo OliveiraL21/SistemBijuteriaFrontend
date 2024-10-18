@@ -13,7 +13,6 @@ import { TokenService } from '../../services/token.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
 
