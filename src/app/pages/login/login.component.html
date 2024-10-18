@@ -4,10 +4,10 @@
     <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
       animationDuration=".5s"></p-progressSpinner>
   </p-blockUI>
-  <p-card class="w-25rem  flex justify-content-center align-items-center">
+  <p-card class="w-25rem md:h-2rem  flex justify-content-center align-items-center">
     <div clas="w-full flex-column justify-content-center align-items-center">
       <div class="w-full system-icon"></div>
-      <h2 class="text-center p-4 text-5xl">Bijus da Manu</h2>
+      <h2 class="text-center p-4 text-5xl md:text-3xl">Bijus da Manu</h2>
     </div>
     <form [formGroup]="form" class="mt-2">
       <app-input-text [form]="form" [controlData]="getCustomInputUsername()"></app-input-text>

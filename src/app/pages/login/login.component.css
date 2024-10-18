@@ -13,3 +13,9 @@
   background-position: center;
   height: 150px;
 }
+
+@media (min-width: 1050px) {
+  .system-icon {
+    height: 100px;
+  }
+}
