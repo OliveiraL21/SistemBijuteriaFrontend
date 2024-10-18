@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   showMessage(type: string, title: string, message: string) {
-    this.messageService.add({ severity: type, summary: title, detail: message, life: 3000 });
+    this.messageService.add({ severity: type, summary: title, detail: message });
   }
 
   initForm(): void {
