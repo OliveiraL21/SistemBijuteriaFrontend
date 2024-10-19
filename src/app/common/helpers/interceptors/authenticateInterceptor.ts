@@ -11,7 +11,7 @@ export class AuthenticateInterceptor implements HttpInterceptor {
 
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.split('/')[2] == environment.api_url.split('/')[2]) {
+    if (req.url.split('/')[1] == 'login') {
       return next.handle(req);
     }
 

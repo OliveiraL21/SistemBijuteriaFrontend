@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
-const baseUrl = `${environment.api_url}/Login`
+const baseUrl = `${environment.api_url}/api/Login`
 
 @Injectable({
   providedIn: 'root'
