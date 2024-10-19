@@ -31,6 +31,8 @@ import { MenuModule } from 'primeng/menu';
 import { MenuPrincipalComponent } from '../../components/menu/menu-principal/menu-principal.component';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 
 
@@ -69,6 +71,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RippleModule,
     MenuModule,
     PanelMenuModule,
+    AvatarModule,
+    AvatarGroupModule
   ],
   exports: [
     CommonModule,
@@ -102,6 +106,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RippleModule,
     MenuModule,
     PanelMenuModule,
+    AvatarModule,
+    AvatarGroupModule
   ],
   providers: [
     MessageService,

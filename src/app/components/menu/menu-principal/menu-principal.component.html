@@ -1,3 +1,23 @@
 <div class="card flex justify-content-center">
-  <p-menu [model]="items" />
+  <p-menu class="text-white-alpha-80"
+    styleClass="bg-indigo-500 h-screen text-white-alpha-80 border-none border-noround-left" [model]="items">
+    <ng-template pTemplate="start">
+      <span class="inline-flex align-items-center gap-2 px-2 py-2">
+        <img src="diamond-ring.png" alt="system logo" height="60px" width="60px">
+        <h4 class="text-white font-bold">Bijus da Manu</h4>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="end" class="text-color hover:pink-500">
+      <button pRipple
+        class="relative p-link bg-indigo-500 button-hover overflow-hidden p-2 pl-3 text-color hover:pink-700 border-noround border-none w-full flex justify-content-start align-items-center"
+        (click)="minhaConta()">
+        <p-avatar image="manu.jpg" styleClass="mr-2" shape="circle"></p-avatar>
+        <span class="inline-flex flex-column">
+          <span class="text-white font-bold text-sm">{{username}}</span>
+
+        </span>
+      </button>
+    </ng-template>
+  </p-menu>
+
 </div>

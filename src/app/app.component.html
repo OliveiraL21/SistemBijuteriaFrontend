@@ -1,8 +1,8 @@
-<main class="w-full h-screen">
+<main class="w-full h-screen p-0 m-0">
   <div *ngIf="authenticated == false">
-    <app-login></app-login>
+    <router-outlet></router-outlet>
   </div>
-  <div *ngIf="authenticated">
+  <div *ngIf="authenticated" class="flex gap-4">
     <app-menu-principal></app-menu-principal>
     <router-outlet></router-outlet>
   </div>

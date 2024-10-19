@@ -1,0 +1,27 @@
+::ng-deep .p-menuitem-text {
+  color: #fff;
+}
+
+
+::ng-deep .p-menuitem-link:hover {
+  background-color: #d63384;
+  color: #000
+}
+
+::ng-deep .p-menuitem-link:focus {
+  background-color: #d63384;
+  color: #000;
+}
+
+::ng-deep .p-menuitem-link:focus::after {
+  background-color: #6610f2;
+  color: #ffffff;
+}
+
+.button-hover:hover {
+  background-color: #d63384 !important;
+}
+
+.button-hover:focus {
+  background-color: #d63384 !important;
+}
