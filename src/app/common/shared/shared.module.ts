@@ -33,6 +33,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { CustomTableComponent } from '../../components/custom-table/custom-table.component';
 
 
 
@@ -43,6 +44,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     InputPasswordComponent,
     CustomButtonComponent,
     CustomToastComponent,
+    CustomTableComponent,
   ],
   imports: [
     CommonModule,
@@ -72,7 +74,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     MenuModule,
     PanelMenuModule,
     AvatarModule,
-    AvatarGroupModule
+    AvatarGroupModule,
+    TableModule,
   ],
   exports: [
     CommonModule,
@@ -107,7 +110,9 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     MenuModule,
     PanelMenuModule,
     AvatarModule,
-    AvatarGroupModule
+    AvatarGroupModule,
+    TableModule,
+    CustomTableComponent
   ],
   providers: [
     MessageService,
