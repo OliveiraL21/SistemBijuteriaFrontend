@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomInputText } from '../../../models/custonsModels/CustomTextInputData/CustomInputText';
 import { CustomFormControls } from '../../../models/custonsModels/CustomFormData/CustomFormControls';
+import { Router } from '@angular/router';
+import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -10,7 +12,7 @@ import { CustomFormControls } from '../../../models/custonsModels/CustomFormData
 })
 export class CadastroClienteComponent {
   form!: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.onInitForm();
   }
 
@@ -31,12 +33,20 @@ export class CadastroClienteComponent {
     ]
   }
 
+  getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
+    return new CustomButton(label, rounded, styles, severity);
+  }
+
   onInitForm(): void {
     this.form = this.fb.group({
       nome: [null, [Validators.required]],
       cpf: [null, null],
       telefone: [null, [Validators.required]]
     })
+  }
+
+  voltar() {
+    this.router.navigateByUrl('cliente/lista');
   }
 
   ngOnIniti() {

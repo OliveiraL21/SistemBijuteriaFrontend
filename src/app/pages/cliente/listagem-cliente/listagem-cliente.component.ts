@@ -20,7 +20,7 @@ export class ListagemClienteComponent {
 
 
   getCustomButton(): CustomButton {
-    return new CustomButton('Novo Cliente', false, '');
+    return new CustomButton('Novo Cliente', false, '', 'primary');
   }
 
   getClientes() {

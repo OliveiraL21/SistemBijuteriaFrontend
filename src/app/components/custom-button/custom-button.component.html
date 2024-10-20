@@ -1,2 +1,3 @@
 <p-button [label]="custom.label" [rounded]="custom.rounded"
+  [severity]="custom.severity == 'danger'? 'danger' : 'primary'"
   [styleClass]="custom.stylesClasses ? custom.stylesClasses : ''" (onClick)="click()" />
