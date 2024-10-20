@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/entityModels/cliente/Cliente';
+import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
 
 @Component({
   selector: 'app-listagem-cliente',
@@ -17,6 +18,11 @@ export class ListagemClienteComponent {
 
   }
 
+
+  getCustomButton(): CustomButton {
+    return new CustomButton('Novo Cliente', false, '');
+  }
+
   getClientes() {
     this.loading = true;
     this.clienteService.listAll().subscribe({
@@ -28,6 +34,10 @@ export class ListagemClienteComponent {
         console.log(error);
       }
     })
+  }
+
+  novo() {
+    this.router.navigateByUrl('cliente/cadastro');
   }
 
   ngOnInit() {

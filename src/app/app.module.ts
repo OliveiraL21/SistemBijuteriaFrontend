@@ -9,6 +9,8 @@ import { MenuPrincipalModule } from './components/menu/menu-principal/menu-princ
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthenticateInterceptor } from './common/helpers/interceptors/authenticateInterceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { errorInterceptor } from './common/helpers/interceptors/error.interceptor';
+import { CustomFormComponent } from './components/custom-form/custom-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserAnimationsModule,
   ],
   providers: [
-    AuthenticateInterceptor, { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
+    AuthenticateInterceptor, { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true },
+    errorInterceptor, { provide: HTTP_INTERCEPTORS, useClass: errorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

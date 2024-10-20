@@ -1,6 +1,6 @@
 <div class="w-full mb-5" [formGroup]="form">
   <p-floatLabel>
-    <input type="text" pInputText [id]="controlData.id" [formControlName]="controlData.controlName" class="w-full">
+    <input type="text" pInputText [formControlName]="controlData.controlName" class="w-full">
     <label [for]="controlData.forLabel">{{controlData.label}}</label>
   </p-floatLabel>
   <small *ngIf="form.get(controlData.controlName)?.hasError('required') && form.get(controlData.controlName)?.dirty"

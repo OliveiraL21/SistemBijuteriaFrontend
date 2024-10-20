@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { CustomTableComponent } from '../../components/custom-table/custom-table.component';
+import { CustomFormComponent } from '../../components/custom-form/custom-form.component';
 
 
 
@@ -45,6 +46,7 @@ import { CustomTableComponent } from '../../components/custom-table/custom-table
     CustomButtonComponent,
     CustomToastComponent,
     CustomTableComponent,
+    CustomFormComponent,
   ],
   imports: [
     CommonModule,
@@ -112,7 +114,8 @@ import { CustomTableComponent } from '../../components/custom-table/custom-table
     AvatarModule,
     AvatarGroupModule,
     TableModule,
-    CustomTableComponent
+    CustomTableComponent,
+    CustomFormComponent,
   ],
   providers: [
     MessageService,

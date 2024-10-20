@@ -1,1 +1,10 @@
-<p>cadastro-cliente works!</p>
+<div class="w-full mt-5 p-4">
+  <p-card>
+    <h1>Cadastro de Cliente</h1>
+    <app-custom-form [form]="form" [controls]="getFormControls()"></app-custom-form>
+    <div class="w-full mt-2 flex justify-content-between">
+      <p-button label="Cancelar" severity="danger"></p-button>
+      <p-button label="Salvar"></p-button>
+    </div>
+  </p-card>
+</div>

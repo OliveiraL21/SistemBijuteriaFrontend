@@ -1,5 +1,33 @@
 <div class="w-full h-full p-2">
   <p-table [value]="clientes">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <div class="flex w-6 justify-content-start align-items-center">
+          <h1>Clientes</h1>
+        </div>
+        <div class="flex w-6 justify-content-end align-items-center">
+          <app-custom-button [custom]="getCustomButton()" (onClickEvent)="novo()"></app-custom-button>
+        </div>
+      </div>
 
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nome</th>
+        <th style="width: '20%'">Telefone</th>
+        <th style="width: '10%'">Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente>
+      <tr>
+        <td>{{cliente.nome}}</td>
+        <td>{{cliente.telefone}}</td>
+        <td>
+          <p-button icon="pi pi-pencil" severity="info"></p-button>
+          <p-button icon="pi pi-trash" severity="danger"></p-button>
+        </td>
+      </tr>
+    </ng-template>
   </p-table>
 </div>

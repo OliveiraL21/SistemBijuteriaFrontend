@@ -1,0 +1,17 @@
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { CustomFormControls } from '../../models/custonsModels/CustomFormData/CustomFormControls';
+
+@Component({
+  selector: 'app-custom-form',
+  templateUrl: './custom-form.component.html',
+  styleUrl: './custom-form.component.scss'
+})
+export class CustomFormComponent {
+  @Input() form!: FormGroup;
+  @Input() controls?: CustomFormControls[];
+
+  constructor() {
+
+  }
+}

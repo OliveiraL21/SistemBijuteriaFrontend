@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <div *ngFor="let control of controls">
+    <div *ngIf="control.type === 'text'" class="w-25rem">
+      <app-input-text [controlData]="control.data" [form]="form"></app-input-text>
+    </div>
+
+    <div *ngIf="control.type === 'select'">
+      <app-select></app-select>
+    </div>
+  </div>
+</form>
