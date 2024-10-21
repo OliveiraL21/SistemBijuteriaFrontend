@@ -77,7 +77,7 @@ export class CadastroClienteComponent {
     this.clienteService.create(cliente).subscribe({
       next: (response: Cliente) => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente cadastrado com sucesso !' });
+        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente cadastrado com sucesso !', key: 'tr1' });
         this.router.navigateByUrl('cliente/lista');
       },
       error: (error: any) => {
@@ -114,7 +114,7 @@ export class CadastroClienteComponent {
       }
     } else {
       this.messageService.clear();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor preencha todos os campos obrigatórios', life: 3000 });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor preencha todos os campos obrigatórios', life: 3000, key: 'tr1' });
       UtilsRepository.getRequiredFieldsInvalid(this.form);
       this.loading = false;
     }
