@@ -11,6 +11,7 @@ import { AuthenticateInterceptor } from './common/helpers/interceptors/authentic
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { errorInterceptor } from './common/helpers/interceptors/error.interceptor';
 import { CustomFormComponent } from './components/custom-form/custom-form.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { CustomFormComponent } from './components/custom-form/custom-form.compon
   providers: [
     AuthenticateInterceptor, { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true },
     errorInterceptor, { provide: HTTP_INTERCEPTORS, useClass: errorInterceptor, multi: true },
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

@@ -14,4 +14,8 @@ export class CustomFormComponent {
   constructor() {
 
   }
+
+  trackByFn(index: any, item: any) {
+    return index;
+  }
 }

@@ -1,11 +1,17 @@
 <div class="w-full mt-5 p-4">
+  <p-toast position="top-right" [key]="'tr1'" />
+  <p-blockUI [blocked]="loading">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
   <p-card>
-    <h1>Cadastro de Cliente</h1>
+    <h1 class="mb-4 -mt-2">Cadastro de Cliente</h1>
     <app-custom-form [form]="form" [controls]="getFormControls()"></app-custom-form>
     <div class="w-full mt-2 flex justify-content-between">
       <app-custom-button [custom]="getCustomButton('Cancelar', false, '', 'danger')"
         (onClickEvent)="voltar()"></app-custom-button>
-      <app-custom-button [custom]="getCustomButton('Salvar', false, '', 'primary')"></app-custom-button>
+      <app-custom-button [custom]="getCustomButton('Salvar', false, '', 'primary')"
+        (onClickEvent)="submit()"></app-custom-button>
     </div>
   </p-card>
 </div>

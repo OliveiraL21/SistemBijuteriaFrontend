@@ -5,13 +5,17 @@ export class CustomInputText {
   label: string;
   forLabel: string;
   disabled: boolean;
+  required: boolean;
+  mask: string;
 
-  constructor(controlName: string, placeholder: string, idName: string, label: string, forLabel: string, disabled: boolean) {
+  constructor(controlName: string, placeholder: string, idName: string, label: string, forLabel: string, disabled: boolean, required: boolean, mask: string) {
     this.controlName = controlName;
     this.placeholder = placeholder;
     this.id = idName;
     this.label = label;
     this.forLabel = forLabel;
     this.disabled = disabled;
+    this.required = required;
+    this.mask = mask;
   }
 }

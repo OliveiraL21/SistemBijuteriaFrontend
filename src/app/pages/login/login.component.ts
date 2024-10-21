@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
     private tokenService: TokenService) { }
 
   getCustomInputUsername(): CustomInputText {
-    return new CustomInputText('username', '', 'username', 'Username', 'username', false);
+    return new CustomInputText('username', '', 'username', 'Username', 'username', false, true, "");
   }
 
   getCustomPassword(): CustomPassword {
-    return new CustomPassword('password', 'password', false, 'Password');
+    return new CustomPassword('password', 'password', false, 'Password', false);
   }
 
   getCustomButton(): CustomButton {
