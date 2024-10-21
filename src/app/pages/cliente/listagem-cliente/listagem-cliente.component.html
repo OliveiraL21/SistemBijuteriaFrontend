@@ -27,10 +27,10 @@
           <td>{{cliente.nome}}</td>
           <td>{{cliente.telefone}}</td>
           <td>
-            <p-button icon="pi pi-pencil" severity="info" size="small" class="bg-indigo-600 text-color-bg-indigo-600"
-              [style]="{'max-width.px': 30}" (onClick)="editar(cliente.id)"></p-button>
-            <p-button icon="pi pi-trash" severity="danger" size="small" class="mx-2" [style]="{'max-width.px': 30}"
-              (onClick)="openDialog($event, cliente.id)"></p-button>
+            <p-button icon="pi pi-pencil" severity="info" size="small" [style]="{'max-width.px': 30}" [text]="true"
+              (onClick)="editar(cliente.id)"></p-button>
+            <p-button icon="pi pi-trash" [text]="true" severity="danger" size="small" class="mx-2"
+              [style]="{'max-width.px': 30}" (onClick)="openDialog($event, cliente.id)"></p-button>
           </td>
         </tr>
       </ng-template>
