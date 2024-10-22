@@ -77,7 +77,7 @@ export class CadastroClienteComponent {
     this.clienteService.create(cliente).subscribe({
       next: (response: Cliente) => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente cadastrado com sucesso !', key: 'tr1' });
+        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente cadastrado com sucesso !', key: 'tr1', life: 3000 });
         this.router.navigateByUrl('cliente/lista');
       },
       error: (error: any) => {
@@ -94,7 +94,7 @@ export class CadastroClienteComponent {
     this.clienteService.update(this.id, cliente).subscribe({
       next: (cliente: Cliente) => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente atualizado com sucesso !' });
+        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente atualizado com sucesso !', key: 'tr1', life: 3000 });
         this.router.navigateByUrl('cliente/lista');
 
       }, error: (error: any) => {
