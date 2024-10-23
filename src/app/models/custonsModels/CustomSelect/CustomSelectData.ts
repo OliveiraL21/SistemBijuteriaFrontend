@@ -7,8 +7,10 @@ export default class CustomSelectData {
   placeholder: string;
   controlName: string;
   label: string;
+  options: any[] = [];
+  required: boolean;
 
-  constructor(optionLabel: string, optionValue: string, filter: boolean, filterBy: string, showClear: boolean, placeholder: string, controlName: string, label: string) {
+  constructor(optionLabel: string, optionValue: string, filter: boolean, filterBy: string, showClear: boolean, placeholder: string, controlName: string, label: string, options: any[], required: boolean) {
     this.optionLabel = optionLabel;
     this.optionValue = optionValue;
     this.filter = filter;
@@ -17,5 +19,7 @@ export default class CustomSelectData {
     this.placeholder = placeholder;
     this.controlName = controlName;
     this.label = label;
+    this.options = options;
+    this.required = required;
   }
 }

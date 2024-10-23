@@ -7,7 +7,7 @@
   <p-card>
     <h1 class="mb-4 -mt-2">Cadastro de Produtos</h1>
     <app-custom-form [form]="form" [controls]="getFormControls()"></app-custom-form>
-    <div class="w-full mt-2 flex justify-content-between">
+    <div class="w-full flex justify-content-between" style="margin-top: 15%;">
       <app-custom-button [custom]="getCustomButton('Cancelar', false, '', 'danger')"
         (onClickEvent)="voltar()"></app-custom-button>
       <app-custom-button [custom]="getCustomButton('Salvar', false, '', 'primary')"

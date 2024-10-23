@@ -1,14 +1,14 @@
 <div class="w-full flex" [formGroup]="form">
   <p-floatLabel>
-    <p-dropdown [options]="options" [optionLabel]="data.optionLabel" [optionValue]="data.optionValue"
-      [filter]="data.filter" [filterBy]="data.filterBy" [showClear]="data.showClear" [placeholder]="data.placeholder">
+    <p-dropdown [options]="data.options" [optionLabel]="data.optionLabel" [optionValue]="data.optionValue"
+      [filter]="data.filter" [filterBy]="data.filterBy" [showClear]="data.showClear" [placeholder]="data.placeholder"
+      styleClass="w-full">
 
       <ng-template pTemplate="filter" let-options="options">
         <div class="flex gap-1">
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
-            <input type="text" pInputText placeholder="filter" [(ngModel)]="filterValue"
-              (keyup)="customFilterFunction($event, options)">
+            <input type="text" pInputText placeholder="filter" (keyup)="customFilterFunction($event, options)">
           </div>
           <button pButton icon="pi pi-times" (click)="resetFunction(options)"></button>
         </div>
@@ -26,6 +26,11 @@
         </div>
       </ng-template>
     </p-dropdown>
-    <label [for]="data.controlName">{{data.label}}</label>
+    <label [for]="data.controlName"><span *ngIf="data.required" class="text-red-600 mr-1">*</span>{{data.label}}</label>
+
+    <small *ngIf="form.get(data.controlName)?.hasError('required') && form.get(data.controlName)?.dirty"
+      class="p-0 mb-4 mt-2 p-error block">
+      Campo obrigatório
+    </small>
   </p-floatLabel>
 </div>

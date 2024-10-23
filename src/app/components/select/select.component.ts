@@ -10,12 +10,11 @@ import { DropdownFilterOptions } from 'primeng/dropdown';
 })
 export class SelectComponent {
   @Input() form!: FormGroup;
-  @Input() options: any[] = [];
   @Input() data!: CustomSelectData;
 
   filterValue: string | undefined = '';
 
-  resetFunction(options: DropdownFilterOptions) {
+  resetFunction(options: any[]) {
     this.filterValue = '';
   }
 
