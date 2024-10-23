@@ -12,10 +12,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { errorInterceptor } from './common/helpers/interceptors/error.interceptor';
 import { CustomFormComponent } from './components/custom-form/custom-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { InputNumberComponent } from './components/input-number/input-number.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,

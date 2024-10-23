@@ -36,6 +36,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { CustomTableComponent } from '../../components/custom-table/custom-table.component';
 import { CustomFormComponent } from '../../components/custom-form/custom-form.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputNumberComponent } from '../../components/input-number/input-number.component';
 
 
 
@@ -48,6 +49,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     CustomToastComponent,
     CustomTableComponent,
     CustomFormComponent,
+    InputNumberComponent,
   ],
   imports: [
     CommonModule,
@@ -118,7 +120,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TableModule,
     CustomTableComponent,
     CustomFormComponent,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputNumberComponent
   ],
   providers: [
     MessageService,
