@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import Produto from '../../../models/entityModels/produtos/produto';
+import Column from '../../../models/custonsModels/CustomTable/CustomColumn';
+import { ProdutoService } from '../../../services/Produto.service';
 
 @Component({
   selector: 'app-produto-lista',
@@ -7,22 +9,36 @@ import Produto from '../../../models/entityModels/produtos/produto';
   styleUrl: './produto-lista.component.scss'
 })
 export class ProdutoListaComponent {
-  openDialog($event: MouseEvent, arg1: any) {
-    throw new Error('Method not implemented.');
-  }
-  editar(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
-  novo() {
-    throw new Error('Method not implemented.');
-  }
-  getCustomButton(): import("../../../models/custonsModels/CustomButtonData/CustomButton").CustomButton {
-    throw new Error('Method not implemented.');
-  }
   produtos: Produto[] = [];
   loading: boolean = false;
 
-  constructor() {
+  constructor(private produtoService: ProdutoService) {
 
+  }
+
+  getColumnList(): Column[] {
+    return [
+      new Column("codigoProduto", "Código"),
+      new Column("descricao", "Produto"),
+      new Column("quantidade", "Quantidade"),
+      new Column("valorUnitario", "Valor"),
+    ]
+  }
+
+  getProdutos() {
+    this.produtoService.list().subscribe({
+      next: (list: Produto[]) => {
+        this.loading = false;
+        this.produtos = list;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    })
+  }
+
+  ngOnInit() {
+    this.loading = true;
+    this.getProdutos();
   }
 }

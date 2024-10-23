@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { CustomButton } from '../../models/custonsModels/CustomButtonData/CustomButton';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import Column from '../../models/custonsModels/CustomTable/CustomColumn';
 
 @Component({
   selector: 'app-custom-table',
@@ -6,6 +10,63 @@ import { Component, Input } from '@angular/core';
   styleUrl: './custom-table.component.scss'
 })
 export class CustomTableComponent {
+  @Input() pageTitle: string = "";
+  @Input() listOfColumns: Column[] = [];
+  @Input() listData: any[] = [];
+  @Input() addRoute: string = "";
+  @Input() editRoute: string = "";
+  @Input() pageName: string = "";
+  @Output() deleteEvent: EventEmitter<string> = new EventEmitter<string>();
+  loading: boolean = false;
 
-  @Input() listData: any
+  constructor(private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
+
+  }
+
+  editar(id: string) {
+    this.router.navigateByUrl(`${this.editRoute}/${id}`);
+  }
+
+  showMessage(type: string, title: string, message: string) {
+    this.messageService.add({
+      severity: type,
+      summary: title,
+      detail: message,
+      key: 'trCustom',
+      life: 1000,
+    })
+  }
+
+  openDialog(event: MouseEvent, id: any) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Tem certeza que deseja excluir este item?',
+      header: 'Confirmação de exclusão',
+      icon: 'pi pi-exclamation-triangle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        this.loading = true;
+        this.deletar(id);
+
+      },
+      reject: () => {
+
+      }
+    })
+  }
+  deletar(id: string) {
+    this.deleteEvent.emit(id);
+  }
+  novo() {
+    this.router.navigateByUrl(this.addRoute);
+  }
+  getCustomButton(): CustomButton {
+    return new CustomButton(`Novo ${this.pageName}`, false, "", "primary");
+  }
+
+
+
 }

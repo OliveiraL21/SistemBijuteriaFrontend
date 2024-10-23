@@ -1,51 +1,8 @@
 <div class="w-full h-full p-4 mt-5">
   <p-confirmDialog />
-  <p-toast />
+  <p-toast position="top-right" key="trCustom" />
   <p-card>
-    <p-table [value]="produtos">
-      <ng-template pTemplate="caption">
-        <div class="flex">
-          <div class="flex w-6 justify-content-start align-items-center">
-            <h1>Clientes</h1>
-          </div>
-          <div class="flex w-6 justify-content-end align-items-center">
-            <app-custom-button [custom]="getCustomButton()" (onClickEvent)="novo()"></app-custom-button>
-          </div>
-        </div>
-
-      </ng-template>
-
-      <ng-template pTemplate="header" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true">
-        <tr>
-          <th>Nome</th>
-          <th style="width: '20%'">Telefone</th>
-          <th style="width: '10%'">Ações</th>
-        </tr>
-        <tr>
-          <th>
-            <p-columnFilter type="text" field="nome" placeholder="Digite um nome"
-              ariaLabel="Filtrar nome"></p-columnFilter>
-          </th>
-          <th>
-            <p-columnFilter type="text" field="telefone" placeholder="Digite o número de telefone">
-
-            </p-columnFilter>
-          </th>
-          <th></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-produto>
-        <tr>
-          <td>{{produto.nome}}</td>
-          <td>{{produto.telefone}}</td>
-          <td>
-            <p-button icon="pi pi-pencil" severity="info" size="small" [style]="{'max-width.px': 30}" [text]="true"
-              (onClick)="editar(produto.id)"></p-button>
-            <p-button icon="pi pi-trash" [text]="true" severity="danger" size="small" class="mx-2"
-              [style]="{'max-width.px': 30}" (onClick)="openDialog($event, produto.id)"></p-button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+    <app-custom-table [pageTitle]="'Produtos'" [pageName]="'Produto'" [listOfColumns]="getColumnList()"
+      [addRoute]="'produto/cadastro'" [editRoute]="'produt/editar'"></app-custom-table>
   </p-card>
 </div>

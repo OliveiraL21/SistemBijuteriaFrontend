@@ -46,6 +46,7 @@ export class MenuPrincipalComponent {
         label: 'Produtos',
         icon: 'pi pi-shopping-bag',
         iconClass: 'text-white',
+        routerLink: 'produto/'
 
       },
       {
