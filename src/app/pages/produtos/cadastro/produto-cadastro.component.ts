@@ -37,6 +37,10 @@ export class ProdutoCadastroComponent {
     return [
       {
         type: 'text',
+        data: new CustomInputText('codigoProduto', 'Informe o código do produto', 'codigoProduto', 'Código do Produto', 'codigoProduto', false, true, "")
+      },
+      {
+        type: 'text',
         data: new CustomInputText('descricao', 'Informe o nome do produto', 'descricao', 'Produto', 'descricao', false, true, "")
       },
       {
@@ -49,7 +53,7 @@ export class ProdutoCadastroComponent {
       },
       {
         type: 'select',
-        data: new CustomSelectData('descricao', 'id', true, 'descricao', true, 'Selecione o tipo do produto', 'tipoProduto', 'Tipo Produto', this.tiposProdutos, true)
+        data: new CustomSelectData('descricao', 'id', true, 'descricao', true, 'Selecione o tipo do produto', 'tipoProdutoId', 'Tipo Produto', this.tiposProdutos, true)
       }
     ]
   }
@@ -72,10 +76,11 @@ export class ProdutoCadastroComponent {
 
   initForm() {
     this.form = this.fb.group({
+      codigoProduto: [null, [Validators.required]],
       descricao: [null, [Validators.required]],
       quantidade: [null, [Validators.required]],
       valorUnitario: [null, [Validators.required]],
-      tipoProduto: [null, [Validators.required]]
+      tipoProdutoId: [null, [Validators.required]]
     })
   }
 
@@ -99,6 +104,10 @@ export class ProdutoCadastroComponent {
       next: (produto: Produto) => {
         this.loading = false;
         this.showMessage("success", "Produto", "Produto cadastrado com sucesso");
+        this.router.navigateByUrl('produto/lista');
+      },
+      error: (error: any) => {
+        this.loading = false;
       }
     })
   }
