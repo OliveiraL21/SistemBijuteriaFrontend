@@ -10,4 +10,11 @@ export class UtilsRepository {
       }
     });
   }
+
+  static convertToDouble(number: string): number {
+    if (number) {
+      return parseFloat(number);
+    }
+    return 0;
+  }
 }
