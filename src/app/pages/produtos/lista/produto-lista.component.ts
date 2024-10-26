@@ -41,14 +41,6 @@ export class ProdutoListaComponent {
       next: (list: Produto[]) => {
         this.loading = false;
         this.produtos = list;
-        // this.produtos = list.map((produto: Produto) => ({
-        //   id: produto.id,
-        //   codigoProduto: produto.codigoProduto,
-        //   descricao: produto.descricao,
-        //   quantidade: produto.quantidade,
-        //   valorUnitario: `R$ ${produto.valorUnitario.toFixed(2).toString()}`,
-        //   tipoProduto: produto.tipoProduto
-        // }));
       },
       error: () => {
         this.loading = false;
