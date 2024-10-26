@@ -4,6 +4,9 @@
       <app-input-text [controlData]="control.data" [form]="form"></app-input-text>
     </div>
 
+    <div *ngIf="control.type === 'number'" class="w-25rem mt-5 mb-2">
+      <app-input-number [form]="form" [controlData]="control.data"></app-input-number>
+    </div>
     <div *ngIf="control.type === 'select'" class="w-full mt-5 mb-2">
       <app-select [data]="control.data" [form]="form"></app-select>
     </div>

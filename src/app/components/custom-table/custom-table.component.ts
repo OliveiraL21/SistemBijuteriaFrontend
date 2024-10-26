@@ -23,6 +23,10 @@ export class CustomTableComponent {
 
   }
 
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+
   editar(id: string) {
     this.router.navigateByUrl(`${this.editRoute}/${id}`);
   }

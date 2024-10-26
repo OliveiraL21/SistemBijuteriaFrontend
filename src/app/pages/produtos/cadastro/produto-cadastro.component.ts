@@ -23,7 +23,7 @@ export class ProdutoCadastroComponent {
   loading: boolean = false;
   form!: FormGroup;
   tiposProdutos: TipoProduto[] = [];
-  id?: string;
+  id: string = "";
 
   constructor(private fb: FormBuilder, private router: Router, private service: ProdutoService, private tipoProdutoService: TipoProdutoService, private messageService: MessageService, private activeRoute: ActivatedRoute) {
 
@@ -44,11 +44,11 @@ export class ProdutoCadastroComponent {
         data: new CustomInputText('descricao', 'Informe o nome do produto', 'descricao', 'Produto', 'descricao', false, true, "")
       },
       {
-        type: 'text',
-        data: new CustomInputText('quantidade', "Informe a quantidade", "quantidade", "Quantidade", "quantidade", false, true, ""),
+        type: 'number',
+        data: new CustomInputNumberData('quantidade', "Quantidade", "quantidade", "quantity", true),
       },
       {
-        type: 'text',
+        type: 'number',
         data: new CustomInputNumberData('valorUnitario', 'Valor Unitário', 'valorUnitario ', 'currency', true)
       },
       {
@@ -84,10 +84,25 @@ export class ProdutoCadastroComponent {
     })
   }
 
+  getProduto() {
+    this.service.details(this.id).subscribe({
+      next: (produto: Produto) => {
+        Object.keys(produto).forEach((key: string) => {
+          if (key == "tipoProduto") {
+            this.form.get('tipoProdutoId')?.setValue(produto.tipoProduto.id);
+          }
+          this.form.get(key)?.setValue(produto[key as keyof Produto]);
+        })
+      }
+    })
+  }
+
   ngOnInit() {
-    this.id = this.activeRoute.snapshot.paramMap.get('id') ?? undefined;
+    this.id = this.activeRoute.snapshot.paramMap.get('id') ?? "";
     this.initForm();
     this.getTipoProduto();
+    if (this.id)
+      this.getProduto();
   }
 
   voltar() {
@@ -97,8 +112,6 @@ export class ProdutoCadastroComponent {
   createProduto() {
     let produto: CreateProduto;
     produto = this.form.value;
-    produto.valorUnitario = UtilsRepository.convertToDouble(produto.valorUnitario.toString());
-    produto.quantidade = UtilsRepository.convertToDouble(produto.quantidade.toString());
 
     this.service.create(produto).subscribe({
       next: (produto: Produto) => {
@@ -112,11 +125,26 @@ export class ProdutoCadastroComponent {
     })
   }
 
+  updateProduto() {
+    let produto: Produto = this.form.value;
+    produto.id = this.id;
+
+    this.service.update(this.id, produto).subscribe({
+      next: (response: Produto) => {
+        this.loading = false;
+        this.showMessage('success', 'Produto', 'Produto atualizado com sucesso !');
+        this.router.navigateByUrl('produto/lista');
+      }
+    })
+  }
+
   submit() {
     this.loading = true;
     if (this.form.valid) {
       if (!this.id) {
         this.createProduto();
+      } else {
+        this.updateProduto();
       }
     } else {
       UtilsRepository.getRequiredFieldsInvalid(this.form);

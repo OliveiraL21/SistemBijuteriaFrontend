@@ -1,6 +1,7 @@
 <div class="w-full h-full">
 
-  <p-table [value]="listData" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true">
+  <p-table [value]="listData" [columns]="listOfColumns" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
+    [paginator]="true">
     <ng-template pTemplate="caption">
       <div class="flex">
         <div class="flex w-6 justify-content-start align-items-center">
@@ -13,17 +14,19 @@
 
     </ng-template>
 
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let column of listOfColumns; let  i = index;">{{column.header}}</th>
+        <th *ngFor="let column of columns; let  i = index;">{{column.header}}</th>
+        <th></th>
       </tr>
       <tr>
-        <th *ngFor="let filterColumn of listOfColumns">
+        <th *ngFor="let filterColumn of columns; let i = index; trackBy:trackByFn">
           <p-columnFilter type="text" [field]="filterColumn.field"></p-columnFilter>
         </th>
+        <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-data let-columns>
+    <ng-template pTemplate="body" let-data let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">{{data[col.field]}}</td>
         <td>
