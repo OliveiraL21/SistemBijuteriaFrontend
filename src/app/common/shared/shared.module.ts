@@ -37,6 +37,8 @@ import { CustomTableComponent } from '../../components/custom-table/custom-table
 import { CustomFormComponent } from '../../components/custom-form/custom-form.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputNumberComponent } from '../../components/input-number/input-number.component';
+import { CustomFileComponent } from '../../components/custom-file/custom-file.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 
@@ -50,6 +52,7 @@ import { InputNumberComponent } from '../../components/input-number/input-number
     CustomTableComponent,
     CustomFormComponent,
     InputNumberComponent,
+    CustomFileComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +85,7 @@ import { InputNumberComponent } from '../../components/input-number/input-number
     AvatarGroupModule,
     TableModule,
     ConfirmDialogModule,
+    FileUploadModule,
   ],
   exports: [
     CommonModule,
@@ -121,7 +125,8 @@ import { InputNumberComponent } from '../../components/input-number/input-number
     CustomTableComponent,
     CustomFormComponent,
     ConfirmDialogModule,
-    InputNumberComponent
+    InputNumberComponent,
+    FileUploadModule
   ],
   providers: [
     MessageService,
