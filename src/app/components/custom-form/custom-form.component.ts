@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CustomFormControls } from '../../models/custonsModels/CustomFormData/CustomFormControls';
 
@@ -10,6 +10,7 @@ import { CustomFormControls } from '../../models/custonsModels/CustomFormData/Cu
 export class CustomFormComponent {
   @Input() form!: FormGroup;
   @Input() controls?: CustomFormControls[];
+  @Output() FileEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
 
@@ -18,4 +19,10 @@ export class CustomFormComponent {
   trackByFn(index: any, item: any) {
     return index;
   }
+
+  fileChange(fileBase64: string) {
+    this.FileEvent.emit(fileBase64);
+  }
+
+
 }

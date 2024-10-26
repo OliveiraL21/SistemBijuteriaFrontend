@@ -18,7 +18,7 @@ export class MenuPrincipalComponent {
   }
 
   minhaConta() {
-    alert("Teste minha conta")
+    this.router.navigateByUrl('usuario/minhaConta');
   }
 
   getUsername() {

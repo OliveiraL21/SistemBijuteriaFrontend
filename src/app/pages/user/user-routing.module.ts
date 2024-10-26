@@ -4,7 +4,7 @@ import { UserCadastroComponent } from './cadastro/user-cadastro.component';
 
 const routes: Routes = [
   {
-    path: 'minhaConta/:id',
+    path: 'minhaConta',
     component: UserCadastroComponent
   }
 ];

@@ -10,5 +10,13 @@
     <div *ngIf="control.type === 'select'" class="w-full mt-5 mb-2">
       <app-select [data]="control.data" [form]="form"></app-select>
     </div>
+
+    <div *ngIf="control.type === 'password'" class="w-25rem mt-5 mb-2">
+      <app-input-password [controlData]="control.data" [form]="form"></app-input-password>
+    </div>
+
+    <div *ngIf="control.type === 'file'" class="w-25rem mt-5 mb-2">
+      <app-custom-file (FileEventEmitter)="fileChange($event)"></app-custom-file>
+    </div>
   </div>
 </form>

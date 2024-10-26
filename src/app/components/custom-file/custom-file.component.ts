@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { UtilsRepository } from '../../common/helpers/utilsRepository/UtilsRepository';
 
 @Component({
   selector: 'app-custom-file',
@@ -6,21 +7,23 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './custom-file.component.scss'
 })
 export class CustomFileComponent {
-  file!: any;
+  files: any[] = [];
   @Output() FileEventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
 
   }
 
-  upload(event: any) {
+  async upload(event: any) {
     if (event.currentFiles) {
-      this.file = event.currentFiles[0];
-      this.FileEventEmitter.emit(this.file);
+      this.files = [event.currentFiles[0]];
+      let base64 = await UtilsRepository.convertToBase64(this.files[0]);
+      this.FileEventEmitter.emit(base64);
     }
   }
 
   clear() {
-    this.file = null;
+    this.files = [];
+    this.FileEventEmitter.emit(this.files[0]);
   }
 }
