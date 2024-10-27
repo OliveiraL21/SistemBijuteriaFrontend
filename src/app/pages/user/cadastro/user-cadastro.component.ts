@@ -9,6 +9,8 @@ import { CustomInputText } from '../../../models/custonsModels/CustomTextInputDa
 import { CustomPassword } from '../../../models/custonsModels/CustomPasswordData/CustomPassword';
 import { TokenService } from '../../../services/token.service';
 import Usuario from '../../../models/entityModels/usuario/Usuario';
+import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Component({
   selector: 'app-user-cadastro',
@@ -18,6 +20,7 @@ import Usuario from '../../../models/entityModels/usuario/Usuario';
 export class UserCadastroComponent {
   loading: boolean = false;
   form!: FormGroup;
+  id!: string;
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private service: UserService, private router: Router, private activatedRouter: ActivatedRoute, private tokenService: TokenService) {
 
@@ -28,6 +31,7 @@ export class UserCadastroComponent {
     this.service.findByUsername(username).subscribe({
       next: (user: Usuario) => {
         this.loading = false;
+        this.id = user.id;
         Object.keys(user).forEach((key: string) => {
           this.form.get(key)?.setValue(user[key as keyof Usuario]);
         })
@@ -70,7 +74,24 @@ export class UserCadastroComponent {
   }
 
   submit() {
-    console.log(this.form.value);
+    this.loading = true;
+    if (this.form.valid) {
+      let data: Usuario = this.form.value;
+      data.id = this.id;
+      this.service.update(this.id, data).subscribe({
+        next: (user: Usuario) => {
+          this.loading = false;
+          this.showMessage('success', 'Usuário', 'Dados atualizados com sucesso');
+        },
+        error: (err: any) => {
+          this.loading = false;
+        }
+      })
+    } else {
+      this.loading = false;
+      UtilsRepository.getRequiredFieldsInvalid(this.form);
+      this.showMessage('error', 'Usuário', 'Por favor preencha os campos obrigatórios');
+    }
   }
   voltar() {
     this.router.navigateByUrl('cliente/lista');

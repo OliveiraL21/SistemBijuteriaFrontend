@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UtilsRepository } from '../../common/helpers/utilsRepository/UtilsRepository';
 
 @Component({
@@ -8,6 +8,10 @@ import { UtilsRepository } from '../../common/helpers/utilsRepository/UtilsRepos
 })
 export class CustomFileComponent {
   files: any[] = [];
+
+  @Input() set FileInput(file: any) {
+    this.files = [file];
+  }
   @Output() FileEventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {

@@ -16,7 +16,7 @@
     </div>
 
     <div *ngIf="control.type === 'file'" class="w-25rem mt-5 mb-2">
-      <app-custom-file (FileEventEmitter)="fileChange($event)"></app-custom-file>
+      <app-custom-file (FileEventEmitter)="fileChange($event)" [FileInput]="file"></app-custom-file>
     </div>
   </div>
 </form>

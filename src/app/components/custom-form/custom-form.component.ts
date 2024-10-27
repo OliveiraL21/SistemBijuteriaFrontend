@@ -10,6 +10,7 @@ import { CustomFormControls } from '../../models/custonsModels/CustomFormData/Cu
 export class CustomFormComponent {
   @Input() form!: FormGroup;
   @Input() controls?: CustomFormControls[];
+  @Input() file?: any;
   @Output() FileEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
