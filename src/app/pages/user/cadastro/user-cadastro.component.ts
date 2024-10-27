@@ -21,6 +21,7 @@ export class UserCadastroComponent {
   loading: boolean = false;
   form!: FormGroup;
   id!: string;
+  file!: any;
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private service: UserService, private router: Router, private activatedRouter: ActivatedRoute, private tokenService: TokenService) {
 
@@ -32,6 +33,7 @@ export class UserCadastroComponent {
       next: (user: Usuario) => {
         this.loading = false;
         this.id = user.id;
+        this.file = UtilsRepository.convertBase64ToBlob(user.foto ?? "");
         Object.keys(user).forEach((key: string) => {
           this.form.get(key)?.setValue(user[key as keyof Usuario]);
         })

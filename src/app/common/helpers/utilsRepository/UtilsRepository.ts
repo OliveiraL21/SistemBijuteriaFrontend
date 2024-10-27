@@ -31,7 +31,7 @@ export class UtilsRepository {
     })
   }
 
-  convertBase64ToBlob(base64: string) {
+  static convertBase64ToBlob(base64: string) {
     if (base64) {
       const byteString = window.atob(base64!.substring(base64.indexOf(",") + 1));
       const arrayBuffer = new ArrayBuffer(byteString.length);
