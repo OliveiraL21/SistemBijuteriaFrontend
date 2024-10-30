@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { TokenService } from '../../../services/token.service';
@@ -12,6 +12,7 @@ import { filter } from 'rxjs';
 export class MenuPrincipalComponent {
   items: MenuItem[] | undefined;
   username: string = "user";
+  @Input() userPhoto!: any;
 
   constructor(private router: Router, private tokenService: TokenService) {
 

@@ -8,7 +8,7 @@
     <h1 class="mb-4 -mt-2">Minha Conta</h1>
     <app-custom-form [form]="form" [controls]="getFormControls()" (FileEvent)="changeFile($event)"
       [file]="file"></app-custom-form>
-    <div class="w-full flex justify-content-between" style="margin-top: 15%;">
+    <div class="w-full flex justify-content-between">
       <app-custom-button [custom]="getCustomButton('Cancelar', false, '', 'danger')"
         (onClickEvent)="voltar()"></app-custom-button>
       <app-custom-button [custom]="getCustomButton('Salvar', false, '', 'primary')"

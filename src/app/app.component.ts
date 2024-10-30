@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { TokenService } from './services/token.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { UserService } from './services/user.service';
+import Usuario from './models/entityModels/usuario/Usuario';
+import { UtilsRepository } from './common/helpers/utilsRepository/UtilsRepository';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +14,9 @@ import { filter } from 'rxjs';
 export class AppComponent {
   title = 'Bijuteria da Manu';
   authenticated: boolean = false;
+  profilePhoto: any;
 
-  constructor(private tokenService: TokenService, private router: Router) {
+  constructor(private tokenService: TokenService, private router: Router, private userService: UserService) {
   }
 
   onChangeRouteEvent() {
@@ -52,8 +56,17 @@ export class AppComponent {
     })
   }
 
+  getUser() {
+    this.userService.findByUsername(this.tokenService.getItem('username') ?? '').subscribe({
+      next: (user: Usuario) => {
+        this.profilePhoto = user.foto;
+
+      }
+    })
+  }
+
   ngOnInit() {
-    console.log(this.authenticated);
     this.onChangeRouteEvent();
+    this.getUser();
   }
 }
