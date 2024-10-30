@@ -25,6 +25,16 @@ export class CadastroClienteComponent {
     this.id = this.activeRoute.snapshot.paramMap.get('id') ?? "";
   }
 
+  showMessage(type: string, title: string, message: string) {
+    this.messageService.add({
+      severity: type,
+      summary: title,
+      detail: message,
+      key: 'trccl',
+      life: 3000
+    })
+  }
+
   getFormControls(): CustomFormControls[] {
     return [
       {
@@ -77,7 +87,7 @@ export class CadastroClienteComponent {
     this.clienteService.create(cliente).subscribe({
       next: (response: Cliente) => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente cadastrado com sucesso !', key: 'tr1', life: 3000 });
+        this.showMessage('success', 'Cliente', 'Cliente cadastrado com sucesso !')
         this.router.navigateByUrl('cliente/lista');
       },
       error: (error: any) => {
@@ -94,7 +104,7 @@ export class CadastroClienteComponent {
     this.clienteService.update(this.id, cliente).subscribe({
       next: (cliente: Cliente) => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente atualizado com sucesso !', key: 'tr1', life: 3000 });
+        this.showMessage('success', 'Cliente', 'Cliente atualizado com sucesso !')
         this.router.navigateByUrl('cliente/lista');
 
       }, error: (error: any) => {
@@ -113,8 +123,7 @@ export class CadastroClienteComponent {
         this.updateCliente();
       }
     } else {
-      this.messageService.clear();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Por favor preencha todos os campos obrigatórios', life: 3000, key: 'tr1' });
+      this.showMessage('error', 'Error', 'Por favor preencha todos os campos obrigatórios');
       UtilsRepository.getRequiredFieldsInvalid(this.form);
       this.loading = false;
     }

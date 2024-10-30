@@ -4,6 +4,7 @@ import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/entityModels/cliente/Cliente';
 import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import Column from '../../../models/custonsModels/CustomTable/CustomColumn';
 
 @Component({
   selector: 'app-listagem-cliente',
@@ -19,6 +20,16 @@ export class ListagemClienteComponent {
 
   }
 
+
+  showMessage(type: string, title: string, message: string) {
+    this.messageService.add({
+      severity: type,
+      summary: title,
+      detail: message,
+      key: 'trcls',
+      life: 3000
+    })
+  }
 
   getCustomButton(): CustomButton {
     return new CustomButton('Novo Cliente', false, '', 'primary');
@@ -37,46 +48,23 @@ export class ListagemClienteComponent {
     })
   }
 
-  novo() {
-    this.router.navigateByUrl('cliente/cadastro');
-  }
-
-  editar(id: string) {
-    this.router.navigateByUrl(`cliente/editar/${id}`);
-  }
-
-  openDialog(event: Event, id: string) {
-    this.confirmService.confirm({
-      target: event.target as EventTarget,
-      message: 'Tem certeza que deseja excluir este item?',
-      header: 'Confirmação de exclusão',
-      icon: 'pi pi-exclamation-triangle',
-      acceptButtonStyleClass: 'p-button-danger p-button-text',
-      rejectButtonStyleClass: 'p-button-text p-button-text',
-      acceptIcon: 'none',
-      rejectIcon: 'none',
-      accept: () => {
-        this.loading = true;
-        this.deletar(id);
-
-      },
-      reject: () => {
-
-      }
-
-    })
+  getColumnList(): Column[] {
+    return [
+      new Column("nome", "Cliente"),
+      new Column("telefone", "Telefone"),
+    ]
   }
 
   deletar(id: string) {
     this.clienteService.delete(id).subscribe({
       next: (response: boolean) => {
         this.loading = false;
-        this.messageService.add({ severity: 'success', summary: 'Cliente', detail: 'Cliente deletado com sucesso !' });
+        this.showMessage('success', 'Cliente', 'cliente excluido com sucesso');
         this.getClientes();
       },
       error: (error: any) => {
         this.loading = false;
-        this.messageService.add({ severity: 'error', summary: 'Cliente', detail: 'Erro ao deletar o cliente, entre em contato com o suporte do sistema' });
+        this.showMessage('error', 'Cliente', 'Erro ao excluir o cliente, entre em contato com o suporte do sistema')
       }
     })
   }
