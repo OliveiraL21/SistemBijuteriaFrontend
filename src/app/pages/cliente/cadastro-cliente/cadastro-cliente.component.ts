@@ -52,9 +52,9 @@ export class CadastroClienteComponent {
     ]
   }
 
-  getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
-    return new CustomButton(label, rounded, styles, severity);
-  }
+  // getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
+  //   return new CustomButton(label, rounded, styles, severity);
+  // }
 
   getCliente() {
     if (this.id) {

@@ -21,7 +21,7 @@ export class errorInterceptor implements HttpInterceptor {
           return throwError("");
         }
 
-        this.message.add({ severity: 'error', summary: 'Error', detail: `${error.error.error}` });
+        this.message.add({ severity: 'error', summary: 'Error', detail: `${error.error.error}`, key: 'tr', life: 3000 });
         return throwError("");
 
       })

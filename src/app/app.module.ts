@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,10 @@ import { AuthenticateInterceptor } from './common/helpers/interceptors/authentic
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { errorInterceptor } from './common/helpers/interceptors/error.interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { registerLocaleData } from '@angular/common';
+import ptBr from '@angular/common/locales/pt';
 
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     AuthenticateInterceptor, { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true },
     errorInterceptor, { provide: HTTP_INTERCEPTORS, useClass: errorInterceptor, multi: true },
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    { provide: LOCALE_ID, useValue: 'pt' },
   ],
   bootstrap: [AppComponent]
 })

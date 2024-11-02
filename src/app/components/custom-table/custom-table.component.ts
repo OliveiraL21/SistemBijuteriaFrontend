@@ -61,6 +61,9 @@ export class CustomTableComponent {
       }
     })
   }
+
+
+
   deletar(id: string) {
     this.deleteEvent.emit(id);
   }
@@ -68,7 +71,7 @@ export class CustomTableComponent {
     this.router.navigateByUrl(this.addRoute);
   }
   getCustomButton(): CustomButton {
-    return new CustomButton(`Novo ${this.pageName}`, false, "", "primary");
+    return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary");
   }
 
 
