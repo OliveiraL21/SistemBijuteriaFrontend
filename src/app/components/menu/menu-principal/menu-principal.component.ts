@@ -40,34 +40,48 @@ export class MenuPrincipalComponent {
         label: 'Clientes',
         icon: 'pi pi-users',
         iconClass: 'text-white',
-        routerLink: 'cliente/'
+        routerLink: 'cliente/',
+        root: true
 
       },
       {
         label: 'Produtos',
         icon: 'pi pi-shopping-bag',
-        iconClass: 'text-white',
-        routerLink: 'produto/'
-
+        iconClass: 'text-white bg-white',
+        routerLink: 'produto/',
+        root: true
       },
       {
         label: 'Vendas',
         icon: 'pi pi-money-bill',
         iconClass: 'text-white',
-        routerLink: 'vendas/',
+        root: true,
         items: [
-          [{
-            label: 'Venda',
-            icon: 'pi pi-money-bill',
-            iconClass: 'text-white',
-            routerLink: 'vendas/venda',
-          }],
-          [{
-            label: 'Relatório de Vendas',
-            icon: 'pi pi-money-bill',
-            iconClass: 'text-white',
-            routerLink: 'vendas/vendas',
-          }]
+          [
+            {
+              label: 'Lista',
+              items: [
+                {
+                  label: 'Venda',
+                  routerLink: 'vendas/venda',
+                  styleClass: 'text-500',
+                  style: { 'color': '#000' }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              label: 'Cadastro',
+              items: [
+                {
+                  label: 'Relatório de Vendas',
+                  routerLink: 'vendas/vendas',
+                }
+              ]
+            }
+
+          ]
         ]
       },
       {
@@ -76,7 +90,8 @@ export class MenuPrincipalComponent {
         iconClass: 'text-white',
         command: (event: any) => {
           this.logout();
-        }
+        },
+        root: true
       },
       {
         separator: true,

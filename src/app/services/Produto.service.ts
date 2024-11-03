@@ -22,6 +22,14 @@ export class ProdutoService {
     return this.http.get<Produto>(`${baseUrl}/${id}`);
   }
 
+  getByCodigo(codigo: string): Observable<Produto> {
+    return this.http.get<Produto>(`${baseUrl}/${codigo}`);
+  }
+
+  getByNome(produto: string): Observable<Produto> {
+    return this.http.get<Produto>(`${baseUrl}/${produto}`);
+  }
+
   create(produto: CreateProduto): Observable<Produto> {
     return this.http.post<Produto>(`${baseUrl}`, produto);
   }

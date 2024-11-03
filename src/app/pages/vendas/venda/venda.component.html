@@ -6,5 +6,67 @@
   </p-blockUI>
   <p-card>
     <h1 class="mb-4 -mt-2">Venda</h1>
+    <p-splitter styleClass="mb-5" [panelSizes]="[25,75]" layout="horizontal" class="w-full">
+      <ng-template pTemplate>
+
+      </ng-template>
+      <ng-template pTemplate>
+        <div class="col flex align-items-center justify-content-center w-full">
+          <p-table [value]="produtos" class="w-full">
+            <ng-template pTemplate="caption">
+              <div class="flex">
+                <p-inputGroup>
+                  <input type="text" pInputText placeholder="produto" formControlName="produto" />
+                  <button type="button" pButton icon="pi pi-search" (click)="getProduto()"></button>
+                </p-inputGroup>
+
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="text-center" style="width:20%">
+                  Código
+                </th>
+                <th class="text-center" style="width:50%">
+                  Produto
+                </th>
+                <th class="text-center" style="width:25%">
+                  Quantidade
+                </th>
+                <th class="text-center" style="width:25%">
+                  Valor
+                </th>
+                <th>
+
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-editing="editing">
+              <tr>
+                <td>
+                  {{ product.codigo }}
+                </td>
+                <td>
+                  {{ product.descricao }}
+                </td>
+                <td [pEditableColumn]="product.quantidade" pEditableColumnField="inventoryStatus">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText [(ngModel)]="product.quantidade" />
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{ product.quantidade }}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  {{ product.valorUnitario | currency: 'BRL' }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </ng-template>
+    </p-splitter>
   </p-card>
 </div>

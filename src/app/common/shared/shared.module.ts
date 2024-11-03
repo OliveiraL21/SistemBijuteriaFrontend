@@ -40,6 +40,8 @@ import { InputNumberComponent } from '../../components/input-number/input-number
 import { CustomFileComponent } from '../../components/custom-file/custom-file.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MegaMenuModule } from 'primeng/megamenu';
+import { SplitterModule } from 'primeng/splitter';
+import { InputGroupModule } from 'primeng/inputgroup';
 
 
 
@@ -87,7 +89,8 @@ import { MegaMenuModule } from 'primeng/megamenu';
     TableModule,
     ConfirmDialogModule,
     FileUploadModule,
-    MegaMenuModule
+    MegaMenuModule,
+    InputGroupModule
   ],
   exports: [
     CommonModule,
@@ -129,7 +132,9 @@ import { MegaMenuModule } from 'primeng/megamenu';
     ConfirmDialogModule,
     InputNumberComponent,
     FileUploadModule,
-    MegaMenuModule
+    MegaMenuModule,
+    SplitterModule,
+    InputGroupModule
   ],
   providers: [
     MessageService,

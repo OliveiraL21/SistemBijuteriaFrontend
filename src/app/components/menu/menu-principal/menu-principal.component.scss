@@ -2,10 +2,28 @@
   color: #fff;
 }
 
+::ng-deep .p-menuitem-text:hover {
+  color: #fff;
+}
+
+::ng-deep .p-submenu-icon {
+  color: #fff;
+}
+
+::ng-deep .p-menuitem-icon {
+  color: white !important;
+}
+
 
 ::ng-deep .p-menuitem-link:hover {
   background-color: #d63384;
   color: #000
+}
+
+::ng-deep .p-menuitem-link-active {
+
+  background-color: #d63384;
+  color: #000;
 }
 
 ::ng-deep .p-menuitem-link:focus {
@@ -17,6 +35,8 @@
   background-color: #6610f2;
   color: #ffffff;
 }
+
+
 
 .button-hover:hover {
   background-color: #d63384 !important;
