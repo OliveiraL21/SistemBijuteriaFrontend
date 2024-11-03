@@ -11,6 +11,11 @@ export class UtilsRepository {
     });
   }
 
+  static isNumberString(number: string): boolean {
+    let result: number = parseInt(number);
+    return typeof result == 'number' && result !== undefined ? true : false;
+  }
+
   static convertToDouble(number: string): number {
     if (number) {
       return parseFloat(number);

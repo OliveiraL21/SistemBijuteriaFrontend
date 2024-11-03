@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProdutoService } from '../../../services/Produto.service';
+import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
+import Produto from '../../../models/entityModels/produtos/produto';
 
 interface produtoVenda {
   codigo: string;
@@ -33,7 +35,24 @@ export class VendaComponent {
     let data = this.form.value;
 
     if (data) {
+      if (UtilsRepository.isNumberString(data)) {
+        this.produtoService.getByCodigo(data).subscribe({
+          next: (produto: Produto) => {
 
+          },
+          error: (err: any) => {
+
+          }
+        })
+      } else {
+        this.produtoService.getByNome(data).subscribe({
+          next: (produto: Produto) => {
+
+          }, error: () => {
+
+          }
+        })
+      }
     }
   }
 }
