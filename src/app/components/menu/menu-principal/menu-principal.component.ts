@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MegaMenuItem, MenuItem } from 'primeng/api';
 import { TokenService } from '../../../services/token.service';
 import { filter } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
   styleUrl: './menu-principal.component.scss'
 })
 export class MenuPrincipalComponent {
-  items: MenuItem[] | undefined;
+  items: MegaMenuItem[] | undefined;
   username: string = "user";
   @Input() userPhoto!: any;
 
@@ -54,6 +54,21 @@ export class MenuPrincipalComponent {
         label: 'Vendas',
         icon: 'pi pi-money-bill',
         iconClass: 'text-white',
+        routerLink: 'vendas/',
+        items: [
+          [{
+            label: 'Venda',
+            icon: 'pi pi-money-bill',
+            iconClass: 'text-white',
+            routerLink: 'vendas/venda',
+          }],
+          [{
+            label: 'Relatório de Vendas',
+            icon: 'pi pi-money-bill',
+            iconClass: 'text-white',
+            routerLink: 'vendas/vendas',
+          }]
+        ]
       },
       {
         label: 'Logout',

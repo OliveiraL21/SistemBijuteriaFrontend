@@ -1,6 +1,7 @@
 <div class="card flex justify-content-center">
-  <p-menu class="text-white-alpha-80"
-    styleClass="bg-indigo-500 h-screen text-white-alpha-80 border-none border-noround-left" [model]="items">
+  <p-megaMenu class="text-white-alpha-80"
+    styleClass="bg-indigo-500 h-screen text-white-alpha-80 border-none border-noround-left" [model]="items"
+    [orientation]="'vertical'">
     <ng-template pTemplate="start">
       <span class="inline-flex align-items-center gap-2 px-2 py-2">
         <img src="diamond-ring.png" alt="system logo" height="60px" width="60px">
@@ -20,6 +21,6 @@
         </span>
       </button>
     </ng-template>
-  </p-menu>
+  </p-megaMenu>
 
 </div>

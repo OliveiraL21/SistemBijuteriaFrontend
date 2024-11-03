@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './venda.component.scss'
 })
 export class VendaComponent {
-
+  loading: boolean = false;
 }

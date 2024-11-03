@@ -57,12 +57,13 @@ export class AppComponent {
   }
 
   getUser() {
-    this.userService.findByUsername(this.tokenService.getItem('username') ?? '').subscribe({
-      next: (user: Usuario) => {
-        this.profilePhoto = user.foto;
-
-      }
-    })
+    if (this.tokenService.possuiToken()) {
+      this.userService.findByUsername(this.tokenService.getItem('username') ?? '').subscribe({
+        next: (user: Usuario) => {
+          this.profilePhoto = user.foto;
+        }
+      })
+    }
   }
 
   ngOnInit() {

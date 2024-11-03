@@ -1,1 +1,10 @@
-<p>venda works!</p>
+<div class="w-full mt-5 p-4">
+  <p-toast position="top-right" [key]="'trp'" />
+  <p-blockUI [blocked]="loading">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
+  <p-card>
+    <h1 class="mb-4 -mt-2">Venda</h1>
+  </p-card>
+</div>

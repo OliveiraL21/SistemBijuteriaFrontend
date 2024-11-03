@@ -39,6 +39,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputNumberComponent } from '../../components/input-number/input-number.component';
 import { CustomFileComponent } from '../../components/custom-file/custom-file.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { MegaMenuModule } from 'primeng/megamenu';
 
 
 
@@ -86,6 +87,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     TableModule,
     ConfirmDialogModule,
     FileUploadModule,
+    MegaMenuModule
   ],
   exports: [
     CommonModule,
@@ -126,7 +128,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     CustomFormComponent,
     ConfirmDialogModule,
     InputNumberComponent,
-    FileUploadModule
+    FileUploadModule,
+    MegaMenuModule
   ],
   providers: [
     MessageService,
