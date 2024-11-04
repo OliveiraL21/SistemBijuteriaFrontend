@@ -23,7 +23,7 @@ export class ProdutoService {
   }
 
   getByCodigo(codigo: string): Observable<Produto> {
-    return this.http.get<Produto>(`${baseUrl}/${codigo}`);
+    return this.http.get<Produto>(`${baseUrl}/GetByCodigo/${codigo}`);
   }
 
   getByNome(produto: string): Observable<Produto> {

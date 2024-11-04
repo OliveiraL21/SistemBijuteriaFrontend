@@ -6,7 +6,7 @@ import Produto from '../../../models/entityModels/produtos/produto';
 import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
 
 interface produtoVenda {
-  codigo: string;
+  codigo: number;
   descricao: string;
   quantidade: number;
   valor: number
@@ -40,10 +40,16 @@ export class VendaComponent {
     let data = this.form.value;
 
     if (data) {
-      if (UtilsRepository.isNumberString(data)) {
-        this.produtoService.getByCodigo(data).subscribe({
+      if (UtilsRepository.isNumberString(data.produto)) {
+        this.produtoService.getByCodigo(data.produto).subscribe({
           next: (produto: Produto) => {
-
+            let prod: produtoVenda = {
+              codigo: produto.codigoProduto,
+              descricao: produto.descricao,
+              quantidade: 0,
+              valor: produto.valorUnitario
+            }
+            this.produtos = [...this.produtos, prod]
           },
           error: (err: any) => {
 
