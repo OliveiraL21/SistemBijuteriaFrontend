@@ -1,7 +1,7 @@
 <div class="w-full h-full">
 
   <p-table [value]="listData" [columns]="listOfColumns" [rows]="10" [rowsPerPageOptions]="[10, 25, 50]"
-    [paginator]="true">
+    [paginator]="true" class="w-full">
     <ng-template pTemplate="caption">
       <div class="flex">
         <div class="flex w-6 justify-content-start align-items-center">
@@ -17,7 +17,7 @@
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let column of columns; let  i = index;">{{column.header}}</th>
-        <th></th>
+        <th style="width: 100px;"></th>
       </tr>
       <tr>
         <th *ngFor="let filterColumn of columns; let i = index; trackBy:trackByFn">
@@ -30,7 +30,7 @@
       <tr>
         <td *ngFor="let col of columns">{{ col.field.includes('valor') ? (data[col.field] | currency: 'BRL') :
           data[col.field] }}</td>
-        <td>
+        <td class="flex">
           <p-button icon="pi pi-pencil" severity="info" size="small" [style]="{'max-width.px': 30}" [text]="true"
             (onClick)="editar(data.id)"></p-button>
           <p-button icon="pi pi-trash" [text]="true" severity="danger" size="small" class="mx-2"

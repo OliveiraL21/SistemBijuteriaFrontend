@@ -60,4 +60,8 @@ export class VendaComponent {
       }
     }
   }
+
+  ngOnInit() {
+    this.initForm();
+  }
 }

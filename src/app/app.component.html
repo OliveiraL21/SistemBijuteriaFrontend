@@ -1,9 +1,9 @@
-<main class="w-full h-screen p-0 m-0">
+<main class="w-full h-full p-0 m-0">
   <p-toast key="tr" />
   <div *ngIf="authenticated == false">
     <router-outlet></router-outlet>
   </div>
-  <div *ngIf="authenticated" class="flex gap-4">
+  <div *ngIf="authenticated" class="flex gap-4 h-screen">
     <app-menu-principal [userPhoto]="profilePhoto"></app-menu-principal>
     <div class="w-11 pr-4">
       <router-outlet></router-outlet>

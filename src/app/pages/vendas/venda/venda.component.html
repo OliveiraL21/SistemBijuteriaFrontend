@@ -1,4 +1,4 @@
-<div class="w-full mt-5 p-4">
+<div class="w-full h-full mt-5 p-4 align-items-center" style="overflow-y: scroll;">
   <p-toast position="top-right" [key]="'trp'" />
   <p-blockUI [blocked]="loading">
     <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
@@ -6,13 +6,22 @@
   </p-blockUI>
   <p-card>
     <h1 class="mb-4 -mt-2">Venda</h1>
-    <p-splitter styleClass="mb-5" [panelSizes]="[25,75]" layout="horizontal" class="w-full">
+    <p-splitter styleClass="mb-5" [panelSizes]="[25,75]" layout="horizontal" class="w-full h-2rem">
       <ng-template pTemplate>
         <div class="w-full flex-column">
-          <div class="w-full p-4">
-            <p-card class="w-full p-6"></p-card>
-            <p-card class="w-full p-6"></p-card>
-            <p-card class="w-full p-6"></p-card>
+          <div class="w-full p-4 ">
+            <p-card class="w-full p-2">
+              <h2 class="text-center -mt-3">SubTotal</h2>
+              <p class="text-right">R$ 10,00</p>
+            </p-card>
+            <p-card class="w-full p-2">
+              <h2 class="text-center -mt-3">Desconto</h2>
+              <p class="text-right">R$ 5,00</p>
+            </p-card>
+            <p-card class="w-full p-2">
+              <h2 class="text-center -mt-3">Total</h2>
+              <p class="text-right">R$ 5,00</p>
+            </p-card>
           </div>
           <div class="w-full p-4">
             <app-custom-button
@@ -22,15 +31,16 @@
 
       </ng-template>
       <ng-template pTemplate>
-        <div class="col flex align-items-center justify-content-center w-full">
+        <div class="col flex justify-content-center w-full">
           <p-table [value]="produtos" class="w-full">
             <ng-template pTemplate="caption">
               <div class="flex">
-                <p-inputGroup>
-                  <input type="text" pInputText placeholder="produto" formControlName="produto" />
-                  <button type="button" pButton icon="pi pi-search" (click)="getProduto()"></button>
-                </p-inputGroup>
-
+                <form [formGroup]="form">
+                  <p-inputGroup>
+                    <input type="text" pInputText placeholder="produto" formControlName="produto" />
+                    <button type="button" pButton icon="pi pi-search" (click)="getProduto()"></button>
+                  </p-inputGroup>
+                </form>
               </div>
             </ng-template>
             <ng-template pTemplate="header">
