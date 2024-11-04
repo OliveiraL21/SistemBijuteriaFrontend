@@ -1,5 +1,6 @@
 <div class="w-full h-full mt-5 p-4 align-items-center" style="overflow-y: scroll;">
-  <p-toast position="top-right" [key]="'trp'" />
+  <p-toast position="top-right" [key]="'trv'" />
+  <p-confirmPopup />
   <p-blockUI [blocked]="loading">
     <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
       animationDuration=".5s"></p-progressSpinner>
@@ -12,7 +13,7 @@
           <div class="w-full p-4 ">
             <p-card class="w-full p-2">
               <h2 class="text-center -mt-3">SubTotal</h2>
-              <p class="text-right">R$ 10,00</p>
+              <p class="text-right">{{subTotal | currency: 'BRL'}}</p>
             </p-card>
             <p-card class="w-full p-2">
               <h2 class="text-center -mt-3">Desconto</h2>
@@ -45,13 +46,13 @@
             </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th class="text-center" style="width:20%">
+                <th class="text-center" style="width:10%">
                   Código
                 </th>
                 <th class="text-center" style="width:50%">
                   Produto
                 </th>
-                <th class="text-center" style="width:25%">
+                <th class="text-center" style="width:10%">
                   Quantidade
                 </th>
                 <th class="text-center" style="width:25%">
@@ -65,10 +66,10 @@
             <ng-template pTemplate="body" let-product let-editing="editing">
               <tr>
                 <td>
-                  {{ product.codigo }}
+                  <p class="text-center">{{ product.codigo }}</p>
                 </td>
                 <td>
-                  {{ product.descricao }}
+                  <p class="text-center">{{ product.descricao }}</p>
                 </td>
                 <td [pEditableColumn]="product.quantidade" pEditableColumnField="inventoryStatus">
                   <p-cellEditor>
@@ -76,12 +77,16 @@
                       <input pInputText [(ngModel)]="product.quantidade" />
                     </ng-template>
                     <ng-template pTemplate="output">
-                      {{ product.quantidade }}
+                      <p class="text-center">{{ product.quantidade }}</p>
                     </ng-template>
                   </p-cellEditor>
                 </td>
                 <td>
-                  {{ product.valorUnitario | currency: 'BRL' }}
+                  <p class="text-center">{{ product.valor | currency: 'BRL' }}</p>
+                </td>
+                <td>
+                  <p-button icon="pi pi-trash" [text]="true" severity="danger" size="small" class="mx-2"
+                    [style]="{'max-width.px': 30}" (onClick)="openConfirmDialog($event, product)"></p-button>
                 </td>
               </tr>
             </ng-template>

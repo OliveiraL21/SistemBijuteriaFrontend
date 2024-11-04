@@ -4,6 +4,7 @@ import { ProdutoService } from '../../../services/Produto.service';
 import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
 import Produto from '../../../models/entityModels/produtos/produto';
 import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 interface produtoVenda {
   codigo: number;
@@ -21,9 +22,15 @@ export class VendaComponent {
   loading: boolean = false;
   produtos: produtoVenda[] = [];
   form!: FormGroup;
+  subTotal: number = 0;
+  total: number = 0;
 
-  constructor(private fb: FormBuilder, private produtoService: ProdutoService) {
+  constructor(private fb: FormBuilder, private produtoService: ProdutoService, private confirmationService: ConfirmationService, private messageService: MessageService) {
 
+  }
+
+  showMessage(type: string, title: string, message: string) {
+    this.messageService.add({ severity: type, summary: title, detail: message, key: 'trv', life: 3000 });
   }
 
   initForm() {
@@ -34,6 +41,28 @@ export class VendaComponent {
 
   getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
     return new CustomButton(label, rounded, styles, severity);
+  }
+
+  calcularSubTotal(valorUnitario: number) {
+    this.subTotal += valorUnitario;
+  }
+
+  delete(produto: produtoVenda) {
+    this.produtos = this.produtos.filter(x => x.codigo != produto.codigo);
+    this.subTotal -= produto.valor;
+  }
+
+  openConfirmDialog(event: Event, produto: produtoVenda) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Deseja realmente excluir este item?',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-sm',
+      accept: () => {
+        this.showMessage('success', 'Venda', 'Item excluido com sucesso');
+        this.delete(produto);
+      },
+    });
   }
 
   getProduto() {
@@ -50,6 +79,7 @@ export class VendaComponent {
               valor: produto.valorUnitario
             }
             this.produtos = [...this.produtos, prod]
+            this.calcularSubTotal(prod.valor);
           },
           error: (err: any) => {
 
