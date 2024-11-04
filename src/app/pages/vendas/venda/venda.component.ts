@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProdutoService } from '../../../services/Produto.service';
 import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
 import Produto from '../../../models/entityModels/produtos/produto';
+import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
 
 interface produtoVenda {
   codigo: string;
@@ -29,6 +30,10 @@ export class VendaComponent {
     this.form = this.fb.group({
       produto: [null, null]
     })
+  }
+
+  getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
+    return new CustomButton(label, rounded, styles, severity);
   }
 
   getProduto() {

@@ -8,6 +8,17 @@
     <h1 class="mb-4 -mt-2">Venda</h1>
     <p-splitter styleClass="mb-5" [panelSizes]="[25,75]" layout="horizontal" class="w-full">
       <ng-template pTemplate>
+        <div class="w-full flex-column">
+          <div class="w-full p-4">
+            <p-card class="w-full p-6"></p-card>
+            <p-card class="w-full p-6"></p-card>
+            <p-card class="w-full p-6"></p-card>
+          </div>
+          <div class="w-full p-4">
+            <app-custom-button
+              [custom]="getCustomButton('Finalizar Venda', true, 'w-full px-4 bg-indigo-600', 'primary')"></app-custom-button>
+          </div>
+        </div>
 
       </ng-template>
       <ng-template pTemplate>
