@@ -17,11 +17,15 @@
             </p-card>
             <p-card class="w-full p-2">
               <h2 class="text-center -mt-3">Desconto</h2>
-              <p class="text-right">R$ 5,00</p>
+              <div class="flex align-items-center justify-content-center">
+                <p-inputNumber suffix="%" [(ngModel)]="desconto" [disabled]="subTotal == 0"
+                  (ngModelChange)="calcularTotal()" />
+              </div>
+
             </p-card>
             <p-card class="w-full p-2">
               <h2 class="text-center -mt-3">Total</h2>
-              <p class="text-right">R$ 5,00</p>
+              <p class="text-right">{{total | currency: 'BRL'}}</p>
             </p-card>
           </div>
           <div class="w-full p-4">
@@ -74,7 +78,8 @@
                 <td [pEditableColumn]="product.quantidade" pEditableColumnField="inventoryStatus">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText [(ngModel)]="product.quantidade" />
+                      <input pInputText [(ngModel)]="product.quantidade"
+                        (ngModelChange)="calcularSubtotalInput(product.valor, product.quantidade)" />
                     </ng-template>
                     <ng-template pTemplate="output">
                       <p class="text-center">{{ product.quantidade }}</p>

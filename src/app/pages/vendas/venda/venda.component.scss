@@ -1,3 +1,7 @@
 .container-overflow {
   overflow-y: scroll;
 }
+
+::ng-deep.p-inputnumber-input {
+  text-align: right;
+}

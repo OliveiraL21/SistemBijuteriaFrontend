@@ -23,6 +23,7 @@ export class VendaComponent {
   produtos: produtoVenda[] = [];
   form!: FormGroup;
   subTotal: number = 0;
+  desconto: number = 0;
   total: number = 0;
 
   constructor(private fb: FormBuilder, private produtoService: ProdutoService, private confirmationService: ConfirmationService, private messageService: MessageService) {
@@ -47,9 +48,19 @@ export class VendaComponent {
     this.subTotal += valorUnitario;
   }
 
+  calcularSubtotalInput(valor: number, quantidade: number) {
+    this.subTotal = (valor * quantidade);
+  }
+
+  calcularTotal() {
+    var valorDesconto = this.subTotal * (this.desconto / 100);
+    this.total = this.subTotal - valorDesconto;
+    console.log(this.total);
+  }
+
   delete(produto: produtoVenda) {
     this.produtos = this.produtos.filter(x => x.codigo != produto.codigo);
-    this.subTotal -= produto.valor;
+    this.subTotal -= (produto.valor * produto.quantidade);
   }
 
   openConfirmDialog(event: Event, produto: produtoVenda) {
@@ -65,7 +76,16 @@ export class VendaComponent {
     });
   }
 
+  existProduto(produto: produtoVenda) {
+    if (produto) {
+      var result = this.produtos.some(x => x.codigo == produto.codigo);
+      return result;
+    }
+    return false;
+  }
+
   getProduto() {
+    this.loading = true;
     let data = this.form.value;
 
     if (data) {
@@ -75,14 +95,21 @@ export class VendaComponent {
             let prod: produtoVenda = {
               codigo: produto.codigoProduto,
               descricao: produto.descricao,
-              quantidade: 0,
+              quantidade: 1,
               valor: produto.valorUnitario
             }
-            this.produtos = [...this.produtos, prod]
-            this.calcularSubTotal(prod.valor);
+            if (this.existProduto(prod)) {
+              const index = this.produtos.findIndex(x => x.codigo == prod.codigo);
+              this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
+              this.calcularSubTotal(this.produtos[index].valor);
+            } else {
+              this.produtos = [...this.produtos, prod];
+              this.calcularSubTotal(prod.valor);
+            }
+            this.loading = false;
           },
           error: (err: any) => {
-
+            this.loading = false;
           }
         })
       } else {
