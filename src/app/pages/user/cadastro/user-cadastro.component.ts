@@ -66,8 +66,8 @@ export class UserCadastroComponent {
     ]
   }
 
-  getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
-    return new CustomButton(label, rounded, styles, severity);
+  getCustomButton(label: string, rounded: boolean, styles: string, severity: string, icon: string): CustomButton {
+    return new CustomButton(label, rounded, styles, severity, icon);
   }
 
   changeFile(base64: string) {

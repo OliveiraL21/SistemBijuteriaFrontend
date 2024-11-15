@@ -71,7 +71,7 @@ export class CustomTableComponent {
     this.router.navigateByUrl(this.addRoute);
   }
   getCustomButton(): CustomButton {
-    return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary");
+    return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary", "pi pi-plus");
   }
 
 

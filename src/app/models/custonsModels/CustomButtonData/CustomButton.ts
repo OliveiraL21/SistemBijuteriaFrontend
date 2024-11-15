@@ -3,13 +3,14 @@ export class CustomButton {
   rounded: boolean;
   severity: string;
   stylesClasses: string;
+  icon: string;
 
 
-  constructor(label: string, rounded: boolean, styles: string, severity: string) {
+  constructor(label: string, rounded: boolean, styles: string, severity: string, icon: string) {
     this.label = label;
     this.rounded = rounded;
     this.stylesClasses = styles;
     this.severity = severity;
-
+    this.icon = icon;
   }
 }

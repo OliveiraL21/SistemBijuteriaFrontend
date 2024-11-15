@@ -58,9 +58,7 @@ export class ProdutoCadastroComponent {
     ]
   }
 
-  getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
-    return new CustomButton(label, rounded, styles, severity);
-  }
+
 
   getTipoProduto() {
     this.tipoProdutoService.list().subscribe({

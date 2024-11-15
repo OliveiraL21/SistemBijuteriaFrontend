@@ -63,7 +63,7 @@ export class VendaComponent {
   }
 
   getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
-    return new CustomButton(label, rounded, styles, severity);
+    return new CustomButton(label, rounded, styles, severity, "");
   }
 
   calcularSubTotal(valorUnitario: number) {

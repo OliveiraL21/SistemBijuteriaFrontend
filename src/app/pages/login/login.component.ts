@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   getCustomButton(): CustomButton {
-    return new CustomButton("Logar", true, 'w-full bg-indigo-600', 'primary');
+    return new CustomButton("Logar", true, 'w-full bg-indigo-600', 'primary', '');
   }
 
   showMessage(type: string, title: string, message: string) {

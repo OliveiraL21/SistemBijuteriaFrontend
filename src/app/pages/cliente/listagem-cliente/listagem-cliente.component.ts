@@ -31,10 +31,6 @@ export class ListagemClienteComponent {
     })
   }
 
-  getCustomButton(): CustomButton {
-    return new CustomButton('Novo Cliente', false, '', 'primary');
-  }
-
   getClientes() {
     this.loading = true;
     this.clienteService.listAll().subscribe({
