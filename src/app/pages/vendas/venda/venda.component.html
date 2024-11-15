@@ -39,12 +39,17 @@
         <div class="col flex justify-content-center w-full">
           <p-table [value]="produtos" class="w-full">
             <ng-template pTemplate="caption">
-              <div class="flex">
-                <form [formGroup]="form">
-                  <p-inputGroup>
-                    <input type="text" pInputText placeholder="produto" formControlName="produto" />
-                    <button type="button" pButton icon="pi pi-search" (click)="getProduto()"></button>
-                  </p-inputGroup>
+              <div class="flex p-3">
+                <form [formGroup]="form" class="flex w-full">
+                  <app-select [form]="form" [data]="getCustomSelect()"></app-select>
+                  <p-floatLabel class="w-full">
+                    <p-inputGroup class="w-5 ml-5">
+                      <input type="text" pInputText formControlName="produto" />
+                      <button type="button" pButton icon="pi pi-search" (click)="getProduto()"></button>
+                      <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
+                    </p-inputGroup>
+                  </p-floatLabel>
+
                 </form>
               </div>
             </ng-template>

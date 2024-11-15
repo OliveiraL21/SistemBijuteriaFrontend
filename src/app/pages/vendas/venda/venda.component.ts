@@ -5,6 +5,9 @@ import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRe
 import Produto from '../../../models/entityModels/produtos/produto';
 import { CustomButton } from '../../../models/custonsModels/CustomButtonData/CustomButton';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import CustomSelectData from '../../../models/custonsModels/CustomSelect/CustomSelectData';
+import { Cliente } from '../../../models/entityModels/cliente/Cliente';
+import { ClienteService } from '../../../services/cliente.service';
 
 interface produtoVenda {
   codigo: number;
@@ -20,13 +23,15 @@ interface produtoVenda {
 
 export class VendaComponent {
   loading: boolean = false;
+  clientes: Cliente[] = [];
   produtos: produtoVenda[] = [];
   form!: FormGroup;
   subTotal: number = 0;
   desconto: number = 0;
   total: number = 0;
 
-  constructor(private fb: FormBuilder, private produtoService: ProdutoService, private confirmationService: ConfirmationService, private messageService: MessageService) {
+
+  constructor(private fb: FormBuilder, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService) {
 
   }
 
@@ -36,8 +41,25 @@ export class VendaComponent {
 
   initForm() {
     this.form = this.fb.group({
-      produto: [null, null]
+      produto: [null, null],
+      clienteId: [null, null]
     })
+  }
+
+  getClientes() {
+    this.clienteService.listAll().subscribe({
+      next: (clientes: Cliente[]) => {
+        this.clientes = clientes;
+      },
+
+      error: () => {
+        this.loading = false;
+      }
+    })
+  }
+
+  getCustomSelect(): CustomSelectData {
+    return new CustomSelectData("nome", "id", true, "name", true, "cliente", "clienteId", "Cliente", this.clientes, true);
   }
 
   getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
@@ -46,21 +68,23 @@ export class VendaComponent {
 
   calcularSubTotal(valorUnitario: number) {
     this.subTotal += valorUnitario;
+    this.total = this.subTotal;
   }
 
   calcularSubtotalInput(valor: number, quantidade: number) {
     this.subTotal = (valor * quantidade);
+    this.total === 0 ? this.subTotal : this.total;
   }
 
   calcularTotal() {
     var valorDesconto = this.subTotal * (this.desconto / 100);
     this.total = this.subTotal - valorDesconto;
-    console.log(this.total);
   }
 
   delete(produto: produtoVenda) {
     this.produtos = this.produtos.filter(x => x.codigo != produto.codigo);
     this.subTotal -= (produto.valor * produto.quantidade);
+    this.total = this.subTotal;
   }
 
   openConfirmDialog(event: Event, produto: produtoVenda) {
@@ -107,6 +131,7 @@ export class VendaComponent {
               this.calcularSubTotal(prod.valor);
             }
             this.loading = false;
+            this.form.get('produto')?.reset();
           },
           error: (err: any) => {
             this.loading = false;
@@ -126,5 +151,10 @@ export class VendaComponent {
 
   ngOnInit() {
     this.initForm();
+    this.getClientes();
+  }
+
+  finalizarVenda() {
+
   }
 }
