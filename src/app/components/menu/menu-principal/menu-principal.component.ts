@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MegaMenuItem, MenuItem } from 'primeng/api';
 import { TokenService } from '../../../services/token.service';
@@ -14,7 +14,7 @@ export class MenuPrincipalComponent {
   username: string = "user";
   @Input() userPhoto!: any;
 
-  constructor(private router: Router, private tokenService: TokenService) {
+  constructor(private router: Router, private tokenService: TokenService, private render: Renderer2, private el: ElementRef) {
 
   }
 
@@ -29,6 +29,14 @@ export class MenuPrincipalComponent {
   logout() {
     this.tokenService.clearStorage();
     this.router.navigateByUrl('login');
+  }
+
+  changeMenuItemColor() {
+    const menuItems = this.el.nativeElement.querySelectorAll('.p-menuitem-link');
+    const target = Array.from(menuItems as NodeListOf<HTMLElement>).find((item: HTMLElement) => item.textContent?.trim() === 'Venda');
+    if (target) {
+      this.render.setStyle(target, 'color', 'black'); // Exemplo de manipulação
+    }
   }
 
   ngOnInit() {
@@ -59,20 +67,22 @@ export class MenuPrincipalComponent {
         items: [
           [
             {
-              label: 'Lista',
+              label: 'Cadastro',
+              root: false,
               items: [
                 {
                   label: 'Venda',
                   routerLink: 'vendas/venda',
                   styleClass: 'text-500',
-                  style: { 'color': '#000' }
+                  root: false,
                 }
               ]
             }
           ],
           [
             {
-              label: 'Cadastro',
+              label: 'Lista',
+              root: false,
               items: [
                 {
                   label: 'Relatório de Vendas',
@@ -98,5 +108,10 @@ export class MenuPrincipalComponent {
       }
     ]
     this.getUsername();
+  }
+
+  ngAfterViewInit() {
+    this.changeMenuItemColor();
+
   }
 }
