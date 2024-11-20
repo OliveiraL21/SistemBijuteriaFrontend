@@ -41,7 +41,9 @@
             <ng-template pTemplate="caption">
               <div class="flex p-3">
                 <form [formGroup]="form" class="flex w-full">
-                  <app-select [form]="form" [data]="getCustomSelect()"></app-select>
+                  <app-select [form]="form" [data]="getCustomSelect()"
+                    (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
+
                   <p-floatLabel class="w-full">
                     <p-inputGroup class="w-5 ml-5">
                       <input type="text" pInputText formControlName="produto" />
@@ -106,3 +108,30 @@
     </p-splitter>
   </p-card>
 </div>
+
+<p-dialog [modal]="true" [(visible)]="modalProdutosVisible">
+  <p-table [value]="modalProducts" selectionMode="single" [(selection)]="selectedModalProduct" dataKey="product">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        Escolha um produto
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Código</th>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Valor</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr [pSelectableRow]="product">
+        <td>{{product.codigo}}</td>
+        <td>{{product.descricao}}</td>
+        <td>{{product.quantidade}}</td>
+        <td>{{product.valor | currency: 'BRL'}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

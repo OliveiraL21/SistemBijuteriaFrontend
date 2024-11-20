@@ -22,6 +22,7 @@ interface produtoVenda {
 })
 
 export class VendaComponent {
+
   loading: boolean = false;
   clientes: Cliente[] = [];
   produtos: produtoVenda[] = [];
@@ -29,6 +30,9 @@ export class VendaComponent {
   subTotal: number = 0;
   desconto: number = 0;
   total: number = 0;
+  modalProdutosVisible: boolean = false;
+  selectedModalProduct?: produtoVenda;
+  modalProducts: produtoVenda[] = [];
 
 
   constructor(private fb: FormBuilder, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService) {
@@ -108,6 +112,17 @@ export class VendaComponent {
     return false;
   }
 
+  setProdutoByCodigo(produto: produtoVenda) {
+    if (this.existProduto(produto)) {
+      const index = this.produtos.findIndex(x => x.codigo == produto.codigo);
+      this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
+      this.calcularSubTotal(this.produtos[index].valor);
+    } else {
+      this.produtos = [...this.produtos, produto];
+      this.calcularSubTotal(produto.valor);
+    }
+  }
+
   getProduto() {
     this.loading = true;
     let data = this.form.value;
@@ -122,14 +137,8 @@ export class VendaComponent {
               quantidade: 1,
               valor: produto.valorUnitario
             }
-            if (this.existProduto(prod)) {
-              const index = this.produtos.findIndex(x => x.codigo == prod.codigo);
-              this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
-              this.calcularSubTotal(this.produtos[index].valor);
-            } else {
-              this.produtos = [...this.produtos, prod];
-              this.calcularSubTotal(prod.valor);
-            }
+            this.setProdutoByCodigo(prod);
+
             this.loading = false;
             this.form.get('produto')?.reset();
           },
@@ -138,21 +147,44 @@ export class VendaComponent {
           }
         })
       } else {
-        this.produtoService.getByNome(data).subscribe({
-          next: (produto: Produto) => {
-
+        this.produtoService.getByNome(data.produto).subscribe({
+          next: (produto: Produto[]) => {
+            this.modalProducts = produto.map((prod: Produto) => ({
+              codigo: prod.codigoProduto,
+              descricao: prod.descricao,
+              quantidade: prod.quantidade,
+              valor: prod.valorUnitario
+            }))
+            this.modalProdutosVisible = true;
+            this.loading = false;
+            this.form.get('produto')?.reset();
           }, error: () => {
-
+            this.loading = false;
           }
         })
       }
     }
   }
 
+  disableProdutoField() {
+    this.form.get('produto')?.disable();
+  }
+
+  changeDisabledProdutoField(value: any) {
+    if (value && value !== '') {
+      this.form.get('produto')?.enable();
+    } else {
+      this.disableProdutoField();
+    }
+  }
+
   ngOnInit() {
     this.initForm();
     this.getClientes();
+    this.disableProdutoField();
   }
+
+
 
   finalizarVenda() {
 

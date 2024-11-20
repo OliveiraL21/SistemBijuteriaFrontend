@@ -12,8 +12,8 @@ export class UtilsRepository {
   }
 
   static isNumberString(number: string): boolean {
-    let result: number = parseInt(number);
-    return typeof result == 'number' && result !== undefined ? true : false;
+    let result: any = parseInt(number);
+    return Number.isNaN(result) || typeof result != 'number' ? false : true;
   }
 
   static convertToDouble(number: string): number {

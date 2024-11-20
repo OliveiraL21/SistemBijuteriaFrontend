@@ -43,6 +43,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { SplitterModule } from 'primeng/splitter';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -92,7 +93,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     FileUploadModule,
     MegaMenuModule,
     InputGroupModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    DialogModule,
   ],
   exports: [
     CommonModule,
@@ -137,7 +139,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     MegaMenuModule,
     SplitterModule,
     InputGroupModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    DialogModule
   ],
   providers: [
     MessageService,
