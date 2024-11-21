@@ -27,7 +27,7 @@ export class ProdutoService {
   }
 
   getByNome(produto: string): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${baseUrl}/${produto}`);
+    return this.http.get<Produto[]>(`${baseUrl}/SearchByName/${produto}`);
   }
 
   create(produto: CreateProduto): Observable<Produto> {

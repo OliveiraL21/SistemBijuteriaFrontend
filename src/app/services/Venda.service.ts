@@ -1,0 +1,35 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
+import { Venda } from '../models/entityModels/Venda/Venda';
+
+const baseUrl = `${environment.api_url}/Venda`
+
+@Injectable({
+  providedIn: 'root'
+})
+export class VendaService {
+
+  constructor(private http: HttpClient) { }
+
+  post(venda: Venda): Observable<Venda> {
+    return this.http.post<Venda>(`${baseUrl}`, venda);
+  }
+
+  put(id: string, venda: Venda): Observable<Venda> {
+    return this.http.put<Venda>(`${baseUrl}/${id}`, venda);
+  }
+
+  detail(id: string): Observable<Venda> {
+    return this.http.get<Venda>(`${baseUrl}/${id}`);
+  }
+
+  listAll(): Observable<Venda[]> {
+    return this.http.get<Venda[]>(`${baseUrl}`);
+  }
+
+  delete(id: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${baseUrl}/${id}`);
+  }
+}

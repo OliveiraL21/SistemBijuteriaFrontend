@@ -1,0 +1,10 @@
+import Produto from "../produtos/produto";
+
+export class Venda {
+  total: number = 0;
+  subTotal: number = 0;
+  desconto: number = 0;
+  data: Date | null = null;
+  clienteId: string = "";
+  produtos: any[] = [];
+}

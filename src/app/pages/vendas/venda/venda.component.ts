@@ -8,8 +8,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import CustomSelectData from '../../../models/custonsModels/CustomSelect/CustomSelectData';
 import { Cliente } from '../../../models/entityModels/cliente/Cliente';
 import { ClienteService } from '../../../services/cliente.service';
+import { VendaService } from '../../../services/Venda.service';
+import { Venda } from '../../../models/entityModels/Venda/Venda';
 
 interface produtoVenda {
+  id: string,
   codigo: number;
   descricao: string;
   quantidade: number;
@@ -35,7 +38,7 @@ export class VendaComponent {
   modalProducts: produtoVenda[] = [];
 
 
-  constructor(private fb: FormBuilder, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService) {
+  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService) {
 
   }
 
@@ -76,7 +79,7 @@ export class VendaComponent {
   }
 
   calcularSubtotalInput(valor: number, quantidade: number) {
-    this.subTotal = (valor * quantidade);
+    this.subTotal += (valor * quantidade);
     this.total === 0 ? this.subTotal : this.total;
   }
 
@@ -112,7 +115,7 @@ export class VendaComponent {
     return false;
   }
 
-  setProdutoByCodigo(produto: produtoVenda) {
+  setProduto(produto: produtoVenda) {
     if (this.existProduto(produto)) {
       const index = this.produtos.findIndex(x => x.codigo == produto.codigo);
       this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
@@ -121,6 +124,10 @@ export class VendaComponent {
       this.produtos = [...this.produtos, produto];
       this.calcularSubTotal(produto.valor);
     }
+  }
+
+  closeModalProdutos() {
+    this.modalProdutosVisible = false;
   }
 
   getProduto() {
@@ -132,12 +139,13 @@ export class VendaComponent {
         this.produtoService.getByCodigo(data.produto).subscribe({
           next: (produto: Produto) => {
             let prod: produtoVenda = {
+              id: produto.id ?? "",
               codigo: produto.codigoProduto,
               descricao: produto.descricao,
               quantidade: 1,
               valor: produto.valorUnitario
             }
-            this.setProdutoByCodigo(prod);
+            this.setProduto(prod);
 
             this.loading = false;
             this.form.get('produto')?.reset();
@@ -150,6 +158,7 @@ export class VendaComponent {
         this.produtoService.getByNome(data.produto).subscribe({
           next: (produto: Produto[]) => {
             this.modalProducts = produto.map((prod: Produto) => ({
+              id: prod.id ?? "",
               codigo: prod.codigoProduto,
               descricao: prod.descricao,
               quantidade: prod.quantidade,
@@ -185,8 +194,44 @@ export class VendaComponent {
   }
 
 
+  confirmarProdutoSelecionado() {
+    this.selectedModalProduct!.quantidade = 1;
+    this.setProduto(this.selectedModalProduct as produtoVenda);
+    this.closeModalProdutos();
+  }
+
+  resetFields() {
+    this.produtos = [];
+    this.form.reset();
+    this.selectedModalProduct = undefined;
+    this.total = 0;
+    this.subTotal = 0;
+    this.desconto = 0;
+  }
 
   finalizarVenda() {
+    this.loading = true;
+    let data: Venda = {
+      total: this.total,
+      subTotal: this.subTotal,
+      desconto: this.desconto,
+      data: new Date(),
+      clienteId: this.form.get('clienteId')?.value,
+      produtos: this.produtos.map((produto: produtoVenda) => ({
+        produtoId: produto.id,
+        clienteId: this.form.get('clienteId')?.value,
+        quantidadeComprada: produto.quantidade,
+      })),
+    }
 
+    this.service.post(data).subscribe({
+      next: (result: Venda) => {
+        this.showMessage('success', 'Venda', 'Venda finalizada com sucesso!');
+        this.resetFields();
+        this.loading = false;
+      }, error: (err: any) => {
+        this.loading = false;
+      }
+    })
   }
 }
