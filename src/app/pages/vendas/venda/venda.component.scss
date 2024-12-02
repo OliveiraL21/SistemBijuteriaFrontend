@@ -5,3 +5,12 @@
 ::ng-deep.p-inputnumber-input {
   text-align: right;
 }
+
+
+.search-button {
+  border-radius: 0 10% 10% 0;
+}
+
+.search-button:disabled {
+  cursor: not-allowed;
+}

@@ -47,8 +47,9 @@
 
                   <p-floatLabel class="w-full">
                     <p-inputGroup class="w-5 ml-5">
-                      <input type="text" pInputText formControlName="produto" />
-                      <button type="button" pButton icon="pi pi-search" (click)="getProduto()"></button>
+                      <input type="text" pInputText formControlName="produto" (keypress)="onKeypressProduto($event)" />
+                      <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
+                        [disabled]="buttonSearchDisable"></button>
                       <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
                     </p-inputGroup>
                   </p-floatLabel>

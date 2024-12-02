@@ -36,6 +36,7 @@ export class VendaComponent {
   modalProdutosVisible: boolean = false;
   selectedModalProduct?: produtoVenda;
   modalProducts: produtoVenda[] = [];
+  buttonSearchDisable: boolean = false;
 
 
   constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService) {
@@ -92,6 +93,12 @@ export class VendaComponent {
     this.produtos = this.produtos.filter(x => x.codigo != produto.codigo);
     this.subTotal -= (produto.valor * produto.quantidade);
     this.total = this.subTotal;
+  }
+
+  onKeypressProduto(key: any) {
+    if (key.keyCode === 13) {
+      this.getProduto();
+    }
   }
 
   openConfirmDialog(event: Event, produto: produtoVenda) {
@@ -177,11 +184,13 @@ export class VendaComponent {
 
   disableProdutoField() {
     this.form.get('produto')?.disable();
+    this.buttonSearchDisable = true;
   }
 
   changeDisabledProdutoField(value: any) {
     if (value && value !== '') {
       this.form.get('produto')?.enable();
+      this.buttonSearchDisable = false;
     } else {
       this.disableProdutoField();
     }
