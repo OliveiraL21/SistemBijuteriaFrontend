@@ -80,8 +80,16 @@ export class VendaComponent {
   }
 
   calcularSubtotalInput(valor: number, quantidade: number) {
-    this.subTotal += (valor * quantidade);
-    this.total === 0 ? this.subTotal : this.total;
+    if (!quantidade) {
+      this.subTotal = 0;
+      this.total = this.subTotal;
+    } else {
+      // this.subTotal = (valor * quantidade);
+      this.subTotal = 0;
+      this.subTotal = this.produtos.reduce((acumulator: number, currentValue: produtoVenda) => acumulator + (currentValue.valor * currentValue.quantidade), this.subTotal);
+      this.total = this.subTotal;
+    }
+
   }
 
   calcularTotal() {
