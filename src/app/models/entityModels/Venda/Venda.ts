@@ -6,5 +6,6 @@ export class Venda {
   desconto: number = 0;
   data: Date | null = null;
   clienteId: string = "";
+  statusId: any;
   produtos: any[] = [];
 }

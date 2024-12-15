@@ -10,6 +10,8 @@ import { Cliente } from '../../../models/entityModels/cliente/Cliente';
 import { ClienteService } from '../../../services/cliente.service';
 import { VendaService } from '../../../services/Venda.service';
 import { Venda } from '../../../models/entityModels/Venda/Venda';
+import { StatusService } from '../../../services/Status.service';
+import { Status } from '../../../models/entityModels/status/Status';
 
 interface produtoVenda {
   id: string,
@@ -37,9 +39,10 @@ export class VendaComponent {
   selectedModalProduct?: produtoVenda;
   modalProducts: produtoVenda[] = [];
   buttonSearchDisable: boolean = false;
+  status: Status[] = [];
 
 
-  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService) {
+  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService) {
 
   }
 
@@ -51,6 +54,17 @@ export class VendaComponent {
     this.form = this.fb.group({
       produto: [null, null],
       clienteId: [null, null]
+    })
+  }
+
+  getStatus() {
+    this.statusService.listAll().subscribe({
+      next: (response: Status[]) => {
+        this.status = response;
+      },
+      error: (err: any) => {
+        this.loading = false;
+      }
     })
   }
 
@@ -207,6 +221,7 @@ export class VendaComponent {
   ngOnInit() {
     this.initForm();
     this.getClientes();
+    this.getStatus();
     this.disableProdutoField();
   }
 
@@ -228,11 +243,13 @@ export class VendaComponent {
 
   finalizarVenda() {
     this.loading = true;
+    let statusAtivo = this.status.find(x => x.descricao === 'Ativo');
     let data: Venda = {
       total: this.total,
       subTotal: this.subTotal,
       desconto: this.desconto,
       data: new Date(),
+      statusId: statusAtivo?.id,
       clienteId: this.form.get('clienteId')?.value,
       produtos: this.produtos.map((produto: produtoVenda) => ({
         produtoId: produto.id,
