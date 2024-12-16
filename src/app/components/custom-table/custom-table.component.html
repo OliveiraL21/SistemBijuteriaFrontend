@@ -28,8 +28,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-data let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">{{ col.field.includes('valor') ? (data[col.field] | currency: 'BRL') :
-          data[col.field] }}</td>
+        <!-- <td *ngFor="let col of columns">{{ col.field.includes('valor') ? (data[col.field] | currency: 'BRL') :
+          data[col.field] }}</td> -->
+        <td *ngFor="let col of columns">{{generateTableValues(data, col.field)}}</td>
         <td class="flex">
           <p-button icon="pi pi-pencil" severity="info" size="small" [style]="{'max-width.px': 30}" [text]="true"
             (onClick)="editar(data.id)"></p-button>

@@ -74,6 +74,21 @@ export class CustomTableComponent {
     return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary", "pi pi-plus");
   }
 
+  generateTableValues(data: any, field: any) {
+    if (data && field in data[field]) {
+      if (field.includes('valor')) {
+        return `R$ ${data[field]!.toFixed(2)}`;
+      }
 
+      if (field.includes('data')) {
+        return new Date(data[field]).toLocaleDateString();
+      }
+
+      if (field.includes('$')) {
+        let keys = field.split('$');
+        return data[keys[0]][keys[1]];
+      }
+    }
+  }
 
 }
