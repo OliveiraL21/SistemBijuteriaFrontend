@@ -75,9 +75,9 @@ export class CustomTableComponent {
   }
 
   generateTableValues(data: any, field: any) {
-    if (data && field in data[field]) {
-      if (field.includes('valor')) {
-        return `R$ ${data[field]!.toFixed(2)}`;
+    if (data) {
+      if (field.includes('valor') || field.includes('total') || field.includes('subTotal') || field.includes('desconto')) {
+        return data[field].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
       }
 
       if (field.includes('data')) {
@@ -88,6 +88,8 @@ export class CustomTableComponent {
         let keys = field.split('$');
         return data[keys[0]][keys[1]];
       }
+
+      return data[field];
     }
   }
 

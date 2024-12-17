@@ -33,6 +33,7 @@ export class ProdutoListaComponent {
       new Column("descricao", "Produto"),
       new Column("quantidade", "Quantidade"),
       new Column("valorUnitario", "Valor"),
+      new Column('tipoProduto$descricao', 'Tipo do Produto')
     ]
   }
 
