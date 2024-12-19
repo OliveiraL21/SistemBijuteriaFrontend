@@ -74,6 +74,10 @@ export class CustomTableComponent {
     return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary", "pi pi-plus");
   }
 
+  generateStatusSeverity(data: any, field: any): string {
+    return 'success'
+  }
+
   generateTableValues(data: any, field: any) {
     if (data) {
       if (field.includes('valor') || field.includes('total') || field.includes('subTotal') || field.includes('desconto')) {

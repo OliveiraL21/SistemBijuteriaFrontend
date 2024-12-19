@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
             this.showMessage('success', 'Login', `${response.message}`);
             this.tokenService.setToken(response.accessToken);
             this.tokenService.setItem('username', response.userName);
+            this.tokenService.setItem('photo', response.photo);
             this.route.navigateByUrl('cliente/lista');
           } else {
             this.showMessage('error', 'Login', `${response.message}`);

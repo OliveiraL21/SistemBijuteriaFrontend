@@ -52,6 +52,7 @@ export class AppComponent {
 
         default:
           this.authenticated = true;
+          this.setUserProfilePhoto();
       }
     })
   }
@@ -66,8 +67,12 @@ export class AppComponent {
     }
   }
 
+
+  setUserProfilePhoto() {
+    this.profilePhoto = this.tokenService.getItem('photo');
+  }
+
   ngOnInit() {
     this.onChangeRouteEvent();
-    this.getUser();
   }
 }
