@@ -31,13 +31,13 @@
         <!-- <td *ngFor="let col of columns">{{ col.field.includes('valor') ? (data[col.field] | currency: 'BRL') :
           data[col.field] }}</td> -->
         <td *ngFor="let col of columns">
-          <div *ngIf="col.field == 'status$descricao'">
+          <ng-content *ngIf="col.field == 'status$descricao'">
             <p-tag [severity]="'success'" [value]="generateTableValues(data, col.field)">
             </p-tag>
-          </div>
-          <div *ngIf="col.field !== 'status$descricao'">
+          </ng-content>
+          <ng-content *ngIf="col.field !== 'status$descricao'">
             <span> {{ generateTableValues(data, col.field)}}</span>
-          </div>
+          </ng-content>
         </td>
         <td class="flex">
           <p-button icon="pi pi-pencil" severity="info" size="small" [style]="{'max-width.px': 30}" [text]="true"
