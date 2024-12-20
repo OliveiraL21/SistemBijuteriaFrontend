@@ -86,7 +86,7 @@ export class MenuPrincipalComponent {
               items: [
                 {
                   label: 'Relatório de Vendas',
-                  routerLink: 'vendas/vendas',
+                  routerLink: 'vendas/relatorio',
                 }
               ]
             }

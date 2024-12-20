@@ -12,6 +12,7 @@ import { VendaService } from '../../../services/Venda.service';
 import { Venda } from '../../../models/entityModels/Venda/Venda';
 import { StatusService } from '../../../services/Status.service';
 import { Status } from '../../../models/entityModels/status/Status';
+import { ActivatedRoute } from '@angular/router';
 
 interface produtoVenda {
   id: string,
@@ -40,10 +41,11 @@ export class VendaComponent {
   modalProducts: produtoVenda[] = [];
   buttonSearchDisable: boolean = false;
   status: Status[] = [];
+  id: string = "";
 
 
-  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService) {
-
+  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private activeRouter: ActivatedRoute) {
+    this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
   }
 
   showMessage(type: string, title: string, message: string) {
@@ -54,7 +56,35 @@ export class VendaComponent {
     this.form = this.fb.group({
       produto: [null, null],
       clienteId: [null, null]
-    })
+    });
+  }
+
+
+  getVenda() {
+    if (this.id) {
+      this.loading = true;
+      this.service.detail(this.id).subscribe({
+        next: (venda: any) => {
+          this.total = venda.total;
+          this.subTotal = venda.subtotal;
+          console.log(venda);
+          this.desconto = venda.desconto;
+          this.produtos = venda.produtos.map((produto: any) => ({
+            id: produto.id ?? '',
+            codigo: produto.codigo,
+            descricao: produto.descricao,
+            quantidade: produto.quantidadeComprada,
+            valor: produto.valor,
+          }));
+          this.form.get('clienteId')?.enable();
+          this.form.get('clienteId')?.setValue(venda.cliente.id);
+          this.loading = false;
+        },
+        error: (err: any) => {
+          this.loading = false;
+        }
+      })
+    }
   }
 
   getStatus() {
@@ -223,6 +253,7 @@ export class VendaComponent {
     this.getClientes();
     this.getStatus();
     this.disableProdutoField();
+    this.getVenda();
   }
 
 

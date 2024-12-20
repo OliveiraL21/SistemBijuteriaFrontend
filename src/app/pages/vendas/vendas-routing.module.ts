@@ -9,13 +9,17 @@ const routes: Routes = [
     component: ListaVendaComponent
   },
   {
-    path: 'vendas',
+    path: 'relatorio',
     component: ListaVendaComponent,
   },
   {
     path: 'venda',
     component: VendaComponent
   },
+  {
+    path: 'venda/:id',
+    component: VendaComponent
+  }
 ];
 
 @NgModule({
