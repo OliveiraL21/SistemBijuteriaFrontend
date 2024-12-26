@@ -2,19 +2,10 @@
   color: #fff;
 }
 
-::ng-deep .p-menuitem-text:hover,
-::ng-deep .p-menuitem-text::selection,
-::ng-deep .p-menuitem-text::before,
-::ng-deep .p-menuitem-text::after,
-::ng-deep .p-menuitem-text:active,
-::ng-deep .p-menuitem-text:focus {
-  color: #fff;
-  background-color: #d63384;
-}
-
 ::ng-deep .p-megamenu-submenu {
   background-color: #fff;
 }
+
 
 ::ng-deep .p-submenu-icon {
   color: #fff;
@@ -33,20 +24,6 @@
   background: #d63384;
 }
 
-::ng-deep .p-menuitem-link-active:hover,
-::ng-deep .p-menuitem-link-active:active,
-::ng-deep .p-menuitem-link-active:focus,
-::ng-deep .p-menuitem-link-active::selection,
-::ng-deep .p-menuitem-link-active::after,
-::ng-deep .p-menuitem-link-active::content {
-  background-color: #d63384;
-  color: #000;
-}
-
-::ng-deep .p-submenu-list> ::ng-deep .p-menuitem> ::ng-deep .p-menuitem-content> ::ng-deep .p-menuitem-link:active {
-  background-color: #d63384;
-  color: #000;
-}
 
 
 ::ng-deep .p-submenu-list> ::ng-deep .p-menuitem> ::ng-deep .p-menuitem-content> ::ng-deep .p-menuitem-link> ::ng-deep .p-menuitem-text {
