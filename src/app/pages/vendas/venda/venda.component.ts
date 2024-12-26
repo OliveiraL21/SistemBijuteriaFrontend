@@ -55,7 +55,8 @@ export class VendaComponent {
   initForm() {
     this.form = this.fb.group({
       produto: [null, null],
-      clienteId: [null, null]
+      clienteId: [null, null],
+      status: [null, null]
     });
   }
 
@@ -110,8 +111,8 @@ export class VendaComponent {
     })
   }
 
-  getCustomSelect(): CustomSelectData {
-    return new CustomSelectData("nome", "id", true, "name", true, "cliente", "clienteId", "Cliente", this.clientes, true);
+  getCustomSelect(optionLabel: string, optionValue: string, filter: boolean, filterBy: string, showClear: boolean, placeholder: string, controlName: string, label: string, list: any, required: boolean): CustomSelectData {
+    return new CustomSelectData(optionLabel, optionValue, filter, filterBy, showClear, placeholder, controlName, label, list, required);
   }
 
   getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {

@@ -4,11 +4,21 @@ import { CustomButton } from '../../models/custonsModels/CustomButtonData/Custom
 import { ConfirmationService, MessageService } from 'primeng/api';
 import Column from '../../models/custonsModels/CustomTable/CustomColumn';
 
+export enum Severity {
+  Success = 'success',
+  Info = 'info',
+  Warn = 'warn',
+  Danger = 'danger',
+  Secundary = 'secundary',
+  Contrast = 'contrast',
+}
+
 @Component({
   selector: 'app-custom-table',
   templateUrl: './custom-table.component.html',
   styleUrl: './custom-table.component.scss'
 })
+
 export class CustomTableComponent {
   @Input() pageTitle: string = "";
   @Input() listOfColumns: Column[] = [];
@@ -18,6 +28,8 @@ export class CustomTableComponent {
   @Input() pageName: string = "";
   @Output() deleteEvent: EventEmitter<string> = new EventEmitter<string>();
   loading: boolean = false;
+
+
 
   constructor(private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
 
@@ -74,8 +86,8 @@ export class CustomTableComponent {
     return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary", "pi pi-plus");
   }
 
-  generateStatusSeverity(data: any, field: any): string {
-    return 'success'
+  generateStatusSeverity(data: any, field: any) {
+    return "success";
   }
 
   generateTableValues(data: any, field: any) {

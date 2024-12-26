@@ -29,10 +29,22 @@
     <ng-template pTemplate="body" let-data let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
-          <ng-content *ngIf="col.field == 'status$descricao'">
-            <p-tag [severity]="'success'" [value]="generateTableValues(data, col.field)">
+
+          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Em aberto'">
+            <p-tag severity="info" [value]="generateTableValues(data, col.field)">
             </p-tag>
           </ng-content>
+
+          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Em atraso'">
+            <p-tag severity="danger" [value]="generateTableValues(data, col.field)">
+            </p-tag>
+          </ng-content>
+
+          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Finalizado'">
+            <p-tag severity="success" [value]="generateTableValues(data, col.field)">
+            </p-tag>
+          </ng-content>
+
           <ng-content *ngIf="col.field !== 'status$descricao'">
             <span> {{ generateTableValues(data, col.field)}}</span>
           </ng-content>

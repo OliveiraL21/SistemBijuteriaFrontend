@@ -41,7 +41,8 @@
             <ng-template pTemplate="caption">
               <div class="flex p-3">
                 <form [formGroup]="form" class="flex w-full">
-                  <app-select [form]="form" [data]="getCustomSelect()"
+                  <app-select [form]="form"
+                    [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
                     (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
 
                   <p-floatLabel class="w-full">
@@ -52,6 +53,9 @@
                       <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
                     </p-inputGroup>
                   </p-floatLabel>
+
+                  <app-select *ngIf="id" [form]="form"
+                    [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
 
                 </form>
               </div>
