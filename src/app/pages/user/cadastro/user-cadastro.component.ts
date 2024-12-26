@@ -83,6 +83,7 @@ export class UserCadastroComponent {
       this.service.update(this.id, data).subscribe({
         next: (user: Usuario) => {
           this.loading = false;
+          this.tokenService.setItem('photo', user.foto ?? "");
           this.showMessage('success', 'Usuário', 'Dados atualizados com sucesso');
         },
         error: (err: any) => {

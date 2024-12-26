@@ -274,13 +274,13 @@ export class VendaComponent {
 
   finalizarVenda() {
     this.loading = true;
-    let statusAtivo = this.status.find(x => x.descricao === 'Ativo');
+    let status = this.status.find(x => x.descricao === 'Em aberto');
     let data: Venda = {
       total: this.total,
       subTotal: this.subTotal,
       desconto: this.desconto,
       data: new Date(),
-      statusId: statusAtivo?.id,
+      statusId: status?.id,
       clienteId: this.form.get('clienteId')?.value,
       produtos: this.produtos.map((produto: produtoVenda) => ({
         produtoId: produto.id,
