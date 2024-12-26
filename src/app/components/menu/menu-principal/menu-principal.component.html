@@ -13,10 +13,15 @@
       <button pRipple
         class="relative p-link bg-indigo-500 button-hover overflow-hidden p-2 pl-3 text-color hover:pink-700 border-noround border-none w-full flex justify-content-start align-items-center"
         (click)="minhaConta()">
-        <p-avatar *ngIf="userPhoto !== null && userPhoto !== ''" [image]="userPhoto" styleClass="mr-2 bg-cover"
-          shape="circle"></p-avatar>
-        <p-avatar *ngIf="userPhoto === null || userPhoto === ''" icon="pi pi-user" styleClass="mr-2"
-          shape="circle"></p-avatar>
+        <div *ngIf="userPhoto; then imageAvatar else iconAvatar"></div>
+        <ng-template #imageAvatar>
+          <p-avatar [image]="userPhoto" styleClass="mr-2 bg-cover" shape="circle"></p-avatar>
+        </ng-template>
+
+        <ng-template #iconAvatar>
+          <p-avatar #iconAvatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+        </ng-template>
+
         <span class="inline-flex flex-column">
           <span class="text-white font-bold text-sm">{{username}}</span>
         </span>
