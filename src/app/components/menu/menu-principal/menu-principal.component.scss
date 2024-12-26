@@ -12,6 +12,10 @@
   background-color: #d63384;
 }
 
+::ng-deep .p-megamenu-submenu {
+  background-color: #fff;
+}
+
 ::ng-deep .p-submenu-icon {
   color: #fff;
 }
@@ -25,6 +29,9 @@
   background-color: #d63384;
 }
 
+::ng-deep .p-megamenu .p-menuitem.p-highlight>.p-menuitem-content {
+  background: #d63384;
+}
 
 ::ng-deep .p-menuitem-link-active:hover,
 ::ng-deep .p-menuitem-link-active:active,
