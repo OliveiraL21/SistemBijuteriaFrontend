@@ -108,6 +108,7 @@ export class MenuPrincipalComponent {
       }
     ]
     this.getUsername();
+    console.log(this.userPhoto);
   }
 
   ngAfterViewInit() {
