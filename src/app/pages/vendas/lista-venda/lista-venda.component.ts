@@ -31,6 +31,7 @@ export class ListaVendaComponent {
 
   getColumnList(): Column[] {
     return [
+      new Column("codigo", "Código", true),
       new Column("cliente$nome", "Cliente", true),
       new Column("data", "Data", true),
       new Column("total", "Total"),
