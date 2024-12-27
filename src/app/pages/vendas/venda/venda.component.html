@@ -1,4 +1,4 @@
-<div class="w-full h-full mt-5 p-4 align-items-center" style="overflow-y: scroll;">
+<div class="w-full h-full mt-5 p-4 align-items-center">
   <p-toast position="top-right" [key]="'trv'" />
   <p-confirmPopup />
   <p-blockUI [blocked]="loading">
@@ -28,8 +28,7 @@
             </p-card>
           </div>
           <div class="w-full p-4">
-            <app-custom-button
-              [custom]="getCustomButton('Finalizar Venda', true, 'w-full px-4 bg-indigo-600', 'primary')"
+            <app-custom-button [custom]="getCustomButton('Salvar', true, 'w-full px-4 bg-indigo-600', 'primary')"
               (onClickEvent)="finalizarVenda()"></app-custom-button>
           </div>
         </div>
@@ -41,21 +40,24 @@
             <ng-template pTemplate="caption">
               <div class="flex p-3">
                 <form [formGroup]="form" class="flex w-full">
-                  <app-select [form]="form"
-                    [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
-                    (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
+                  <div class="w-full flex">
+                    <app-select [form]="form"
+                      [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
+                      (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
 
-                  <p-floatLabel class="w-full">
-                    <p-inputGroup class="w-5 ml-5">
-                      <input type="text" pInputText formControlName="produto" (keypress)="onKeypressProduto($event)" />
-                      <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
-                        [disabled]="buttonSearchDisable"></button>
-                      <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
-                    </p-inputGroup>
-                  </p-floatLabel>
+                    <p-floatLabel class=" flex">
+                      <p-inputGroup class="ml-5">
+                        <input type="text" pInputText formControlName="produto"
+                          (keypress)="onKeypressProduto($event)" />
+                        <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
+                          [disabled]="buttonSearchDisable"></button>
+                        <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
+                      </p-inputGroup>
+                    </p-floatLabel>
 
-                  <app-select *ngIf="id" [form]="form"
-                    [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
+                    <app-select *ngIf="id" [form]="form" class="ml-7"
+                      [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
+                  </div>
 
                 </form>
               </div>

@@ -46,7 +46,7 @@ export class ListagemClienteComponent {
 
   getColumnList(): Column[] {
     return [
-      new Column("nome", "Cliente"),
+      new Column("nome", "Cliente", true),
       new Column("telefone", "Telefone"),
     ]
   }

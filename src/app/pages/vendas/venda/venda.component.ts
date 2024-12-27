@@ -12,7 +12,7 @@ import { VendaService } from '../../../services/Venda.service';
 import { Venda } from '../../../models/entityModels/Venda/Venda';
 import { StatusService } from '../../../services/Status.service';
 import { Status } from '../../../models/entityModels/status/Status';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 interface produtoVenda {
   id: string,
@@ -44,7 +44,7 @@ export class VendaComponent {
   id: string = "";
 
 
-  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private activeRouter: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private activeRouter: ActivatedRoute, private router: Router) {
     this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
   }
 
@@ -68,7 +68,6 @@ export class VendaComponent {
         next: (venda: any) => {
           this.total = venda.total;
           this.subTotal = venda.subtotal;
-          console.log(venda);
           this.desconto = venda.desconto;
           this.produtos = venda.produtos.map((produto: any) => ({
             id: produto.id ?? '',
@@ -77,6 +76,7 @@ export class VendaComponent {
             quantidade: produto.quantidadeComprada,
             valor: produto.valor,
           }));
+          this.form.get('status')?.setValue(venda.status.id);
           this.form.get('clienteId')?.enable();
           this.form.get('clienteId')?.setValue(venda.cliente.id);
           this.loading = false;
@@ -129,7 +129,6 @@ export class VendaComponent {
       this.subTotal = 0;
       this.total = this.subTotal;
     } else {
-      // this.subTotal = (valor * quantidade);
       this.subTotal = 0;
       this.subTotal = this.produtos.reduce((acumulator: number, currentValue: produtoVenda) => acumulator + (currentValue.valor * currentValue.quantidade), this.subTotal);
       this.total = this.subTotal;
@@ -273,15 +272,42 @@ export class VendaComponent {
     this.desconto = 0;
   }
 
+  createVenda(data: Venda) {
+    this.service.post(data).subscribe({
+      next: (result: Venda) => {
+        this.showMessage('success', 'Venda', 'Venda cadastrada com sucesso!');
+        this.resetFields();
+        this.loading = false;
+      }, error: (err: any) => {
+        this.loading = false;
+      }
+    })
+  }
+
+  editarVenda(data: Venda) {
+    this.service.put(this.id, data).subscribe({
+      next: (response: Venda) => {
+        this.showMessage('success', 'Venda', 'Venda editada com sucesso!');
+        this.loading = false;
+        this.router.navigateByUrl('vendas/relatorio')
+      },
+      error: (err: any) => {
+        this.loading = false;
+      }
+    })
+  }
+
+
+
   finalizarVenda() {
     this.loading = true;
-    let status = this.status.find(x => x.descricao === 'Em aberto');
+    let status = this.id ? this.form.get('status')?.value : this.status.find(x => x.descricao === 'Em aberto')?.id;
     let data: Venda = {
       total: this.total,
       subTotal: this.subTotal,
       desconto: this.desconto,
       data: new Date(),
-      statusId: status?.id,
+      statusId: status,
       clienteId: this.form.get('clienteId')?.value,
       produtos: this.produtos.map((produto: produtoVenda) => ({
         produtoId: produto.id,
@@ -290,14 +316,12 @@ export class VendaComponent {
       })),
     }
 
-    this.service.post(data).subscribe({
-      next: (result: Venda) => {
-        this.showMessage('success', 'Venda', 'Venda finalizada com sucesso!');
-        this.resetFields();
-        this.loading = false;
-      }, error: (err: any) => {
-        this.loading = false;
-      }
-    })
+    if (!this.id) {
+      this.createVenda(data);
+    } else {
+      this.editarVenda(data);
+    }
+
+
   }
 }

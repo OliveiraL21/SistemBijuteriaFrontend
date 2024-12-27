@@ -29,10 +29,10 @@ export class ProdutoListaComponent {
 
   getColumnList(): Column[] {
     return [
-      new Column("codigoProduto", "Código"),
-      new Column("descricao", "Produto"),
-      new Column("quantidade", "Quantidade"),
-      new Column("valorUnitario", "Valor"),
+      new Column("codigoProduto", "Código", true),
+      new Column("descricao", "Produto", true),
+      new Column("quantidade", "Quantidade", true),
+      new Column("valorUnitario", "Valor", true),
       new Column('tipoProduto$descricao', 'Tipo do Produto')
     ]
   }

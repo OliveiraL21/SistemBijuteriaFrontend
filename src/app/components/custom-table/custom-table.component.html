@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <th *ngFor="let filterColumn of columns; let i = index; trackBy:trackByFn">
-          <p-columnFilter type="text" [field]="filterColumn.field"></p-columnFilter>
+          <p-columnFilter *ngIf="filterColumn.filter" type="text" [field]="filterColumn.field"></p-columnFilter>
         </th>
         <th></th>
       </tr>

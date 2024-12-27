@@ -97,7 +97,7 @@ export class CustomTableComponent {
       }
 
       if (field.includes('data')) {
-        return new Date(data[field]).toLocaleDateString();
+        return data[field];
       }
 
       if (field.includes('$')) {
