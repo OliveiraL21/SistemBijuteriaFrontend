@@ -1,3 +1,4 @@
+import { CustomButton } from './../../../models/custonsModels/CustomButtonData/CustomButton';
 import { Component } from '@angular/core';
 import Column from '../../../models/custonsModels/CustomTable/CustomColumn';
 import { VendaService } from '../../../services/Venda.service';
@@ -27,6 +28,13 @@ export class ListaVendaComponent {
       key: 'trlrv',
       life: 3000
     })
+  }
+
+  getTableCustonButtons(): CustomButton[] {
+    return [
+      new CustomButton('', false, "", "", "pi pi-cart-arrow-down", "Finalizar Venda"),
+      new CustomButton('', false, "", "", "pi pi-money-bill", "Marcar como Atraso")
+    ]
   }
 
   getColumnList(): Column[] {

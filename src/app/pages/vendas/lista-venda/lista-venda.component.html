@@ -3,7 +3,7 @@
   <p-toast position="top-right" key="trCustom" />
   <p-card>
     <app-custom-table [pageTitle]="'Relatórios de Vendas'" [pageName]="''" [listOfColumns]="getColumnList()"
-      [addRoute]="'vendas/venda'" [editRoute]="'vendas/venda'" [listData]="vendas"
-      (deleteEvent)="deletar($event)"></app-custom-table>
+      [addRoute]="'vendas/venda'" [editRoute]="'vendas/venda'" [listData]="vendas" (deleteEvent)="deletar($event)"
+      [tableCustomButons]="getTableCustonButtons()"></app-custom-table>
   </p-card>
 </div>

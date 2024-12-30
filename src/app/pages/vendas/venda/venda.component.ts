@@ -42,6 +42,7 @@ export class VendaComponent {
   buttonSearchDisable: boolean = false;
   status: Status[] = [];
   id: string = "";
+  codigoVenda?: string = "";
 
 
   constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private activeRouter: ActivatedRoute, private router: Router) {
@@ -69,6 +70,7 @@ export class VendaComponent {
           this.total = venda.total;
           this.subTotal = venda.subtotal;
           this.desconto = venda.desconto;
+          this.codigoVenda = venda.codigo;
           this.produtos = venda.produtos.map((produto: any) => ({
             id: produto.id ?? '',
             codigo: produto.codigo,
@@ -304,6 +306,7 @@ export class VendaComponent {
     let status = this.id ? this.form.get('status')?.value : this.status.find(x => x.descricao === 'Em aberto')?.id;
     let data: Venda = {
       total: this.total,
+      codigo: this.codigoVenda ?? null,
       subTotal: this.subTotal,
       desconto: this.desconto,
       data: new Date(),
