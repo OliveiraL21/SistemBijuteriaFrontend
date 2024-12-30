@@ -30,10 +30,18 @@ export class ListaVendaComponent {
     })
   }
 
+  marcarComoAtraso(id: String, data: any) {
+
+  }
+
+  finalizarVenda(id: string, data: any) {
+
+  }
+
   getTableCustonButtons(): CustomButton[] {
     return [
-      new CustomButton('', false, "", "", "pi pi-cart-arrow-down", "Finalizar Venda"),
-      new CustomButton('', false, "", "", "pi pi-money-bill", "Marcar como Atraso")
+      new CustomButton('', false, "", "", "pi pi-cart-arrow-down", "Finalizar Venda", (id: any, data: any) => this.finalizarVenda(id, data)),
+      new CustomButton('', false, "", "", "pi pi-money-bill", "Marcar como Atraso", (id: any, data: any) => this.marcarComoAtraso(id, data))
     ]
   }
 
