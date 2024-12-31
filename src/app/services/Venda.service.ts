@@ -32,4 +32,12 @@ export class VendaService {
   delete(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${baseUrl}/${id}`);
   }
+
+  marcarAtraso(id: any, data: any): Observable<any> {
+    return this.http.put<any>(`${baseUrl}/marcarAtraso${id}`, data);
+  }
+
+  FinalizarVenda(id: any, data: any): Observable<any> {
+    return this.http.put<any>(`${baseUrl}/finalizarVenda/${id}`, data);
+  }
 }

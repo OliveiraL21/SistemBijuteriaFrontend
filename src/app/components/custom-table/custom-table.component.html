@@ -52,7 +52,7 @@
         <td class="flex">
           <ng-container class="flex w-5" *ngFor="let button of tableCustomButons">
             <p-button [pTooltip]="button.tooltip" [tooltipOptions]="{tooltipPosition: 'bottom'}" size="small"
-              [style]="{'max-width.px': 30}" [text]="true" [icon]="button.icon" severity="secondary"
+              [style]="{'max-width.px': 30}" class="mx-2" [text]="true" [icon]="button.icon" severity="secondary"
               (onClick)="button.ClickAction(data.id, data)"></p-button>
           </ng-container>
           <p-button pTooltip="Editar" [tooltipOptions]="{tooltipPosition: 'bottom'}" icon="pi pi-pencil" severity="info"

@@ -31,11 +31,38 @@ export class ListaVendaComponent {
   }
 
   marcarComoAtraso(id: String, data: any) {
-
+    this.service.marcarAtraso(id, data).subscribe({
+      next: (response: any) => {
+        this.loading = false;
+        if (response) {
+          this.showMessage('success', 'Vendas', 'Venda atualizada com sucesso');
+        } else {
+          this.showMessage('error', 'Vendas', 'Erro ao atualizar venda, entre em contato com o seu representante');
+        }
+      },
+      error: (err: any) => {
+        this.loading = false;
+        this.showMessage('error', 'Vendas', 'Erro ao atualizar venda, entre em contato com o seu representante');
+      }
+    })
   }
 
   finalizarVenda(id: string, data: any) {
+    this.service.FinalizarVenda(id, data).subscribe({
+      next: (response: any) => {
+        this.loading = false;
+        if (response) {
+          this.showMessage('success', 'Vendas', 'Venda atualizada com sucesso');
+        } else {
+          this.showMessage('error', 'Vendas', 'Erro ao atualizar venda, entre em contato com o seu representante');
+        }
 
+      },
+      error: (err: any) => {
+        this.loading = false;
+        this.showMessage('error', 'Vendas', 'Erro ao atualizar venda, entre em contato com o seu representante');
+      }
+    })
   }
 
   getTableCustonButtons(): CustomButton[] {
