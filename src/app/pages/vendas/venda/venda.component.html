@@ -27,10 +27,7 @@
               <p class="text-right">{{total | currency: 'BRL'}}</p>
             </p-card>
           </div>
-          <div class="w-full p-4">
-            <app-custom-button [custom]="getCustomButton('Salvar', true, 'w-full px-4 bg-indigo-600', 'primary')"
-              (onClickEvent)="finalizarVenda()"></app-custom-button>
-          </div>
+
         </div>
 
       </ng-template>
@@ -57,6 +54,7 @@
 
                     <app-select *ngIf="id" [form]="form" class="ml-7"
                       [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
+
                   </div>
 
                 </form>
@@ -113,6 +111,12 @@
         </div>
       </ng-template>
     </p-splitter>
+    <div class="flex w-full justify-content-between">
+      <app-custom-button [custom]="getCustomButton('Cancelar', false,'', 'danger')"
+        (onClickEvent)="cancelar()"></app-custom-button>
+      <p-splitButton label="Salvar" (onClick)="salvarVenda('salvar')" [model]="buttonItens"
+        severity="help"></p-splitButton>
+    </div>
   </p-card>
 </div>
 

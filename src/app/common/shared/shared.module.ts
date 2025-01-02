@@ -45,6 +45,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 
 
@@ -97,6 +98,7 @@ import { TagModule } from 'primeng/tag';
     ConfirmPopupModule,
     DialogModule,
     TagModule,
+    SplitButtonModule,
   ],
   exports: [
     CommonModule,
@@ -144,6 +146,7 @@ import { TagModule } from 'primeng/tag';
     ConfirmPopupModule,
     DialogModule,
     TagModule,
+    SplitButtonModule
   ],
   providers: [
     MessageService,

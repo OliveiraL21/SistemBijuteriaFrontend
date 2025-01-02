@@ -43,10 +43,28 @@ export class VendaComponent {
   status: Status[] = [];
   id: string = "";
   codigoVenda?: string = "";
-
+  buttonItens: any[] = [];
 
   constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private activeRouter: ActivatedRoute, private router: Router) {
     this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
+
+    this.buttonItens = [
+      {
+        label: 'Marcar Atraso',
+        styleClass: 'text-500',
+        command: () => {
+          this.marcarAtraso('atraso');
+        }
+      },
+
+      {
+        label: 'Finalizar Venda',
+        styleClass: 'text-500',
+        command: () => {
+          this.finalizarVenda('finalizar');
+        }
+      }
+    ]
   }
 
   showMessage(type: string, title: string, message: string) {
@@ -111,6 +129,10 @@ export class VendaComponent {
         this.loading = false;
       }
     })
+  }
+
+  cancelar() {
+    this.router.navigateByUrl('vendas/relatorio');
   }
 
   getCustomSelect(optionLabel: string, optionValue: string, filter: boolean, filterBy: string, showClear: boolean, placeholder: string, controlName: string, label: string, list: any, required: boolean): CustomSelectData {
@@ -256,6 +278,7 @@ export class VendaComponent {
     this.getStatus();
     this.disableProdutoField();
     this.getVenda();
+    this.form.get('status')?.disable();
   }
 
 
@@ -299,11 +322,25 @@ export class VendaComponent {
     })
   }
 
+  definirStatus(summoner: string) {
+    let status: any = 'Em aberto';
+
+    if (this.id && summoner === 'atraso') {
+      status = this.status.find(x => x.descricao === 'Em atraso')?.id;
+      return status;
+    }
+
+    if (this.id && summoner === 'finalizar') {
+      status = this.status.find(x => x.descricao === 'Finalizado')?.id;
+      return status;
+    }
 
 
-  finalizarVenda() {
-    this.loading = true;
-    let status = this.id ? this.form.get('status')?.value : this.status.find(x => x.descricao === 'Em aberto')?.id;
+    return status;
+  }
+
+  createVendaObject(summoner: string): Venda {
+    let status = this.definirStatus(summoner);
     let data: Venda = {
       total: this.total,
       codigo: this.codigoVenda ?? null,
@@ -319,12 +356,31 @@ export class VendaComponent {
       })),
     }
 
+    return data;
+  }
+
+  salvarVenda(summoner: string) {
+    this.loading = true;
+    let data = this.createVendaObject(summoner);
+
     if (!this.id) {
       this.createVenda(data);
     } else {
       this.editarVenda(data);
     }
+  }
 
+  marcarAtraso(summoner: string) {
+    this.loading = true;
+    let data = this.createVendaObject(summoner);
+    this.editarVenda(data);
+    this.loading = false;
+  }
 
+  finalizarVenda(summoner: string) {
+    this.loading = true;
+    let data = this.createVendaObject(summoner);
+    this.editarVenda(data);
+    this.loading = false;
   }
 }

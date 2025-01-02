@@ -65,13 +65,6 @@ export class ListaVendaComponent {
     })
   }
 
-  getTableCustonButtons(): CustomButton[] {
-    return [
-      new CustomButton('', false, "", "", "pi pi-cart-arrow-down", "Finalizar Venda", (id: any, data: any) => this.finalizarVenda(id, data)),
-      new CustomButton('', false, "", "", "pi pi-money-bill", "Marcar como Atraso", (id: any, data: any) => this.marcarComoAtraso(id, data))
-    ]
-  }
-
   getColumnList(): Column[] {
     return [
       new Column("codigo", "Código", true),

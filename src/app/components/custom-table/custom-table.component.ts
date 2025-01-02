@@ -26,7 +26,6 @@ export class CustomTableComponent {
   @Input() addRoute: string = "";
   @Input() editRoute: string = "";
   @Input() pageName: string = "";
-  @Input() tableCustomButons: CustomButton[] = [];
   @Output() deleteEvent: EventEmitter<string> = new EventEmitter<string>();
   loading: boolean = false;
 

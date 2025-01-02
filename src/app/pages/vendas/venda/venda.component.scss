@@ -14,3 +14,8 @@
 .search-button:disabled {
   cursor: not-allowed;
 }
+
+
+::ng-deep .p-ripple>.p-menuitem-link .p-menuitem-text {
+  color: #000 !important;
+}
