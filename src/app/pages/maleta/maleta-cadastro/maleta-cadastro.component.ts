@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomFormControls } from '../../../models/custonsModels/CustomFormData/CustomFormControls';
 import { CustomInputText } from '../../../models/custonsModels/CustomTextInputData/CustomInputText';
 import CustomSelectData from '../../../models/custonsModels/CustomSelect/CustomSelectData';
+import { Maleta } from '../../../models/entityModels/maleta/Maleta';
 
 @Component({
   selector: 'app-maleta-cadastro',
@@ -15,9 +16,10 @@ import CustomSelectData from '../../../models/custonsModels/CustomSelect/CustomS
 export class MaletaCadastroComponent {
   loading: boolean = false;
   form!: FormGroup;
+  id: string | null = null;
 
   constructor(private service: MaletaService, private router: Router, private activeRoute: ActivatedRoute, private messageService: MessageService, private fb: FormBuilder) {
-
+    this.id = this.activeRoute.snapshot.paramMap.get('id') ?? null;
   }
 
   getFormControls(): CustomFormControls[] {
@@ -73,8 +75,52 @@ export class MaletaCadastroComponent {
     this.router.navigateByUrl('maleta/listagem');
   }
 
-  submit() {
+  createPayload() {
+    let data = this.form.getRawValue();
+    let maleta: Maleta = {
+      id: this.id ?? null,
+      Envio: data.envio,
+      Pagamento: data.pagamento,
+      Troca: data.troca,
+      numero: data.numero,
+      status: data.status
+    }
 
+    return maleta;
+  }
+
+  createMaleta(payload: Maleta) {
+    this.service.create(payload)?.subscribe({
+      next: (response: Maleta) => {
+        this.showMessage('success', 'Maleta', 'Registro cadastrado com sucesso!');
+        this.loading = false;
+      },
+      error: (err: any) => {
+        this.loading = false;
+      }
+    })
+  }
+
+  editarMaleta(payload: Maleta) {
+    this.service.update(this.id ?? "", payload)?.subscribe({
+      next: (response: Maleta) => {
+        this.showMessage('success', 'Maleta', 'Registro atualizado com sucesso!');
+        this.loading = false;
+      },
+      error: (err: any) => {
+        this.loading = false;
+      }
+    })
+  }
+
+  submit() {
+    this.loading = true;
+    let payload = this.createPayload();
+    if (!this.id) {
+      this.createMaleta(payload);
+    } else {
+      this.editarMaleta(payload)
+    }
   }
 
 }
