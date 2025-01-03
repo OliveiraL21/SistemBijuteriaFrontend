@@ -335,7 +335,10 @@ export class VendaComponent {
       return status;
     }
 
-
+    if (summoner === 'salvar') {
+      status = this.status.find(x => x.descricao === 'Em aberto')?.id;
+      return status;
+    }
     return status;
   }
 

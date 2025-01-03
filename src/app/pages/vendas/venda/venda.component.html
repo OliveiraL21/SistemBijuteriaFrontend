@@ -114,8 +114,15 @@
     <div class="flex w-full justify-content-between">
       <app-custom-button [custom]="getCustomButton('Cancelar', false,'', 'danger')"
         (onClickEvent)="cancelar()"></app-custom-button>
-      <p-splitButton label="Salvar" (onClick)="salvarVenda('salvar')" [model]="buttonItens"
-        severity="help"></p-splitButton>
+      <div *ngIf="!id">
+        <app-custom-button [custom]="getCustomButton('salvar', false, '', 'primary')"
+          (onClickEvent)="salvarVenda('salvar')"></app-custom-button>
+      </div>
+      <div *ngIf="id">
+        <p-splitButton label="Salvar" (onClick)="salvarVenda('salvar')" [model]="buttonItens"
+          severity="help"></p-splitButton>
+      </div>
+
     </div>
   </p-card>
 </div>

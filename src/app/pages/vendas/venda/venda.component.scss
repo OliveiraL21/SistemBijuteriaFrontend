@@ -16,6 +16,14 @@
 }
 
 
-::ng-deep .p-ripple>.p-menuitem-link .p-menuitem-text {
-  color: #000 !important;
+::ng-deep .p-tieredmenu .p-menuitem>.p-menuitem-content .p-menuitem-link .p-menuitem-text {
+  color: #4b5563 !important;
+}
+
+::ng-deep .p-tieredmenu .p-menuitem>.p-menuitem-content .p-menuitem-link .p-menuitem-text:hover {
+  color: #fff !important;
+}
+
+::ng-deep .p-tieredmenu .p-menuitem:not(.p-highlight):not(.p-disabled)>.p-menuitem-content:hover .p-menuitem-link .p-menuitem-text {
+  color: #fff !important;
 }
