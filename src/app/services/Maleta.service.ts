@@ -12,6 +12,10 @@ export class MaletaService {
 
   constructor(private http: HttpClient) { }
 
+  list(): Observable<Maleta[]> {
+    return this.http.get<Maleta[]>(`${baseUrl}`);
+  }
+
   detail(id: string): Observable<Maleta> {
     return this.http.get<Maleta>(`${baseUrl}/${id}`);
   }

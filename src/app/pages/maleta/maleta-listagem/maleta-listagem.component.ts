@@ -1,3 +1,4 @@
+import { MaletaService } from './../../../services/Maleta.service';
 import { Component } from '@angular/core';
 import Column from '../../../models/custonsModels/CustomTable/CustomColumn';
 import { Maleta } from '../../../models/entityModels/maleta/Maleta';
@@ -14,7 +15,7 @@ export class MaletaListagemComponent {
   lisOfMaletas: Maleta[] = [];
   loading: boolean = false;
 
-  constructor(private router: Router, private activeRoute: ActivatedRoute, private messageSerivce: MessageService) {
+  constructor(private service: MaletaService, private router: Router, private activeRoute: ActivatedRoute, private messageService: MessageService) {
 
   }
 
@@ -24,7 +25,7 @@ export class MaletaListagemComponent {
   }
 
   showMessage(type: string, title: string, message: string) {
-    this.messageSerivce.add({
+    this.messageService.add({
       severity: type,
       summary: title,
       detail: message,
@@ -43,10 +44,31 @@ export class MaletaListagemComponent {
   }
 
   getMaletas() {
-
+    this.loading = true;
+    this.service.list().subscribe({
+      next: (list: Maleta[]) => {
+        this.lisOfMaletas = list;
+        this.loading = false;
+      },
+      error: (err: any) => {
+        this.loading = false;
+      }
+    })
   }
 
-  deletar() {
-    throw new Error('Method not implemented.');
+  deletar(id: string) {
+    this.service.deletar(id).subscribe({
+      next: (response: boolean) => {
+        if (response) {
+          this.showMessage('success', 'Maleta', 'Registro excluido com sucesso!');
+        } else {
+          this.showMessage('error', 'Maleta', 'Erro ao excluir o registro, tente novamente mais tarde');
+        }
+        this.loading = false;
+      },
+      error: (err: any) => {
+        this.loading = false;
+      }
+    })
   }
 }
