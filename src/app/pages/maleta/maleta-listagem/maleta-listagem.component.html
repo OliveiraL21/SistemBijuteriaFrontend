@@ -1,0 +1,10 @@
+<div class="w-full  p-4 mt-5">
+  <p-confirmDialog />
+  <p-toast position="top-right" key="trCustomMaleta" />
+  <p-card>
+    <app-custom-table [pageTitle]="'Maletas'" [pageName]="'Maleta'" [listOfColumns]="getCustomColumns()"
+      [listData]="lisOfMaletas" [addRoute]="'maleta/cadastro'" [editRoute]="'maleta/editar'"
+      (deleteEvent)="deletar()"></app-custom-table>
+  </p-card>
+
+</div>

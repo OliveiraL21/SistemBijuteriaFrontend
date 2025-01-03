@@ -13,6 +13,8 @@ import { errorInterceptor } from './common/helpers/interceptors/error.intercepto
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+import { MaletaListagemComponent } from './pages/maleta/maleta-listagem/maleta-listagem.component';
+import { MaletaCadastroComponent } from './pages/maleta/maleta-cadastro/maleta-cadastro.component';
 
 registerLocaleData(ptBr);
 
