@@ -7,6 +7,8 @@ import { CustomFormControls } from '../../../models/custonsModels/CustomFormData
 import { CustomInputText } from '../../../models/custonsModels/CustomTextInputData/CustomInputText';
 import CustomSelectData from '../../../models/custonsModels/CustomSelect/CustomSelectData';
 import { Maleta } from '../../../models/entityModels/maleta/Maleta';
+import { StatusService } from '../../../services/Status.service';
+import { Status } from '../../../models/entityModels/status/Status';
 
 @Component({
   selector: 'app-maleta-cadastro',
@@ -17,8 +19,8 @@ export class MaletaCadastroComponent {
   loading: boolean = false;
   form!: FormGroup;
   id: string | null = null;
-
-  constructor(private service: MaletaService, private router: Router, private activeRoute: ActivatedRoute, private messageService: MessageService, private fb: FormBuilder) {
+  status: Status[] = [];
+  constructor(private service: MaletaService, private router: Router, private activeRoute: ActivatedRoute, private messageService: MessageService, private fb: FormBuilder, private statusService: StatusService) {
     this.id = this.activeRoute.snapshot.paramMap.get('id') ?? null;
   }
 
@@ -26,15 +28,15 @@ export class MaletaCadastroComponent {
     return [
       {
         type: 'text',
-        data: new CustomInputText('troca', 'Informe a data de troca da maleta', 'troca', 'Data de Troca', 'troca', false, true, '00/00/0000')
+        data: new CustomInputText('troca', 'Informe a data de troca da maleta', 'troca', 'Data de Troca', 'troca', false, true, '99/99/9999')
       },
       {
         type: 'text',
-        data: new CustomInputText('envio', 'Informe a data de envio', 'envio', 'Data de Envio', 'envio', false, true, '00/00/0000')
+        data: new CustomInputText('envio', 'Informe a data de envio', 'envio', 'Data de Envio', 'envio', false, true, '99/99/9999')
       },
       {
         type: 'text',
-        data: new CustomInputText('pagamento', 'Informe a data do pagamento', 'pagamento', 'Data de Pagamento', 'pagamento', false, true, '00/00/0000')
+        data: new CustomInputText('pagamento', 'Informe a data do pagamento', 'pagamento', 'Data de Pagamento', 'pagamento', false, true, '99/99/9999')
       },
       {
         type: 'text',
@@ -42,7 +44,7 @@ export class MaletaCadastroComponent {
       },
       {
         type: 'select',
-        data: new CustomSelectData('descricao', 'id', false, 'descricao', true, 'Selecione um status', 'status', 'Status', [], true)
+        data: new CustomSelectData('descricao', 'id', false, 'descricao', true, 'Selecione um status', 'status', 'Status', this.status, true)
       }
     ]
   }
@@ -54,6 +56,17 @@ export class MaletaCadastroComponent {
       detail: message,
       key: 'trlccm',
       life: 3000
+    })
+  }
+
+  getStatus() {
+    this.statusService.listAll().subscribe({
+      next: (response: Status[]) => {
+        this.status = response;
+        this.loading = false;
+      }, error: (err: any) => {
+        this.loading = false;
+      }
     })
   }
 
@@ -69,6 +82,7 @@ export class MaletaCadastroComponent {
 
   ngOnInit() {
     this.initForm();
+    this.getStatus();
   }
 
   voltar() {

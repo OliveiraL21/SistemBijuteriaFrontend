@@ -53,6 +53,13 @@ export class MenuPrincipalComponent {
 
       },
       {
+        label: 'Maleta',
+        icon: 'pi pi-briefcase',
+        iconClass: 'text-white',
+        routerLink: 'maleta/',
+        root: true
+      },
+      {
         label: 'Produtos',
         icon: 'pi pi-shopping-bag',
         iconClass: 'text-white bg-white',
