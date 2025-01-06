@@ -40,6 +40,7 @@ export class MaletaListagemComponent {
       new Column('troca', 'Data da Troca', false),
       new Column('envio', 'Data de Envio', true),
       new Column('pagamento', 'Data de Pagamento', true),
+      new Column('status$descricao', 'Status', false)
     ]
   }
 

@@ -83,6 +83,9 @@ export class MaletaCadastroComponent {
   ngOnInit() {
     this.initForm();
     this.getStatus();
+    if (this.id) {
+      this.getMaleta();
+    }
   }
 
   voltar() {
@@ -91,16 +94,32 @@ export class MaletaCadastroComponent {
 
   createPayload() {
     let data = this.form.getRawValue();
+    console.log(data);
     let maleta: Maleta = {
       id: this.id ?? null,
       Envio: data.envio,
       Pagamento: data.pagamento,
       Troca: data.troca,
       numero: data.numero,
+      statusId: data.status,
       status: data.status
     }
 
     return maleta;
+  }
+
+  getMaleta() {
+    this.loading = true;
+    this.service.detail(this.id ?? '').subscribe({
+      next: (response: Maleta) => {
+        Object.keys(response).forEach((key: string) => {
+          this.form.get(key)?.setValue(response[key as keyof Maleta]);
+          if (key == 'status') {
+            this.form.get(key)?.setValue(response.status?.id);
+          }
+        })
+      }
+    })
   }
 
   createMaleta(payload: Maleta) {

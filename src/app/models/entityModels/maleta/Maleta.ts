@@ -7,4 +7,5 @@ export class Maleta {
   Pagamento: Date | null = null;
   numero: string | null = null;
   status: Status | null = null;
+  statusId: string | null = null;
 }
