@@ -29,9 +29,12 @@
     <ng-template pTemplate="body" let-data let-columns="columns">
       <tr>
         <td *ngFor="let col of columns">
-
-          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Em aberto'">
-            <p-tag severity="info" [value]="generateTableValues(data, col.field)">
+          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Ativo' ">
+            <p-tag severity="warning" [value]="generateTableValues(data, col.field)"></p-tag>
+          </ng-content>
+          <ng-content class="w-full"
+            *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Em aberto'">
+            <p-tag severity="info" class="p-4" [value]="generateTableValues(data, col.field)">
             </p-tag>
           </ng-content>
 

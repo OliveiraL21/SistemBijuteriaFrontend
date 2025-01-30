@@ -127,6 +127,7 @@ export class MaletaCadastroComponent {
       next: (response: Maleta) => {
         this.showMessage('success', 'Maleta', 'Registro cadastrado com sucesso!');
         this.loading = false;
+        this.router.navigateByUrl('maleta/listagem');
       },
       error: (err: any) => {
         this.loading = false;
@@ -139,6 +140,7 @@ export class MaletaCadastroComponent {
       next: (response: Maleta) => {
         this.showMessage('success', 'Maleta', 'Registro atualizado com sucesso!');
         this.loading = false;
+        this.router.navigateByUrl('maleta/listagem');
       },
       error: (err: any) => {
         this.loading = false;
