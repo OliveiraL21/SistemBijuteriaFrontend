@@ -6,7 +6,8 @@
       animationDuration=".5s"></p-progressSpinner>
   </p-blockUI>
   <p-card>
-    <h1 class="mb-4 -mt-2">Venda - {{codigoVenda}}</h1>
+    <h1 *ngIf="id" class="mb-4 -mt-2">Venda - {{codigoVenda}}</h1>
+    <h1 *ngIf="!id" class="mb-4 -mt-2">Venda</h1>
     <p-splitter styleClass="mb-5" [panelSizes]="[30,70]" layout="horizontal" class="w-full h-2rem">
       <ng-template pTemplate>
         <div class="w-full flex-column">
@@ -37,7 +38,13 @@
             <ng-template pTemplate="caption">
               <div class="flex p-3">
                 <form [formGroup]="form" class="flex w-full">
-                  <div class="w-full flex">
+                  <div class="w-full flex gap-1">
+
+                    <app-select [form]="form"
+                      [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"></app-select>
+
+
+
                     <app-select [form]="form"
                       [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
                       (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>

@@ -13,6 +13,8 @@ import { Venda } from '../../../models/entityModels/Venda/Venda';
 import { StatusService } from '../../../services/Status.service';
 import { Status } from '../../../models/entityModels/status/Status';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Maleta } from '../../../models/entityModels/maleta/Maleta';
+import { MaletaService } from '../../../services/Maleta.service';
 
 interface produtoVenda {
   id: string,
@@ -44,8 +46,9 @@ export class VendaComponent {
   id: string = "";
   codigoVenda?: string = "";
   buttonItens: any[] = [];
+  maletas: Maleta[] = [];
 
-  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private activeRouter: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private maletaService: MaletaService, private activeRouter: ActivatedRoute, private router: Router) {
     this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
 
     this.buttonItens = [
@@ -67,6 +70,14 @@ export class VendaComponent {
     ]
   }
 
+  getMaletas() {
+    this.maletaService.list().subscribe({
+      next: (response: Maleta[]) => {
+        this.maletas = response;
+      }
+    })
+  }
+
   showMessage(type: string, title: string, message: string) {
     this.messageService.add({ severity: type, summary: title, detail: message, key: 'trv', life: 3000 });
   }
@@ -75,7 +86,8 @@ export class VendaComponent {
     this.form = this.fb.group({
       produto: [null, null],
       clienteId: [null, null],
-      status: [null, null]
+      status: [null, null],
+      maletaId: [null, null]
     });
   }
 
@@ -274,6 +286,7 @@ export class VendaComponent {
 
   ngOnInit() {
     this.initForm();
+    this.getMaletas();
     this.getClientes();
     this.getStatus();
     this.disableProdutoField();
