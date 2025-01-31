@@ -38,8 +38,8 @@ export class MaletaListagemComponent {
     return [
       new Column('numero', 'Número', true),
       new Column('troca', 'Data da Troca', false),
-      new Column('envio', 'Data de Envio', true),
-      new Column('pagamento', 'Data de Pagamento', true),
+      new Column('envio', 'Data de Envio', false),
+      new Column('pagamento', 'Data de Pagamento', false),
       new Column('status$descricao', 'Status', false)
     ]
   }
@@ -58,10 +58,13 @@ export class MaletaListagemComponent {
   }
 
   deletar(id: string) {
+    this.loading = true;
     this.service.deletar(id).subscribe({
       next: (response: boolean) => {
         if (response) {
           this.showMessage('success', 'Maleta', 'Registro excluido com sucesso!');
+          this.getMaletas();
+          this.loading = false;
         } else {
           this.showMessage('error', 'Maleta', 'Erro ao excluir o registro, tente novamente mais tarde');
         }
