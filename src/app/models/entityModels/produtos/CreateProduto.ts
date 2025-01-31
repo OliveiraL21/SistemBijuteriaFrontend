@@ -3,4 +3,5 @@ export default class CreateProduto {
   quantidade: number = 0;
   valorUnitario: number = 0;
   tipoProdutoId: string = "";
+  maletaId: string = "";
 }

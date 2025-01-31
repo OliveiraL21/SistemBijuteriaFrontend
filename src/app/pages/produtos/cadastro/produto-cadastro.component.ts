@@ -13,6 +13,8 @@ import { MessageService } from 'primeng/api';
 import CreateProduto from '../../../models/entityModels/produtos/CreateProduto';
 import { ProdutoService } from '../../../services/Produto.service';
 import Produto from '../../../models/entityModels/produtos/produto';
+import { MaletaService } from '../../../services/Maleta.service';
+import { Maleta } from '../../../models/entityModels/maleta/Maleta';
 
 @Component({
   selector: 'app-produto-cadastro',
@@ -24,13 +26,22 @@ export class ProdutoCadastroComponent {
   form!: FormGroup;
   tiposProdutos: TipoProduto[] = [];
   id: string = "";
+  maletas: Maleta[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private service: ProdutoService, private tipoProdutoService: TipoProdutoService, private messageService: MessageService, private activeRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private router: Router, private service: ProdutoService, private tipoProdutoService: TipoProdutoService, private messageService: MessageService, private maletaService: MaletaService, private activeRoute: ActivatedRoute) {
 
   }
 
   showMessage(severity: string, title: string, message: string) {
     this.messageService.add({ severity: severity, summary: title, detail: message, key: 'trp', life: 3000 });
+  }
+
+  getMaletas() {
+    this.maletaService.list().subscribe({
+      next: (response: Maleta[]) => {
+        this.maletas = response;
+      }
+    })
   }
 
   getFormControls(): CustomFormControls[] {
@@ -54,6 +65,10 @@ export class ProdutoCadastroComponent {
       {
         type: 'select',
         data: new CustomSelectData('descricao', 'id', true, 'descricao', true, 'Selecione o tipo do produto', 'tipoProdutoId', 'Tipo Produto', this.tiposProdutos, true)
+      },
+      {
+        type: 'select',
+        data: new CustomSelectData('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', this.maletas, true),
       }
     ]
   }
@@ -78,7 +93,8 @@ export class ProdutoCadastroComponent {
       descricao: [null, [Validators.required]],
       quantidade: [null, [Validators.required]],
       valorUnitario: [null, [Validators.required]],
-      tipoProdutoId: [null, [Validators.required]]
+      tipoProdutoId: [null, [Validators.required]],
+      maletaId: [null, [Validators.required]]
     })
   }
 
@@ -88,6 +104,9 @@ export class ProdutoCadastroComponent {
         Object.keys(produto).forEach((key: string) => {
           if (key == "tipoProduto") {
             this.form.get('tipoProdutoId')?.setValue(produto.tipoProduto.id);
+          }
+          if (key == "maleta") {
+            this.form.get('maletaId')?.setValue(produto.maleta.id);
           }
           this.form.get(key)?.setValue(produto[key as keyof Produto]);
         })
@@ -99,6 +118,7 @@ export class ProdutoCadastroComponent {
     this.id = this.activeRoute.snapshot.paramMap.get('id') ?? "";
     this.initForm();
     this.getTipoProduto();
+    this.getMaletas();
     if (this.id)
       this.getProduto();
   }

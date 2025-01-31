@@ -1,3 +1,4 @@
+import { Maleta } from "../maleta/Maleta";
 import TipoProduto from "../tipoProduto/tipoProduto";
 
 export default class Produto {
@@ -7,4 +8,5 @@ export default class Produto {
   quantidade: number = 0;
   valorUnitario: number = 0;
   tipoProduto: TipoProduto = new TipoProduto();
+  maleta: Maleta = new Maleta();
 }
