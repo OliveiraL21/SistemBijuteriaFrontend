@@ -6,26 +6,30 @@
       animationDuration=".5s"></p-progressSpinner>
   </p-blockUI>
   <p-card>
-    <h1 *ngIf="id" class="mb-4 -mt-2">Venda - {{codigoVenda}}</h1>
+    <div class="py-2">
+      <h1 *ngIf="id" class="mb-2 -mt-4">Venda - <span class="text-indigo-400">{{codigoVenda}}</span></h1>
+      <span class="mb-2"><span class="font-semibold">Data:</span> {{dataVenda}}</span>
+    </div>
+
     <h1 *ngIf="!id" class="mb-4 -mt-2">Venda</h1>
     <p-splitter styleClass="mb-5" [panelSizes]="[30,70]" layout="horizontal" class="w-full h-2rem">
       <ng-template pTemplate>
         <div class="w-full flex-column">
           <div class="w-full p-4 ">
-            <p-card class="w-full p-2">
+            <p-card class="w-full p-1">
               <h2 class="text-center -mt-3">SubTotal</h2>
-              <p class="text-right">{{subTotal | currency: 'BRL'}}</p>
+              <p class="text-center">{{subTotal | currency: 'BRL'}}</p>
             </p-card>
-            <p-card class="w-full p-2">
+            <p-card class="w-full p-1">
               <h2 class="text-center -mt-3">Desconto</h2>
               <div class="flex align-items-center justify-content-center w-full">
                 <p-inputNumber suffix="%" [(ngModel)]="desconto" [disabled]="subTotal == 0"
                   (ngModelChange)="calcularTotal()" />
               </div>
             </p-card>
-            <p-card class="w-full p-2">
+            <p-card class="w-full p-1">
               <h2 class="text-center -mt-3">Total</h2>
-              <p class="text-right">{{total | currency: 'BRL'}}</p>
+              <p class="text-center">{{total | currency: 'BRL'}}</p>
             </p-card>
           </div>
 
@@ -33,36 +37,28 @@
 
       </ng-template>
       <ng-template pTemplate>
-        <div class="col flex justify-content-center w-full">
+        <div class="col flex justify-content-center w-full ">
           <p-table [value]="produtos" class="w-full">
             <ng-template pTemplate="caption">
-              <div class="flex p-3">
-                <form [formGroup]="form" class="flex w-full">
-                  <div class="w-full flex gap-1">
+              <div class="w-full p-3">
+                <form [formGroup]="form" class="w-full flex gap-2">
+                  <app-select [form]="form"
+                    [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"></app-select>
+                  <app-select [form]="form"
+                    [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
+                    (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
 
-                    <app-select [form]="form"
-                      [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"></app-select>
+                  <p-floatLabel>
+                    <p-inputGroup>
+                      <input type="text" pInputText formControlName="produto" (keypress)="onKeypressProduto($event)" />
+                      <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
+                        [disabled]="buttonSearchDisable"></button>
+                      <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
+                    </p-inputGroup>
+                  </p-floatLabel>
 
-
-
-                    <app-select [form]="form"
-                      [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
-                      (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
-
-                    <p-floatLabel class=" flex">
-                      <p-inputGroup class="ml-5">
-                        <input type="text" pInputText formControlName="produto"
-                          (keypress)="onKeypressProduto($event)" />
-                        <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
-                          [disabled]="buttonSearchDisable"></button>
-                        <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
-                      </p-inputGroup>
-                    </p-floatLabel>
-
-                    <app-select *ngIf="id" [form]="form" class="ml-7"
-                      [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
-
-                  </div>
+                  <app-select [form]="form" *ngIf="id"
+                    [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
 
                 </form>
               </div>
@@ -79,7 +75,7 @@
                   Quantidade
                 </th>
                 <th class="text-center" style="width:25%">
-                  Valor
+                  Valor Unitário
                 </th>
                 <th>
 

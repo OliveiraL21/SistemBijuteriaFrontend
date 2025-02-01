@@ -47,6 +47,7 @@ export class VendaComponent {
   codigoVenda?: string = "";
   buttonItens: any[] = [];
   maletas: Maleta[] = [];
+  dataVenda?: string;
 
   constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private maletaService: MaletaService, private activeRouter: ActivatedRoute, private router: Router) {
     this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
@@ -101,6 +102,7 @@ export class VendaComponent {
           this.subTotal = venda.subtotal;
           this.desconto = venda.desconto;
           this.codigoVenda = venda.codigo;
+          this.dataVenda = new Date(venda.data).toLocaleDateString();
           this.produtos = venda.produtos.map((produto: any) => ({
             id: produto.id ?? '',
             codigo: produto.codigo,
@@ -111,6 +113,7 @@ export class VendaComponent {
           this.form.get('status')?.setValue(venda.status.id);
           this.form.get('clienteId')?.enable();
           this.form.get('clienteId')?.setValue(venda.cliente.id);
+          this.form.get('maletaId')?.setValue(venda.maleta.id);
           this.loading = false;
         },
         error: (err: any) => {
@@ -358,6 +361,7 @@ export class VendaComponent {
   createVendaObject(summoner: string): Venda {
     let status = this.definirStatus(summoner);
     let data: Venda = {
+      id: this.id ?? "",
       total: this.total,
       codigo: this.codigoVenda ?? null,
       subTotal: this.subTotal,
@@ -365,6 +369,7 @@ export class VendaComponent {
       data: new Date(),
       statusId: status,
       clienteId: this.form.get('clienteId')?.value,
+      maletaId: this.form.get('maletaId')?.value,
       produtos: this.produtos.map((produto: produtoVenda) => ({
         produtoId: produto.id,
         clienteId: this.form.get('clienteId')?.value,
