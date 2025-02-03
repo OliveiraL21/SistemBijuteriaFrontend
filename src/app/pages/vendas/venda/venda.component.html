@@ -42,23 +42,34 @@
             <ng-template pTemplate="caption">
               <div class="w-full p-3">
                 <form [formGroup]="form" class="w-full flex gap-2">
-                  <app-select [form]="form"
-                    [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"></app-select>
-                  <app-select [form]="form"
-                    [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
-                    (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
+                  <div class="w-2">
+                    <app-select [form]="form"
+                      [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"></app-select>
+                  </div>
 
-                  <p-floatLabel>
-                    <p-inputGroup>
-                      <input type="text" pInputText formControlName="produto" (keypress)="onKeypressProduto($event)" />
-                      <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
-                        [disabled]="buttonSearchDisable"></button>
-                      <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
-                    </p-inputGroup>
-                  </p-floatLabel>
+                  <div class="w-3">
+                    <app-select [form]="form"
+                      [data]="getCustomSelect('nome', 'id', true, 'name', true, 'cliente', 'clienteId', 'Cliente', this.clientes, true)"
+                      (selectCustomValueChangeEvent)="changeDisabledProdutoField($event)"></app-select>
+                  </div>
 
-                  <app-select [form]="form" *ngIf="id"
-                    [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
+                  <div class="w-5">
+                    <p-floatLabel>
+                      <p-inputGroup>
+                        <input type="text" pInputText formControlName="produto"
+                          (keypress)="onKeypressProduto($event)" />
+                        <button type="button" pButton icon="pi pi-search" class="search-button " (click)="getProduto()"
+                          [disabled]="buttonSearchDisable"></button>
+                        <label for="produto"><span class=" pl-2 text-red-600 mr-1">*</span>Produto</label>
+                      </p-inputGroup>
+                    </p-floatLabel>
+                  </div>
+
+                  <div class="w-2">
+                    <app-select [form]="form" *ngIf="id"
+                      [data]="getCustomSelect('descricao', 'id', false, 'descricao', true, 'Status', 'status', 'Status', status, true)"></app-select>
+                  </div>
+
 
                 </form>
               </div>
