@@ -6,8 +6,8 @@
       animationDuration=".5s"></p-progressSpinner>
   </p-blockUI>
   <p-card>
-    <div class="py-2">
-      <h1 *ngIf="id" class="mb-2 -mt-4">Venda - <span class="text-indigo-400">{{codigoVenda}}</span></h1>
+    <div class="py-2" *ngIf="id">
+      <h1 class="mb-2 -mt-4">Venda - <span class="text-indigo-400">{{codigoVenda}}</span></h1>
       <span class="mb-2"><span class="font-semibold">Data:</span> {{dataVenda}}</span>
     </div>
 
