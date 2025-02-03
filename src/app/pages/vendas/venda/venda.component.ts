@@ -21,7 +21,7 @@ interface produtoVenda {
   codigo: number;
   descricao: string;
   quantidade: number;
-  valor: number
+  valor: number;
 }
 @Component({
   selector: 'app-venda',
@@ -48,6 +48,7 @@ export class VendaComponent {
   buttonItens: any[] = [];
   maletas: Maleta[] = [];
   dataVenda?: string;
+  statusAtual?: string;
 
   constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private maletaService: MaletaService, private activeRouter: ActivatedRoute, private router: Router) {
     this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
@@ -109,11 +110,13 @@ export class VendaComponent {
             descricao: produto.descricao,
             quantidade: produto.quantidadeComprada,
             valor: produto.valor,
+            produtoId: produto.produtoId,
           }));
           this.form.get('status')?.setValue(venda.status.id);
           this.form.get('clienteId')?.enable();
           this.form.get('clienteId')?.setValue(venda.cliente.id);
           this.form.get('maletaId')?.setValue(venda.maleta.id);
+          this.statusAtual = venda.status.descricao;
           this.loading = false;
         },
         error: (err: any) => {
@@ -237,7 +240,7 @@ export class VendaComponent {
         this.produtoService.getByCodigo(data.produto).subscribe({
           next: (produto: Produto) => {
             let prod: produtoVenda = {
-              id: produto.id ?? "",
+              id: "",
               codigo: produto.codigoProduto,
               descricao: produto.descricao,
               quantidade: 1,
@@ -256,7 +259,7 @@ export class VendaComponent {
         this.produtoService.getByNome(data.produto).subscribe({
           next: (produto: Produto[]) => {
             this.modalProducts = produto.map((prod: Produto) => ({
-              id: prod.id ?? "",
+              id: "",
               codigo: prod.codigoProduto,
               descricao: prod.descricao,
               quantidade: prod.quantidade,
@@ -370,10 +373,11 @@ export class VendaComponent {
       statusId: status,
       clienteId: this.form.get('clienteId')?.value,
       maletaId: this.form.get('maletaId')?.value,
-      produtos: this.produtos.map((produto: produtoVenda) => ({
-        produtoId: produto.id,
+      produtos: this.produtos.map((produto: any) => ({
+        produtoId: produto.produtoId,
         clienteId: this.form.get('clienteId')?.value,
         quantidadeComprada: produto.quantidade,
+        id: produto.id,
       })),
     }
 
