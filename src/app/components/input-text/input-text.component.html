@@ -11,4 +11,8 @@
     class="p-0 mb-4 mt-2 p-error block">
     Campo obrigatório
   </small>
+  <small class="p-0 mb-4 mt-2 p-error block"
+    *ngIf="form.get(controlData.controlName)?.hasError('email') && form.get(controlData.controlName)?.dirty">
+    E-mail inválido
+  </small>
 </div>

@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
     this.messageService.add({ severity: type, summary: title, detail: message, key: "trLogin", life: 3000 });
   }
 
+  novoUsuario() {
+    this.route.navigateByUrl('usuario/novo-usuario');
+  }
+
   initForm(): void {
     this.form = this.fb.group({
       username: [null, [Validators.required]],

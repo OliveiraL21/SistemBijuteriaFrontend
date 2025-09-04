@@ -8,13 +8,14 @@
     <div clas="w-full flex-column justify-content-center align-items-center">
       <div class="w-full system-icon"></div>
       <h2 class="text-center p-4 text-5xl md:text-3xl">Bijus da Manu</h2>
+      <span class="w-full text-color-secondary text-lg ">Faça seu cadastro aqui!</span>
     </div>
-    <form [formGroup]="form" class="mt-2">
+    <form [formGroup]="form" class="mt-5">
       <app-input-text [form]="form" [controlData]="getCustomInputUsername()"></app-input-text>
+      <app-input-text [form]="form" [controlData]="getCustomInputEmail()"></app-input-text>
       <app-input-password [form]="form" [controlData]="getCustomPassword()"></app-input-password>
-      <small class="link__cadastro">Ainda não possui cadastro? <a (click)="novoUsuario()">cadastre-se
-          agora!</a></small>
-      <app-custom-button [custom]="getCustomButton()" (onClickEvent)="logar()"></app-custom-button>
+      <small class="link__cadastro">Já possui cadastro? <a (click)="login()">faça o login!</a></small>
+      <app-custom-button [custom]="getCustomButton()" (onClickEvent)="enviar()"></app-custom-button>
     </form>
   </p-card>
 </div>

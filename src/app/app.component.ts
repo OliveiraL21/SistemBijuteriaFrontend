@@ -32,8 +32,8 @@ export class AppComponent {
           this.authenticated = false;
           break;
 
-        case 'novo-usuario':
-          this.authenticated = false;
+        case 'usuario':
+          this.authenticated = url.split('/')[2] === 'novo-usuario' ? false : this.tokenService.possuiToken();
           break;
 
         case 'redefinirSenha':
