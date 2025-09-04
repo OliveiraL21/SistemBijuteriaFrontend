@@ -91,9 +91,9 @@ export class ListaVendaComponent {
     this.service.listAll().subscribe({
       next: (venda: Venda[]) => {
         this.vendas = venda;
-        this.vendas = this.vendas.map((v: Venda) => ({
+        this.vendas = this.vendas.map((v: any) => ({
           ...v,
-          data: this.convertToDate(v.data)
+          data: this.convertToDate(v.createAt)
         }))
         this.loading = false;
       }, error: () => {

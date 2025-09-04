@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../../../services/Produto.service';
 import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
 import Produto from '../../../models/entityModels/produtos/produto';
@@ -87,9 +87,9 @@ export class VendaComponent {
   initForm() {
     this.form = this.fb.group({
       produto: [null, null],
-      clienteId: [null, null],
+      clienteId: [null, [Validators.required]],
       status: [null, null],
-      maletaId: [null, null]
+      maletaId: [null, [Validators.required]],
     });
   }
 
@@ -103,7 +103,7 @@ export class VendaComponent {
           this.subTotal = venda.subtotal;
           this.desconto = venda.desconto;
           this.codigoVenda = venda.codigo;
-          this.dataVenda = new Date(venda.data).toLocaleDateString();
+          this.dataVenda = new Date(venda.createAt.substring(0, 4), venda.createAt.substring(5, 7) - 1, venda.createAt.substring(8, 10)).toLocaleDateString();
           this.produtos = venda.produtos.map((produto: any) => ({
             id: produto.id ?? '',
             codigo: produto.codigo,
@@ -240,7 +240,7 @@ export class VendaComponent {
         this.produtoService.getByCodigo(data.produto).subscribe({
           next: (produto: Produto) => {
             let prod: produtoVenda = {
-              id: "",
+              id: produto.id ?? '',
               codigo: produto.codigoProduto,
               descricao: produto.descricao,
               quantidade: 1,
@@ -259,7 +259,7 @@ export class VendaComponent {
         this.produtoService.getByNome(data.produto).subscribe({
           next: (produto: Produto[]) => {
             this.modalProducts = produto.map((prod: Produto) => ({
-              id: "",
+              id: prod.id ?? '',
               codigo: prod.codigoProduto,
               descricao: prod.descricao,
               quantidade: prod.quantidade,
@@ -374,10 +374,10 @@ export class VendaComponent {
       clienteId: this.form.get('clienteId')?.value,
       maletaId: this.form.get('maletaId')?.value,
       produtos: this.produtos.map((produto: any) => ({
-        produtoId: produto.produtoId,
+        produtoId: produto.id,
         clienteId: this.form.get('clienteId')?.value,
         quantidadeComprada: produto.quantidade,
-        id: produto.id,
+        id: this.id ?? "",
       })),
     }
 
@@ -386,12 +386,18 @@ export class VendaComponent {
 
   salvarVenda(summoner: string) {
     this.loading = true;
-    let data = this.createVendaObject(summoner);
+    if (this.form.valid) {
+      let data = this.createVendaObject(summoner);
 
-    if (!this.id) {
-      this.createVenda(data);
+      if (!this.id) {
+        this.createVenda(data);
+      } else {
+        this.editarVenda(data);
+      }
     } else {
-      this.editarVenda(data);
+      this.showMessage('error', 'Venda', 'Preencha todos os campos obrigatórios!');
+      this.loading = false;
+      UtilsRepository.getRequiredFieldsInvalid(this.form);
     }
   }
 
