@@ -16,8 +16,8 @@
 
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let column of columns; let  i = index;">{{column.header}}</th>
-        <th style="width: 100px;"></th>
+        <th *ngFor="let column of columns; let  i = index;" [ngClass]="column.classes">{{column.header}}</th>
+        <th class="text-center" style="width: 100px;">Ações</th>
       </tr>
       <tr>
         <th *ngFor="let filterColumn of columns; let i = index; trackBy:trackByFn">
@@ -52,7 +52,7 @@
             <span> {{ generateTableValues(data, col.field)}}</span>
           </ng-content>
         </td>
-        <td class="flex">
+        <td class="flex text-center justify-content-center">
           <p-button pTooltip="Editar" [tooltipOptions]="{tooltipPosition: 'bottom'}" icon="pi pi-pencil" severity="info"
             size="small" [style]="{'max-width.px': 30}" [text]="true" (onClick)="editar(data.id)"></p-button>
           <p-button pTooltip="Remover" [tooltipOptions]="{tooltipPosition: 'bottom'}" icon="pi pi-trash" [text]="true"
