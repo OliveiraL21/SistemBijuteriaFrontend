@@ -9,6 +9,12 @@ import { MessageService } from 'primeng/api';
 import { ClienteService } from '../../../services/cliente.service';
 import { CreateCliente } from '../../../models/entityModels/cliente/CreateCliente';
 import { Cliente } from '../../../models/entityModels/cliente/Cliente';
+import CustomSelectData from '../../../models/custonsModels/CustomSelect/CustomSelectData';
+
+interface TipoContato {
+  label: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-cadastro-cliente',
@@ -19,10 +25,18 @@ export class CadastroClienteComponent {
   form!: FormGroup;
   loading: boolean = false;
   id: string;
+  telefoneMask: string = "(99) 99999-9999";
+  tiposContato: TipoContato[] = [
+    { label: 'Celular', value: 'celular' },
+    { label: 'Fixo', value: 'fixo' },
+  ];
+  isCelular: boolean = true;
+  isFixo: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private messageService: MessageService, private clienteService: ClienteService, private activeRoute: ActivatedRoute) {
     this.onInitForm();
     this.id = this.activeRoute.snapshot.paramMap.get('id') ?? "";
+    this.telefoneMask = "(99) 99999-9999";
   }
 
   showMessage(type: string, title: string, message: string) {
@@ -46,15 +60,20 @@ export class CadastroClienteComponent {
         data: new CustomInputText('cpf', 'Informe o cpf', 'cpf', 'Cpf', 'cpf', false, false, "999.999.999-99")
       },
       {
+        type: 'select',
+        data: new CustomSelectData('label', 'value', false, '', true, 'Selecione o tipo de contato', 'tipoContato', 'Tipo de Contato', this.tiposContato, true)
+      },
+      {
         type: 'text',
-        data: new CustomInputText('telefone', 'Informe o telefone', 'telefone', 'Telefone', 'telefone', false, true, "(99) - 99999-9999")
+        data: new CustomInputText('celular', 'Informe o telefone celular', 'celular', 'Celular', 'celular', false, true, this.telefoneMask, this.isCelular)
+      },
+
+      {
+        type: 'text',
+        data: new CustomInputText('telefone', 'Informe o telefone', 'telefone', 'Telefone', 'telefone', false, true, this.telefoneMask, this.isFixo)
       }
     ]
   }
-
-  // getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
-  //   return new CustomButton(label, rounded, styles, severity);
-  // }
 
   getCliente() {
     if (this.id) {
@@ -69,11 +88,36 @@ export class CadastroClienteComponent {
     }
   }
 
+  onTipoContatoChange(tipo: string) {
+    if (tipo === 'celular') {
+      this.telefoneMask = "(99) 99999-9999";
+      this.isCelular = true;
+      this.isFixo = false;
+      this.form.get('telefone')?.setValidators(null);
+      this.form.get('telefone')?.updateValueAndValidity();
+      this.form.get('celular')?.setValidators([Validators.required]);
+      this.form.get('celular')?.updateValueAndValidity();
+      this.form.get('telefone')?.setValue(null);
+    } else if (tipo === 'fixo') {
+      this.telefoneMask = "(99) 9999-9999";
+      this.isCelular = false;
+      this.isFixo = true;
+      this.form.get('celular')?.setValidators(null);
+      this.form.get('celular')?.updateValueAndValidity();
+      this.form.get('telefone')?.setValidators([Validators.required]);
+      this.form.get('telefone')?.updateValueAndValidity();
+      this.form.get('celular')?.setValue(null);
+    }
+  }
+
+
   onInitForm(): void {
     this.form = this.fb.group({
       nome: [null, [Validators.required]],
       cpf: [null, null],
-      telefone: [null, [Validators.required]]
+      telefone: [null, [Validators.required]],
+      tipoContato: [null, [Validators.required]],
+      celular: [null, [Validators.required]],
     })
   }
 
@@ -84,6 +128,7 @@ export class CadastroClienteComponent {
   createCliente(): void {
     let cliente: CreateCliente;
     cliente = this.form.value;
+    cliente.telefone = this.form.value.celular ?? this.form.value.telefone;
     this.clienteService.create(cliente).subscribe({
       next: (response: Cliente) => {
         this.loading = false;

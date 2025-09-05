@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CustomInputText } from '../../models/custonsModels/CustomTextInputData/CustomInputText';
 
@@ -10,4 +10,9 @@ import { CustomInputText } from '../../models/custonsModels/CustomTextInputData/
 export class InputTextComponent {
   @Input() form!: FormGroup;
   @Input() controlData!: CustomInputText;
+  @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
+
+  onInputChange(event: any) {
+    this.valueChange.emit(event);
+  }
 }

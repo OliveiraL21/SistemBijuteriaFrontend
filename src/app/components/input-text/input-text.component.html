@@ -1,9 +1,9 @@
-<div class="w-full mb-5" [formGroup]="form">
+<div class="w-full mb-5" *ngIf="controlData.isVisible" [formGroup]="form">
   <p-floatLabel class="w-full">
     <input type="text" pInputText [formControlName]="controlData.controlName" class="w-full"
-      *ngIf="controlData.mask === '' || controlData.mask === undefined">
+      *ngIf="controlData.mask === '' || controlData.mask === undefined" (ngModelChange)="onInputChange($event)" />
     <p-inputMask [mask]="controlData.mask" [formControlName]="controlData.controlName" *ngIf="controlData.mask"
-      class="w-full" styleClass="w-full"></p-inputMask>
+      class="w-full" styleClass="w-full" (ngModelChange)="onInputChange($event)"></p-inputMask>
     <label [for]="controlData.forLabel"><span *ngIf="controlData.required"
         class="text-red-600 mr-1">*</span>{{controlData.label}}</label>
   </p-floatLabel>

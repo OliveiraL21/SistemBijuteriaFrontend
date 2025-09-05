@@ -1,14 +1,16 @@
 <form [formGroup]="form">
   <div *ngFor="let control of controls; let i = index; trackBy:trackByFn">
     <div *ngIf="control.type === 'text'" class="w-25rem mt-5 mb-2">
-      <app-input-text [controlData]="control.data" [form]="form"></app-input-text>
+      <app-input-text [controlData]="control.data" [form]="form"
+        (valueChange)="outputValueChange($event)"></app-input-text>
     </div>
 
     <div *ngIf="control.type === 'number'" class="w-25rem mt-5 mb-2">
       <app-input-number [form]="form" [controlData]="control.data"></app-input-number>
     </div>
     <div *ngIf="control.type === 'select'" class="w-25rem mt-5 mb-2">
-      <app-select [data]="control.data" [form]="form"></app-select>
+      <app-select [data]="control.data" [form]="form"
+        (selectCustomValueChangeEvent)="selectOutput($event)"></app-select>
     </div>
 
     <div *ngIf="control.type === 'password'" class="w-25rem mt-5 mb-2">

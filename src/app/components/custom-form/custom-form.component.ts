@@ -15,11 +15,20 @@ export class CustomFormComponent {
   @Output() FileEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() SubmitEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() BackEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() ValueInputTextChangeEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectOutputEvent: EventEmitter<any> = new EventEmitter<any>();
+
+  selectOutput(event: any) {
+    this.selectOutputEvent.emit(event);
+  }
 
   constructor() {
 
   }
 
+  outputValueChange(event: any) {
+    this.ValueInputTextChangeEvent.emit(event);
+  }
 
   getCustomButton(label: string, rounded: boolean, styles: string, severity: string): CustomButton {
     return new CustomButton(label, rounded, styles, severity, "");

@@ -1,6 +1,6 @@
 <div class="card flex justify-content-center h-full">
   <p-megaMenu class="text-white-alpha-80 h-full "
-    styleClass="bg-pink-700 h-full text-white-alpha-80 border-none border-noround-left " [model]="items"
+    styleClass="bg-indigo-700 h-full text-white-alpha-80 border-none border-noround-left " [model]="items"
     [orientation]="'vertical'">
     <ng-template pTemplate="start">
       <span class="inline-flex align-items-center gap-2 px-2 py-2">
@@ -11,7 +11,7 @@
 
     <ng-template pTemplate="end" class="text-color hover:pink-500">
       <button pRipple
-        class="relative p-link bg-pink-700 button-hover overflow-hidden p-2 pl-3 text-color hover:pink-700 border-noround border-none w-full flex justify-content-start align-items-center"
+        class="relative p-link bg-indigo-700 button-hover overflow-hidden p-2 pl-3 text-color hover:pink-700 border-noround border-none w-full flex justify-content-start align-items-center"
         (click)="minhaConta()">
         <div *ngIf="userPhoto; then imageAvatar else iconAvatar"></div>
         <ng-template #imageAvatar>

@@ -6,7 +6,7 @@
   </p-blockUI>
   <p-card>
     <h1 class="mb-4 -mt-2">Cadastro de Cliente</h1>
-    <app-custom-form [form]="form" [controls]="getFormControls()" (BackEvent)="voltar()"
-      (SubmitEvent)="submit()"></app-custom-form>
+    <app-custom-form [form]="form" [controls]="getFormControls()" (BackEvent)="voltar()" (SubmitEvent)="submit()"
+      (selectOutputEvent)="onTipoContatoChange($event)"></app-custom-form>
   </p-card>
 </div>
