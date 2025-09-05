@@ -28,7 +28,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-data let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">
+        <td *ngFor="let col of columns" [ngClass]="col.classes">
           <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Ativo' ">
             <p-tag class="p-4" severity="warning" [value]="generateTableValues(data, col.field)"></p-tag>
           </ng-content>
