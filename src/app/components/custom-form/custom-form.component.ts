@@ -17,9 +17,14 @@ export class CustomFormComponent {
   @Output() BackEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() ValueInputTextChangeEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() selectOutputEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addSelectEvenetEmmiter: EventEmitter<any> = new EventEmitter<any>();
 
   selectOutput(event: any) {
     this.selectOutputEvent.emit(event);
+  }
+
+  addSelectEmmiter(event: any) {
+    this.addSelectEvenetEmmiter.emit(event);
   }
 
   constructor() {

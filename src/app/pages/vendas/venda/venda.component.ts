@@ -49,6 +49,7 @@ export class VendaComponent {
   maletas: Maleta[] = [];
   dataVenda?: string;
   statusAtual?: string;
+  modalMaletaVisible: boolean = false;
 
   constructor(private fb: FormBuilder, private service: VendaService, private produtoService: ProdutoService, private clienteService: ClienteService, private confirmationService: ConfirmationService, private messageService: MessageService, private statusService: StatusService, private maletaService: MaletaService, private activeRouter: ActivatedRoute, private router: Router) {
     this.id = this.activeRouter.snapshot.paramMap.get('id') ?? "";
@@ -91,6 +92,15 @@ export class VendaComponent {
       status: [null, null],
       maletaId: [null, [Validators.required]],
     });
+  }
+
+  adicionarMaleta(event: any) {
+    this.modalMaletaVisible = event.openModal;
+  }
+
+  incluirMaleta(maleta: Maleta) {
+    this.maletas = [...this.maletas, maleta];
+    this.modalMaletaVisible = false;
   }
 
 

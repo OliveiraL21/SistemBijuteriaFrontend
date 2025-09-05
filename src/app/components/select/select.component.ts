@@ -12,6 +12,7 @@ export class SelectComponent {
   @Input() form!: FormGroup;
   @Input() data!: CustomSelectData;
   @Output() selectCustomValueChangeEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addSelectItemEmmiter: EventEmitter<any> = new EventEmitter<any>();
 
   filterValue: string | undefined = '';
 
@@ -25,6 +26,10 @@ export class SelectComponent {
 
   selectChangeValue(value: any) {
     this.selectCustomValueChangeEvent.emit(value);
+  }
+
+  addNewEmmiter(event: any) {
+    this.addSelectItemEmmiter.emit({ evento: event, openModal: true });
   }
 
 }

@@ -16,6 +16,9 @@ import { SharedModule } from '../../common/shared/shared.module';
     CommonModule,
     MaletaRoutingModule,
     SharedModule
+  ],
+  exports: [
+    MaletaCadastroComponent,
   ]
 })
 export class MaletaModule { }

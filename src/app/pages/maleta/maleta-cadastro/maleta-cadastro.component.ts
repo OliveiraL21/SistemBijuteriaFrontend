@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MaletaService } from '../../../services/Maleta.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -20,8 +20,15 @@ export class MaletaCadastroComponent {
   form!: FormGroup;
   id: string | null = null;
   status: Status[] = [];
+  @Input() modalVenda: boolean = false;
+  @Output() modalVendaCadastro: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private service: MaletaService, private router: Router, private activeRoute: ActivatedRoute, private messageService: MessageService, private fb: FormBuilder, private statusService: StatusService) {
     this.id = this.activeRoute.snapshot.paramMap.get('id') ?? null;
+  }
+
+  emitirMaletaCadastrada(maleta: Maleta) {
+    this.modalVendaCadastro.emit(maleta);
   }
 
   getFormControls(): CustomFormControls[] {
@@ -127,7 +134,12 @@ export class MaletaCadastroComponent {
       next: (response: Maleta) => {
         this.showMessage('success', 'Maleta', 'Registro cadastrado com sucesso!');
         this.loading = false;
-        this.router.navigateByUrl('maleta/listagem');
+        if (this.modalVenda) {
+          this.emitirMaletaCadastrada(response);
+          return;
+        } else {
+          this.router.navigateByUrl('maleta/listagem');
+        }
       },
       error: (err: any) => {
         this.loading = false;

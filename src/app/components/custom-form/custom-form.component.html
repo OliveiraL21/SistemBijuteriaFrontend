@@ -9,8 +9,8 @@
       <app-input-number [form]="form" [controlData]="control.data"></app-input-number>
     </div>
     <div *ngIf="control.type === 'select'" class="w-25rem mt-5 mb-2">
-      <app-select [data]="control.data" [form]="form"
-        (selectCustomValueChangeEvent)="selectOutput($event)"></app-select>
+      <app-select [data]="control.data" [form]="form" (selectCustomValueChangeEvent)="selectOutput($event)"
+        (addSelectItemEmmiter)="addSelectEmmiter($event)"></app-select>
     </div>
 
     <div *ngIf="control.type === 'password'" class="w-25rem mt-5 mb-2">

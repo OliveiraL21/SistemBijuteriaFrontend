@@ -26,6 +26,14 @@
           <div>{{ item[data.optionLabel] }}</div>
         </div>
       </ng-template>
+
+      <ng-template pTemplate="footer">
+        <p-divider></p-divider>
+        <div class="flex justify-content-center -mt-4 p-2">
+          <p-button label="Adicionar novo" fluid severity="secondary" text size="small" icon="pi pi-plus"
+            (onClick)="addNewEmmiter($event)" />
+        </div>
+      </ng-template>
     </p-dropdown>
     <label [for]="data.controlName"><span *ngIf="data.required" class="text-red-600 mr-1">*</span>{{data.label}}</label>
 

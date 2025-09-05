@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { VendasRoutingModule } from './vendas-routing.module';
 import { VendaComponent } from './venda/venda.component';
 import { ListaVendaComponent } from './lista-venda/lista-venda.component';
+import { MaletaModule } from '../maleta/maleta.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ListaVendaComponent } from './lista-venda/lista-venda.component';
   imports: [
     CommonModule,
     VendasRoutingModule,
-    SharedModule
+    SharedModule,
+    MaletaModule
   ]
 })
 export class VendasModule { }

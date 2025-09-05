@@ -45,7 +45,8 @@
                 <form [formGroup]="form" class="w-full flex gap-2">
                   <div class="w-3">
                     <app-select [form]="form"
-                      [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"></app-select>
+                      [data]="getCustomSelect('numero', 'id', true, 'numero', true, 'Selecione a maleta', 'maletaId', 'Maleta', maletas, true)"
+                      (addSelectItemEmmiter)="adicionarMaleta($event)"></app-select>
                   </div>
 
                   <div class="w-3">
@@ -170,4 +171,9 @@
       <p-button label="Confirmar" severity="primary" (onClick)="confirmarProdutoSelecionado()"></p-button>
     </div>
   </ng-template>
+</p-dialog>
+
+<p-dialog [modal]="true" [(visible)]="modalMaletaVisible" [style]="{'width': '50%'}">
+  <app-maleta-cadastro [modalVenda]="this.modalMaletaVisible"
+    (modalVendaCadastro)="incluirMaleta($event)"></app-maleta-cadastro>
 </p-dialog>

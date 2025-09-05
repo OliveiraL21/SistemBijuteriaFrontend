@@ -19,7 +19,7 @@ html {
   padding: 0;
 }
 
-.p-inputtext:disabled {
+::ng-deep .p-inputtext[disabled] {
   background-color: #fff !important;
   color: rgba(0, 0, 0, 0.85) !important;
   border: none !important;
