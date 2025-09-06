@@ -40,10 +40,6 @@ export class CustomTableComponent {
     return index;
   }
 
-  teste() {
-    console.log('click');
-  }
-
   editar(id: string) {
     this.router.navigateByUrl(`${this.editRoute}/${id}`);
   }
