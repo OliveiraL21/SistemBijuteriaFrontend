@@ -173,7 +173,7 @@ export class VendaComponent {
 
   calcularSubTotal(valorUnitario: number) {
     this.subTotal += valorUnitario;
-    this.total = this.subTotal;
+    this.total = this.subTotal - (this.subTotal * (this.desconto / 100));
   }
 
   calcularSubtotalInput(valor: number, quantidade: number) {
@@ -183,7 +183,7 @@ export class VendaComponent {
     } else {
       this.subTotal = 0;
       this.subTotal = this.produtos.reduce((acumulator: number, currentValue: produtoVenda) => acumulator + (currentValue.valor * currentValue.quantidade), this.subTotal);
-      this.total = this.subTotal;
+      this.total = this.subTotal - (this.subTotal * (this.desconto / 100));
     }
 
   }
@@ -226,14 +226,22 @@ export class VendaComponent {
     return false;
   }
 
+  updateProdutoVendaList(produto: produtoVenda) {
+    const index = this.produtos.findIndex(x => x.codigo == produto.codigo);
+    this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
+    this.calcularSubTotal(this.produtos[index].valor);
+  }
+
+  addProdutoVentaToList(produto: produtoVenda) {
+    this.produtos = [...this.produtos, produto];
+    this.calcularSubTotal(produto.valor);
+  }
+
   setProduto(produto: produtoVenda) {
     if (this.existProduto(produto)) {
-      const index = this.produtos.findIndex(x => x.codigo == produto.codigo);
-      this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
-      this.calcularSubTotal(this.produtos[index].valor);
+      this.updateProdutoVendaList(produto);
     } else {
-      this.produtos = [...this.produtos, produto];
-      this.calcularSubTotal(produto.valor);
+      this.addProdutoVentaToList(produto);
     }
   }
 
