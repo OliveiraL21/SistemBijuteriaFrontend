@@ -20,7 +20,7 @@ export class MaletaCadastroComponent {
   form!: FormGroup;
   id: string | null = null;
   status: Status[] = [];
-  @Input() modalVenda: boolean = false;
+  @Input() modalVenda!: boolean;
   @Output() modalVendaCadastro: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private service: MaletaService, private router: Router, private activeRoute: ActivatedRoute, private messageService: MessageService, private fb: FormBuilder, private statusService: StatusService) {
@@ -90,7 +90,7 @@ export class MaletaCadastroComponent {
   ngOnInit() {
     this.initForm();
     this.getStatus();
-    if (this.id) {
+    if (this.id && this.modalVenda == null || this.modalVenda == undefined) {
       this.getMaleta();
     }
   }
