@@ -31,9 +31,9 @@ export class ProdutoListaComponent {
     return [
       new Column("codigoProduto", "Código", true),
       new Column("descricao", "Produto", true, ['w-4']),
-      new Column("quantidade", "Quantidade", true),
-      new Column("valorUnitario", "Valor", false),
-      new Column('tipoProduto$descricao', 'Tipo do Produto', false)
+      new Column("quantidade", "Quantidade", false, ['text-center']),
+      new Column("valorUnitario", "Valor", false, ['text-center']),
+      new Column('tipoProduto$descricao', 'Tipo do Produto', false, ['text-center'])
     ]
   }
 

@@ -70,8 +70,8 @@ export class ListaVendaComponent {
       new Column("codigo", "Código", true),
       new Column("cliente$nome", "Cliente", true),
       new Column("data", "Data", true),
-      new Column("total", "Total"),
-      new Column('status$descricao', 'Status')
+      new Column("total", "Total", false, ['text-center']),
+      new Column('status$descricao', 'Status', false, ['text-center']),
     ]
   }
 
