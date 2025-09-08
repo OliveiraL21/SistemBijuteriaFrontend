@@ -27,6 +27,7 @@ export class CustomTableComponent {
   @Input() editRoute: string = "";
   @Input() pageName: string = "";
   @Output() deleteEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() downloadEvent: EventEmitter<string> = new EventEmitter<string>();
   loading: boolean = false;
 
 
@@ -75,7 +76,9 @@ export class CustomTableComponent {
     })
   }
 
-
+  download(id: string) {
+    this.downloadEvent.emit(id);
+  }
 
   deletar(id: string) {
     this.deleteEvent.emit(id);

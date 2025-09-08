@@ -40,4 +40,8 @@ export class VendaService {
   FinalizarVenda(id: any, data: any): Observable<any> {
     return this.http.put<any>(`${baseUrl}/finalizarVenda/${id}`, data);
   }
+
+  downloadRelatorio(id: any): Observable<Blob> {
+    return this.http.get(`${baseUrl}/downloadRelatorio/${id}`, { responseType: 'blob' });
+  }
 }

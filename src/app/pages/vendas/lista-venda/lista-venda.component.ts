@@ -4,6 +4,7 @@ import Column from '../../../models/custonsModels/CustomTable/CustomColumn';
 import { VendaService } from '../../../services/Venda.service';
 import { MessageService } from 'primeng/api';
 import { Venda } from '../../../models/entityModels/Venda/Venda';
+import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
 
 @Component({
   selector: 'app-lista-venda',
@@ -112,6 +113,19 @@ export class ListaVendaComponent {
         }
       }, error: (err: any) => {
 
+      }
+    })
+  }
+
+  downloadRelatorio(id: string) {
+    this.service.downloadRelatorio(id).subscribe({
+      next: (response: Blob) => {
+        this.showMessage('success', 'Vendas', 'Relatório gerado com sucesso!');
+        UtilsRepository.downloadFile(response, 'relatorio-venda.pdf');
+        this.loading = false;
+      }, error: (err: any) => {
+        this.showMessage('error', 'Vendas', 'Erro ao gerar relatório, entre em contato com o seu representante!');
+        this.loading = false;
       }
     })
   }

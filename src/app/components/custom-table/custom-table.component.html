@@ -59,6 +59,9 @@
           <p-button pTooltip="Remover" [tooltipOptions]="{tooltipPosition: 'bottom'}" icon="pi pi-trash" [text]="true"
             severity="danger" size="small" class="mx-2" [style]="{'max-width.px': 30}"
             (onClick)="openDialog($event, data.id)"></p-button>
+          <p-button pTooltip="Download" [tooltipOptions]="{tooltipPosition: 'bottom'}" icon="pi pi-download"
+            [text]="true" size="small" class="mx-2" [style]="{'max-width.px': 30}"
+            (onClick)="download(data.id)"></p-button>
         </td>
       </tr>
     </ng-template>
