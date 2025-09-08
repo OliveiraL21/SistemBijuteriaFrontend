@@ -30,7 +30,7 @@ export class CadastroClienteComponent {
     { label: 'Celular', value: 'celular' },
     { label: 'Fixo', value: 'fixo' },
   ];
-  isCelular: boolean = true;
+  isCelular: boolean = false;
   isFixo: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private messageService: MessageService, private clienteService: ClienteService, private activeRoute: ActivatedRoute) {
