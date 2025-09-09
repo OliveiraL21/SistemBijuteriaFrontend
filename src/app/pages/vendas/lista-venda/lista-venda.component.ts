@@ -5,6 +5,7 @@ import { VendaService } from '../../../services/Venda.service';
 import { MessageService } from 'primeng/api';
 import { Venda } from '../../../models/entityModels/Venda/Venda';
 import { UtilsRepository } from '../../../common/helpers/utilsRepository/UtilsRepository';
+import { ReportService } from '../../../services/report.service';
 
 @Component({
   selector: 'app-lista-venda',
@@ -16,7 +17,7 @@ export class ListaVendaComponent {
   vendas: any[] = [];
   loading: boolean = false;
 
-  constructor(private service: VendaService, private messageSerivce: MessageService) {
+  constructor(private service: VendaService, private messageSerivce: MessageService, private reportService: ReportService) {
 
   }
 
@@ -118,7 +119,8 @@ export class ListaVendaComponent {
   }
 
   downloadRelatorio(id: string) {
-    this.service.downloadRelatorio(id).subscribe({
+    this.loading = true;
+    this.reportService.relatorioVenda(id).subscribe({
       next: (response: Blob) => {
         this.showMessage('success', 'Vendas', 'Relatório gerado com sucesso!');
         UtilsRepository.downloadFile(response, 'relatorio-venda.pdf');

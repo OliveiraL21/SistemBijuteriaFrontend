@@ -1,6 +1,10 @@
 <div class="w-full  p-4 mt-5">
   <p-confirmDialog />
   <p-toast position="top-right" key="trCustom" />
+  <p-blockUI [blocked]="loading">
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+      animationDuration=".5s"></p-progressSpinner>
+  </p-blockUI>
   <p-card>
     <app-custom-table [pageTitle]="'Relatórios de Vendas'" [pageName]="''" [listOfColumns]="getColumnList()"
       [addRoute]="'vendas/venda'" [editRoute]="'vendas/venda'" [listData]="vendas" (deleteEvent)="deletar($event)"
