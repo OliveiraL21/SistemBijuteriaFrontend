@@ -22,6 +22,7 @@ interface produtoVenda {
   descricao: string;
   quantidade: number;
   valor: number;
+  produtoId: string;
 }
 @Component({
   selector: 'app-venda',
@@ -258,10 +259,11 @@ export class VendaComponent {
         this.produtoService.getByCodigo(data.produto).subscribe({
           next: (produto: Produto) => {
             let prod: produtoVenda = {
-              id: produto.id ?? '',
+              id: '',
               codigo: produto.codigoProduto,
               descricao: produto.descricao,
               quantidade: 1,
+              produtoId: produto.id ?? "",
               valor: produto.valorUnitario
             }
             this.setProduto(prod);
@@ -277,11 +279,12 @@ export class VendaComponent {
         this.produtoService.getByNome(data.produto).subscribe({
           next: (produto: Produto[]) => {
             this.modalProducts = produto.map((prod: Produto) => ({
-              id: prod.id ?? '',
+              id: '',
               codigo: prod.codigoProduto,
               descricao: prod.descricao,
               quantidade: prod.quantidade,
-              valor: prod.valorUnitario
+              valor: prod.valorUnitario,
+              produtoId: prod.id ?? "",
             }))
             this.modalProdutosVisible = true;
             this.loading = false;
@@ -392,10 +395,11 @@ export class VendaComponent {
       clienteId: this.form.get('clienteId')?.value,
       maletaId: this.form.get('maletaId')?.value,
       produtos: this.produtos.map((produto: any) => ({
-        produtoId: produto.id,
+        produtoId: produto.produtoId,
         clienteId: this.form.get('clienteId')?.value,
         quantidadeComprada: produto.quantidade,
-        id: this.id ?? "",
+        vendaId: this.id ?? undefined,
+        id: produto.id ?? undefined,
       })),
     }
 
