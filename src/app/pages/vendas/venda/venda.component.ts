@@ -398,7 +398,7 @@ export class VendaComponent {
         produtoId: produto.produtoId,
         clienteId: this.form.get('clienteId')?.value,
         quantidadeComprada: produto.quantidade,
-        vendaId: this.id ?? undefined,
+        vendaId: this.id ?? "",
         id: produto.id ?? undefined,
       })),
     }
