@@ -26,6 +26,7 @@ export class CustomTableComponent {
   @Input() addRoute: string = "";
   @Input() editRoute: string = "";
   @Input() pageName: string = "";
+  @Input() downloadVisible: boolean = false;
   @Output() deleteEvent: EventEmitter<string> = new EventEmitter<string>();
   @Output() downloadEvent: EventEmitter<string> = new EventEmitter<string>();
   loading: boolean = false;
