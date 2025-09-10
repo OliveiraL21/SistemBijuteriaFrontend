@@ -104,7 +104,7 @@
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <input pInputText [(ngModel)]="product.quantidade"
-                        (ngModelChange)="calcularSubtotalInput(product.valor, product.quantidade)" />
+                        (ngModelChange)="calcularSubtotalInput(product.valorUnitario, product.quantidade)" />
                     </ng-template>
                     <ng-template pTemplate="output">
                       <p class="text-center">{{ product.quantidade }}</p>
@@ -112,7 +112,7 @@
                   </p-cellEditor>
                 </td>
                 <td>
-                  <p class="text-center">{{ product.valor | currency: 'BRL' }}</p>
+                  <p class="text-center">{{ product.valorUnitario | currency: 'BRL' }}</p>
                 </td>
                 <td>
                   <p-button icon="pi pi-trash" [text]="true" severity="danger" size="small" class="mx-2"

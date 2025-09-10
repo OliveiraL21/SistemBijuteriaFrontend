@@ -21,7 +21,7 @@ interface produtoVenda {
   codigo: number;
   descricao: string;
   quantidade: number;
-  valor: number;
+  valorUnitario: number;
   produtoId: string;
 }
 @Component({
@@ -120,7 +120,7 @@ export class VendaComponent {
             codigo: produto.codigo,
             descricao: produto.descricao,
             quantidade: produto.quantidadeComprada,
-            valor: produto.valor,
+            valorUnitario: produto.valorUnitario,
             produtoId: produto.produtoId,
           }));
           this.form.get('status')?.setValue(venda.status.id);
@@ -183,7 +183,7 @@ export class VendaComponent {
       this.total = this.subTotal;
     } else {
       this.subTotal = 0;
-      this.subTotal = this.produtos.reduce((acumulator: number, currentValue: produtoVenda) => acumulator + (currentValue.valor * currentValue.quantidade), this.subTotal);
+      this.subTotal = this.produtos.reduce((acumulator: number, currentValue: produtoVenda) => acumulator + (currentValue.valorUnitario * currentValue.quantidade), this.subTotal);
       this.total = this.subTotal - (this.subTotal * (this.desconto / 100));
     }
 
@@ -196,7 +196,7 @@ export class VendaComponent {
 
   delete(produto: produtoVenda) {
     this.produtos = this.produtos.filter(x => x.codigo != produto.codigo);
-    this.subTotal -= (produto.valor * produto.quantidade);
+    this.subTotal -= (produto.valorUnitario * produto.quantidade);
     this.total = this.subTotal;
   }
 
@@ -230,12 +230,12 @@ export class VendaComponent {
   updateProdutoVendaList(produto: produtoVenda) {
     const index = this.produtos.findIndex(x => x.codigo == produto.codigo);
     this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
-    this.calcularSubTotal(this.produtos[index].valor);
+    this.calcularSubTotal(this.produtos[index].valorUnitario);
   }
 
   addProdutoVentaToList(produto: produtoVenda) {
     this.produtos = [...this.produtos, produto];
-    this.calcularSubTotal(produto.valor);
+    this.calcularSubTotal(produto.valorUnitario);
   }
 
   setProduto(produto: produtoVenda) {
@@ -264,7 +264,7 @@ export class VendaComponent {
               descricao: produto.descricao,
               quantidade: 1,
               produtoId: produto.id ?? "",
-              valor: produto.valorUnitario
+              valorUnitario: produto.valorUnitario
             }
             this.setProduto(prod);
 
@@ -283,7 +283,7 @@ export class VendaComponent {
               codigo: prod.codigoProduto,
               descricao: prod.descricao,
               quantidade: prod.quantidade,
-              valor: prod.valorUnitario,
+              valorUnitario: prod.valorUnitario,
               produtoId: prod.id ?? "",
             }))
             this.modalProdutosVisible = true;
@@ -398,6 +398,8 @@ export class VendaComponent {
         produtoId: produto.produtoId,
         clienteId: this.form.get('clienteId')?.value,
         quantidadeComprada: produto.quantidade,
+        descricao: produto.descricao,
+        valorUnitario: produto.valorUnitario,
         vendaId: this.id ?? "",
         id: produto.id ?? undefined,
       })),
