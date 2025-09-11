@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomInputText } from '../../models/custonsModels/CustomTextInputData/CustomInputText';
 import { CustomPassword } from '../../models/custonsModels/CustomPasswordData/CustomPassword';
@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private messageService: MessageService, private service: LoginService, private route: Router,
     private tokenService: TokenService) { }
+
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnter() {
+    this.logar();
+  }
 
   getCustomInputUsername(): CustomInputText {
     return new CustomInputText('username', '', 'username', 'Username', 'username', false, true, "");
