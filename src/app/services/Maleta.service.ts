@@ -28,6 +28,10 @@ export class MaletaService {
     return this.http.put<Maleta>(`${baseUrl}/${id}`, data);
   }
 
+  dropdown(): Observable<Maleta[]> {
+    return this.http.get<Maleta[]>(`${baseUrl}/lista-dropdown`);
+  }
+
   deletar(id: string): Observable<boolean> {
     return this.http.delete<boolean>(`${baseUrl}/${id}`);
   }

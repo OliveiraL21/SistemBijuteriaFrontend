@@ -37,7 +37,7 @@ export class ProdutoCadastroComponent {
   }
 
   getMaletas() {
-    this.maletaService.list().subscribe({
+    this.maletaService.dropdown().subscribe({
       next: (response: Maleta[]) => {
         this.maletas = response;
       }

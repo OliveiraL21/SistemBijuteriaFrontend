@@ -6,7 +6,7 @@
       animationDuration=".5s"></p-progressSpinner>
   </p-blockUI>
   <p-card>
-    <app-custom-table [pageTitle]="'Relatórios de Vendas'" [pageName]="''" [listOfColumns]="getColumnList()"
+    <app-custom-table [pageTitle]="'Relatórios de Vendas'" [pageName]="'Venda'" [listOfColumns]="getColumnList()"
       [addRoute]="'vendas/venda'" [editRoute]="'vendas/venda'" [listData]="vendas" (deleteEvent)="deletar($event)"
       (downloadEvent)="downloadRelatorio($event)" [downloadVisible]="true"></app-custom-table>
   </p-card>

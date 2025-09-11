@@ -88,7 +88,7 @@ export class CustomTableComponent {
     this.router.navigateByUrl(this.addRoute);
   }
   getCustomButton(): CustomButton {
-    return new CustomButton(`Novo ${this.pageName}`, false, "bg-indigo-600", "primary", "pi pi-plus");
+    return new CustomButton(`Adicionar ${this.pageName}`, false, "bg-indigo-600", "primary", "pi pi-plus");
   }
 
   generateStatusSeverity(data: any, field: any) {
