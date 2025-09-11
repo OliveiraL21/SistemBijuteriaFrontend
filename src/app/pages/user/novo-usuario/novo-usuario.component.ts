@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { CustomInputText } from '../../../models/custonsModels/CustomTextInputData/CustomInputText';
@@ -18,6 +18,11 @@ export class NovoUsuarioComponent {
   loading: boolean = false;
 
   constructor(private fb: FormBuilder, private service: UserService, private router: Router, private messageService: MessageService) { }
+
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnter() {
+    this.enviar();
+  }
 
   getCustomInputUsername(): CustomInputText {
     return new CustomInputText('username', '', 'username', 'Username', 'username', false, true, "");
