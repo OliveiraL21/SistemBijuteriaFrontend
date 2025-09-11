@@ -172,12 +172,21 @@ export class VendaComponent {
     return new CustomButton(label, rounded, styles, severity, "");
   }
 
-  calcularSubTotal(valorUnitario: number) {
-    this.subTotal += valorUnitario;
-    this.total = this.subTotal - (this.subTotal * (this.desconto / 100));
+  calcularValorUnitario(valor: number, quantidade: number) {
+    return valor * quantidade;
   }
 
-  calcularSubtotalInput(valor: number, quantidade: number) {
+  calcularSubTotal(valorUnitario: number, quantidade: number, index: number) {
+    this.subTotal += valorUnitario;
+    this.total = this.subTotal - (this.subTotal * (this.desconto / 100));
+    this.produtos[index]!.valorUnitario = this.calcularValorUnitario(valorUnitario, quantidade);
+  }
+  resetarCamposCalculos(index: number) {
+    this.subTotal = 0;
+    this.total = 0;
+    this.produtos[index]!.valorUnitario = 0;
+  }
+  calcularSubtotalInput(valor: number, quantidade: number, index: number) {
     if (!quantidade) {
       this.subTotal = 0;
       this.total = this.subTotal;
@@ -185,7 +194,9 @@ export class VendaComponent {
       this.subTotal = 0;
       this.subTotal = this.produtos.reduce((acumulator: number, currentValue: produtoVenda) => acumulator + (currentValue.valorUnitario * currentValue.quantidade), this.subTotal);
       this.total = this.subTotal - (this.subTotal * (this.desconto / 100));
+      this.produtos[index]!.valorUnitario = this.calcularValorUnitario(valor, quantidade);
     }
+
 
   }
 
@@ -230,12 +241,12 @@ export class VendaComponent {
   updateProdutoVendaList(produto: produtoVenda) {
     const index = this.produtos.findIndex(x => x.codigo == produto.codigo);
     this.produtos[index].quantidade = parseInt(this.produtos[index].quantidade.toString()) + 1;
-    this.calcularSubTotal(this.produtos[index].valorUnitario);
+    this.calcularSubTotal(this.produtos[index].valorUnitario, this.produtos[index].quantidade, index);
   }
 
   addProdutoVentaToList(produto: produtoVenda) {
     this.produtos = [...this.produtos, produto];
-    this.calcularSubTotal(produto.valorUnitario);
+    this.calcularSubTotal(produto.valorUnitario, produto.quantidade, this.produtos.length - 1);
   }
 
   setProduto(produto: produtoVenda) {

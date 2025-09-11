@@ -92,7 +92,7 @@
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-product let-editing="editing">
+            <ng-template pTemplate="body" let-product let-rowIndex="rowIndex" let-editing="editing">
               <tr>
                 <td>
                   <p class="text-center">{{ product.codigo }}</p>
@@ -104,7 +104,7 @@
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <input pInputText [(ngModel)]="product.quantidade"
-                        (ngModelChange)="calcularSubtotalInput(product.valorUnitario, product.quantidade)" />
+                        (ngModelChange)="calcularSubtotalInput(product.valorUnitario, product.quantidade, rowIndex)" />
                     </ng-template>
                     <ng-template pTemplate="output">
                       <p class="text-center">{{ product.quantidade }}</p>
