@@ -1,12 +1,43 @@
 {
-  "name": "sistem-bijuteria-frontend",
-  "version": "0.0.0",
+  "name": "bijus-da-manu",
+  "version": "1.0.0",
+  "description": "Sistema de controle de estoque para bijuterias",
+  "author": "Lucas José Dias de Oliveira",
+  "license": "MIT",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "electron .",
+    "serve": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "electron": "ng build --base-href ./ && electron .",
     "test": "ng test"
+  },
+  "build": {
+    "appId": "com.bijusmanu.app",
+    "asar": true,
+    "productName": "Bijus da Manu",
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/images/diamond-ring.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Bijus da Manu"
+    }
   },
   "private": true,
   "dependencies": {
@@ -30,6 +61,7 @@
     "@angular/cli": "^18.1.4",
     "@angular/compiler-cli": "^18.1.0",
     "@types/jasmine": "~5.1.0",
+    "electron": "^38.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
