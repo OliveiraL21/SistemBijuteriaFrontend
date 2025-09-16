@@ -24,7 +24,7 @@
       "package.json"
     ],
     "directories": {
-      "output": "release"
+      "output": "../sistemaBijuteria-installer"
     },
     "win": {
       "target": "nsis",
