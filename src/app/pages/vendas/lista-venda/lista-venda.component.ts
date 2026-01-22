@@ -123,7 +123,7 @@ export class ListaVendaComponent {
     this.reportService.relatorioVenda(id).subscribe({
       next: (response: Blob) => {
         this.showMessage('success', 'Vendas', 'Relatório gerado com sucesso!');
-        UtilsRepository.downloadFile(response, 'relatorio-venda.pdf');
+        UtilsRepository.downloadFile(response, 'comprovante-de-venda.pdf');
         this.loading = false;
       }, error: (err: any) => {
         this.showMessage('error', 'Vendas', 'Erro ao gerar relatório, entre em contato com o seu representante!');
