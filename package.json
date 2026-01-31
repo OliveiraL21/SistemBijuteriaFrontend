@@ -26,6 +26,18 @@
     "directories": {
       "output": "../sistemaBijuteria-installer"
     },
+    "linux": {
+      "target":[
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office",
+      "maintainer": "Lucas José Dias de Oliveira",
+      "icon": "src/assets/images/diamond-ring.png"
+    },
+    "deb":{
+      "priority": "optional"
+    },
     "win": {
       "target": "nsis",
       "icon": "src/assets/images/diamond-ring.ico"
@@ -61,8 +73,8 @@
     "@angular/cli": "^18.1.4",
     "@angular/compiler-cli": "^18.1.0",
     "@types/jasmine": "~5.1.0",
-    "electron": "^38.1.0",
-    "electron-builder": "^26.0.12",
+    "electron": "^38.8.0",
+    "electron-builder": "^26.4.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
