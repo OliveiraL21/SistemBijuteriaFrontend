@@ -45,6 +45,13 @@ export class MenuPrincipalComponent {
         separator: true
       },
       {
+        label: 'Dashboard',
+        icon: 'pi pi-home',
+        iconClass: 'text-white',
+        routerLink: 'dashboard/',
+        root: true
+      },
+      {
         label: 'Clientes',
         icon: 'pi pi-users',
         iconClass: 'text-white',

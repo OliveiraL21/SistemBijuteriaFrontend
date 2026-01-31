@@ -3,11 +3,11 @@
   <div *ngIf="authenticated == false">
     <router-outlet></router-outlet>
   </div>
-  <div *ngIf="authenticated" class="flex gap-4 h-screen">
+  <div *ngIf="authenticated" class="flex  h-screen">
     <div style="min-height: 100vh!important;">
       <app-menu-principal [userPhoto]="profilePhoto"></app-menu-principal>
     </div>
-    <div class="w-11 pr-4 overflow-auto">
+    <div class="w-11 pr-4 overflow-auto surface-100">
       <router-outlet></router-outlet>
     </div>
   </div>

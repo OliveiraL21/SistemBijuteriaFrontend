@@ -9,6 +9,9 @@ const routes: Routes = [
     path: 'login', loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
+  {
     path: 'maleta', loadChildren: () => import('./pages/maleta/maleta.module').then((m) => m.MaletaModule)
   },
   {
