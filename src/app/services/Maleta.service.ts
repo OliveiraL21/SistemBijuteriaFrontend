@@ -20,6 +20,10 @@ export class MaletaService {
     return this.http.get<Maleta>(`${baseUrl}/${id}`);
   }
 
+  getMaletaAtual(): Observable<Maleta> {
+    return this.http.get<Maleta>(`${baseUrl}/maleta-atual`);
+  }
+
   create(data: Maleta): Observable<Maleta> {
     return this.http.post<Maleta>(`${baseUrl}`, data);
   }
