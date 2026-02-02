@@ -1,1 +1,59 @@
+<section class="p-4">
+  <h1>Dashboard</h1>
+  <p-card [style]="{'heigth': '150px', 'width': '100%', 'padding': '1rem'}">
+    <ng-template pTemplate="header">
+      <h3 class="ml-3 mt-2">Maleta Atual</h3>
+      <section class="flex align-items-center justify-content-center gap-5">
+        <p-card [style]="{'width': '160px'}">
+          <ng-template pTemplate="header">
+            <h4 class="mini__card-title">Número</h4>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <span class=" mini__card-content">123456</span>
+          </ng-template>
+        </p-card>
 
+        <p-card class="p-2 w-2">
+          <ng-template pTemplate="header">
+            <h4>Data de Envio</h4>
+          </ng-template>
+
+          <ng-template pTemplate="content">
+            <span>01/01/2026</span>
+          </ng-template>
+        </p-card>
+
+        <p-card class="p-2 w-2">
+          <ng-template pTemplate="header">
+            <h4>Data de Vencimento</h4>
+          </ng-template>
+
+          <ng-template pTemplate="content">
+            <span>01/02/2026</span>
+          </ng-template>
+        </p-card>
+
+        <p-card class="p-2 w-2">
+          <ng-template pTemplate="header">
+            <h4>Data do Pagamento</h4>
+          </ng-template>
+
+          <ng-template pTemplate="content">
+            <span>01/03/2026</span>
+          </ng-template>
+        </p-card>
+
+        <p-card class="p-2 w-2">
+          <ng-template pTemplate="header">
+            <h4>Vendas em aberto</h4>
+          </ng-template>
+
+          <ng-template pTemplate="content">
+            <span>5</span>
+          </ng-template>
+        </p-card>
+
+      </section>
+    </ng-template>
+  </p-card>
+</section>
