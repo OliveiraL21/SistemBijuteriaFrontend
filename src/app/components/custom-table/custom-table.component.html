@@ -31,8 +31,14 @@
       <tr>
         <td *ngFor="let col of columns" [ngClass]="col.classes">
           <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Ativo' ">
-            <p-tag class="p-4" severity="warning" [value]="generateTableValues(data, col.field)"></p-tag>
+            <p-tag class="p-4" secondary="primary" [value]="generateTableValues(data, col.field)"></p-tag>
           </ng-content>
+
+          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Atual'">
+            <p-tag class="p-4" severity="warning" [value]="generateTableValues(data, col.field)">
+            </p-tag>
+          </ng-content>
+
           <ng-content class="w-full"
             *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Em aberto'">
             <p-tag severity="info" class="p-4" [value]="generateTableValues(data, col.field)">
@@ -46,6 +52,11 @@
 
           <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Finalizado'">
             <p-tag class="p-4" severity="success" [value]="generateTableValues(data, col.field)">
+            </p-tag>
+          </ng-content>
+
+          <ng-content *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Entregue'">
+            <p-tag severity="success" class="p-4" [value]="generateTableValues(data, col.field)">
             </p-tag>
           </ng-content>
 

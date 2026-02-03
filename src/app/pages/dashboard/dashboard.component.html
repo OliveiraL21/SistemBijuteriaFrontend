@@ -4,52 +4,70 @@
     <ng-template pTemplate="header">
       <h3 class="ml-3 mt-2">Maleta Atual</h3>
       <section class="flex align-items-center justify-content-center gap-5">
-        <p-card [style]="{'width': '160px'}">
+        <p-card class="w-2">
           <ng-template pTemplate="header">
-            <h4 class="mini__card-title">Número</h4>
+            <div class="flex justify-content-center align-items-center">
+              <p class="text-lg font-light">Número</p>
+            </div>
           </ng-template>
           <ng-template pTemplate="content">
-            <span class=" mini__card-content">123456</span>
+            <div class="flex justify-content-center align-items-center w-full"><span class="text-2xl">{{maleta.numero ??
+                '-' }}</span>
+            </div>
           </ng-template>
         </p-card>
 
-        <p-card class="p-2 w-2">
+        <p-card class="w-2">
           <ng-template pTemplate="header">
-            <h4>Data de Envio</h4>
+            <div class="flex justify-content-center align-items-center">
+              <p class="text-lg font-light">Envio</p>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="content">
-            <span>01/01/2026</span>
+            <div class="flex justify-content-center align-items-center w-full"><span class="text-2xl">{{(maleta.Envio |
+                date:
+                'dd/MM/yyyy') ?? '-' }}</span></div>
           </ng-template>
         </p-card>
 
-        <p-card class="p-2 w-2">
+        <p-card class="w-2">
           <ng-template pTemplate="header">
-            <h4>Data de Vencimento</h4>
+            <div class="flex justify-content-center align-items-center">
+              <p class="text-lg font-light">Vencimento</p>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="content">
-            <span>01/02/2026</span>
+            <div class="flex justify-content-center align-items-center w-full"><span class="text-2xl">{{(maleta.Troca |
+                date:
+                'dd/MM/yyyy') ?? '-' }}</span></div>
           </ng-template>
         </p-card>
 
-        <p-card class="p-2 w-2">
+        <p-card class="w-2">
           <ng-template pTemplate="header">
-            <h4>Data do Pagamento</h4>
+            <div class="flex justify-content-center align-items-center">
+              <p class="text-lg font-light">Pagamento</p>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="content">
-            <span>01/03/2026</span>
+            <div class="flex justify-content-center align-items-center w-full"><span
+                class="text-2xl">{{(maleta.Pagamento | date:
+                'dd/MM/yyyy') ?? '-' }}</span></div>
           </ng-template>
         </p-card>
 
-        <p-card class="p-2 w-2">
+        <p-card class="w-2">
           <ng-template pTemplate="header">
-            <h4>Vendas em aberto</h4>
+            <div class="flex justify-content-center align-items-center">
+              <p class="text-lg font-light">Vendas em aberto</p>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="content">
-            <span>5</span>
+            <div class="flex justify-content-center align-items-center w-full"><span class="text-2xl">5</span></div>
           </ng-template>
         </p-card>
 
