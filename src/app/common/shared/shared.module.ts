@@ -47,6 +47,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DividerModule } from 'primeng/divider';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -100,7 +101,8 @@ import { DividerModule } from 'primeng/divider';
     DialogModule,
     TagModule,
     SplitButtonModule,
-    DividerModule
+    DividerModule,
+    ChartModule
   ],
   exports: [
     CommonModule,
@@ -149,7 +151,8 @@ import { DividerModule } from 'primeng/divider';
     DialogModule,
     TagModule,
     SplitButtonModule,
-    DividerModule
+    DividerModule,
+    ChartModule
   ],
   providers: [
     MessageService,

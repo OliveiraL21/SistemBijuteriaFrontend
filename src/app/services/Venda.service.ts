@@ -41,4 +41,8 @@ export class VendaService {
     return this.http.put<any>(`${baseUrl}/finalizarVenda/${id}`, data);
   }
 
+  getNumberOfSellsByBriefcase(id: string): Observable<number> {
+    return this.http.get<number>(`${baseUrl}/get-number-of-sells/${id}`);
+  }
+
 }
