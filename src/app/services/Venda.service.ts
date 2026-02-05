@@ -45,4 +45,8 @@ export class VendaService {
     return this.http.get<number>(`${baseUrl}/get-number-of-sells/${id}`);
   }
 
+  getByMonth(): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/get-by-month`);
+  }
+
 }

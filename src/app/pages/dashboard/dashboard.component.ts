@@ -13,6 +13,9 @@ export class DashboardComponent {
   form!: FormGroup;
   maleta: Maleta = new Maleta();
   numberOfVendas: number = 0;
+  basicOptions: any;
+  basicData: any;
+  vendas: any[] = [];
 
   constructor(private fb: FormBuilder, private maletaSeervice: MaletaService, private vendaService: VendaService) {
 
@@ -39,7 +42,74 @@ export class DashboardComponent {
     });
   }
 
+  getVendasByMonth() {
+    this.vendaService.getByMonth().subscribe({
+      next: (data) => {
+        this.vendas = data.map((item: any) => item.valor);
+        this.configureChartData();
+      },
+      error: (err) => {
+        console.error('Error fetching vendas by month:', err);
+      }
+    });
+  }
+
+  configureBasicOptions() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+    this.basicOptions = {
+      plugins: {
+        legend: {
+          labels: {
+            color: textColor
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: textColorSecondary
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false
+          }
+        },
+        x: {
+          ticks: {
+            color: textColorSecondary
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false
+          }
+        }
+      }
+    };
+  }
+
+  configureChartData() {
+    this.basicData = {
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      datasets: [
+        {
+          label: 'Vendas',
+          data: [this.vendas[0], this.vendas[1], this.vendas[2], this.vendas[3], this.vendas[4], this.vendas[5], this.vendas[6], this.vendas[7], this.vendas[8], this.vendas[9], this.vendas[10], this.vendas[11]],
+          backgroundColor: ['rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
+          borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'],
+          borderWidth: 1
+        }
+      ]
+    }
+  }
+
   ngOnInit(): void {
     this.getMaletaAtual();
+    this.getVendasByMonth();
+    this.configureBasicOptions();
   }
 }
