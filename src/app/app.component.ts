@@ -15,7 +15,7 @@ export class AppComponent {
   title = 'Bijuteria da Manu';
   authenticated: boolean = false;
   profilePhoto: any;
-
+  username: string = '';
   constructor(private tokenService: TokenService, private router: Router, private userService: UserService) {
   }
 
@@ -62,6 +62,7 @@ export class AppComponent {
       this.userService.findByUsername(this.tokenService.getItem('username') ?? '').subscribe({
         next: (user: Usuario) => {
           this.profilePhoto = user.foto;
+          this.username = this.tokenService.getItem('username') ?? '';
         }
       })
     }

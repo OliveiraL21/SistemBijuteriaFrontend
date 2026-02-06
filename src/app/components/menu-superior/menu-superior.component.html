@@ -1,0 +1,22 @@
+<header class="bg-white w-full h-5rem m-0 p-0 -mt-3">
+  <nav class="m-0 p-0 h-full">
+    <ul class="navbar-menulist w-full h-full flex justify-content-end align-items-center px-4">
+      <li>
+
+      </li>
+      <li class="flex justify-content-center align-items-center mr-5">
+        <div *ngIf="userPhoto; then imageAvatar else iconAvatar"></div>
+        <ng-template #imageAvatar>
+          <p-avatar [image]="userPhoto" styleClass="bg-cover" size="large" shape="circle"></p-avatar>
+        </ng-template>
+
+        <ng-template #iconAvatar>
+          <p-avatar #iconAvatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+        </ng-template>
+        <span class="inline-flex flex-column">
+          <span class="text-white font-bold text-sm">{{username}}</span>
+        </span>
+      </li>
+    </ul>
+  </nav>
+</header>

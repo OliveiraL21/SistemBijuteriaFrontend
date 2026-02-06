@@ -15,6 +15,7 @@ import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { MaletaListagemComponent } from './pages/maleta/maleta-listagem/maleta-listagem.component';
 import { MaletaCadastroComponent } from './pages/maleta/maleta-cadastro/maleta-cadastro.component';
+import { MenuSuperiorModule } from "./components/menu-superior/menu-superior.module";
 
 registerLocaleData(ptBr);
 
@@ -29,6 +30,7 @@ registerLocaleData(ptBr);
     LoginModule,
     MenuPrincipalModule,
     BrowserAnimationsModule,
+    MenuSuperiorModule
   ],
   providers: [
     AuthenticateInterceptor, { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true },

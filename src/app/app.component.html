@@ -3,11 +3,12 @@
   <div *ngIf="authenticated == false">
     <router-outlet></router-outlet>
   </div>
-  <div *ngIf="authenticated" class="flex  ">
+  <div *ngIf="authenticated" class="flex">
     <div style="min-height: 100vh!important;">
       <app-menu-principal [userPhoto]="profilePhoto"></app-menu-principal>
     </div>
-    <div class="w-11 pr-4 surface-100">
+    <div class="w-11 surface-100">
+      <app-menu-superior [userPhoto]="profilePhoto" [username]="username"></app-menu-superior>
       <router-outlet></router-outlet>
     </div>
   </div>
