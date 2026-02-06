@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MaletaService } from '../../services/Maleta.service';
 import { Maleta } from '../../models/entityModels/maleta/Maleta';
 import { VendaService } from '../../services/Venda.service';
+import { Venda } from '../../models/entityModels/Venda/Venda';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent {
   basicOptions: any;
   basicData: any;
   vendas: any[] = [];
+  vendasAtrasadas: Venda[] = [];
 
   constructor(private fb: FormBuilder, private maletaSeervice: MaletaService, private vendaService: VendaService) {
 
@@ -50,6 +52,14 @@ export class DashboardComponent {
       },
       error: (err) => {
         console.error('Error fetching vendas by month:', err);
+      }
+    });
+  }
+
+  getVendasEmAtraso() {
+    this.vendaService.getVendasEmAtraso().subscribe({
+      next: (vendas: Venda[]) => {
+        this.vendasAtrasadas = vendas;
       }
     });
   }
@@ -110,6 +120,7 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.getMaletaAtual();
     this.getVendasByMonth();
+    this.getVendasEmAtraso();
     this.configureBasicOptions();
   }
 }

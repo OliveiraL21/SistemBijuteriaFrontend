@@ -49,4 +49,8 @@ export class VendaService {
     return this.http.get<any>(`${baseUrl}/get-by-month`);
   }
 
+  getVendasEmAtraso(): Observable<Venda[]> {
+    return this.http.get<Venda[]>(`${baseUrl}/vendas-em-atraso`);
+  }
+
 }
