@@ -9,7 +9,7 @@
       <li class="flex justify-content-center align-items-center mr-2 cursor-pointer" (click)="myAccount()">
         <div *ngIf="userPhoto; then imageAvatar else iconAvatar"></div>
         <ng-template #imageAvatar>
-          <p-avatar [image]="userPhoto" styleClass="bg-cover" size="large" shape="circle"></p-avatar>
+          <p-avatar [image]="userPhoto" styleClass="bg-contain" size="large" shape="circle"></p-avatar>
         </ng-template>
 
         <ng-template #iconAvatar>
