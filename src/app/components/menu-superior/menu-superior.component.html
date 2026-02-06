@@ -1,10 +1,12 @@
-<header class="bg-white w-full h-5rem m-0 p-0 -mt-3">
+<header class="bg-white w-full h-4rem m-0 p-0 -mt-3">
   <nav class="m-0 p-0 h-full">
-    <ul class="navbar-menulist w-full h-full flex justify-content-end align-items-center px-4">
-      <li>
-
+    <ul class="navbar-menulist w-full h-full flex justify-content-end align-items-center px-2">
+      <li class="mr-3">
+        <div class="card flex justify-content-center">
+          <i class="pi pi-bell text-xl" pBadge value="2"></i>
+        </div>
       </li>
-      <li class="flex justify-content-center align-items-center mr-5">
+      <li class="flex justify-content-center align-items-center mr-2 cursor-pointer" (click)="myAccount()">
         <div *ngIf="userPhoto; then imageAvatar else iconAvatar"></div>
         <ng-template #imageAvatar>
           <p-avatar [image]="userPhoto" styleClass="bg-cover" size="large" shape="circle"></p-avatar>
@@ -14,7 +16,7 @@
           <p-avatar #iconAvatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
         </ng-template>
         <span class="inline-flex flex-column">
-          <span class="text-white font-bold text-sm">{{username}}</span>
+          <span class="text-sm ml-2">{{username}}</span>
         </span>
       </li>
     </ul>
