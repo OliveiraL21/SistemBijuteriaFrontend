@@ -4,6 +4,7 @@ import { MaletaService } from '../../services/Maleta.service';
 import { Maleta } from '../../models/entityModels/maleta/Maleta';
 import { VendaService } from '../../services/Venda.service';
 import { Venda } from '../../models/entityModels/Venda/Venda';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent {
   vendas: any[] = [];
   vendasAtrasadas: Venda[] = [];
 
-  constructor(private fb: FormBuilder, private maletaSeervice: MaletaService, private vendaService: VendaService) {
+  constructor(private fb: FormBuilder, private maletaSeervice: MaletaService, private vendaService: VendaService, private router: Router) {
 
   }
 
@@ -115,6 +116,10 @@ export class DashboardComponent {
         }
       ]
     }
+  }
+
+  viewVenda(id: string) {
+    this.router.navigateByUrl(`/vendas/venda/${id}`);
   }
 
   ngOnInit(): void {
