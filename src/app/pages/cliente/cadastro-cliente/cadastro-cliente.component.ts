@@ -75,12 +75,33 @@ export class CadastroClienteComponent {
     ]
   }
 
+  verificarTipoDeTelefone(telefone: string) {
+    const celularRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
+    const fixoRegex = /^\(\d{2}\) \d{4}-\d{4}$/;
+    if (!telefone) {
+      if (celularRegex.test(telefone)) {
+        return 'celular';
+      }
+      if (fixoRegex.test(telefone)) {
+        return 'fixo';
+      }
+    }
+    return 'fixo';
+  }
+
   getCliente() {
     if (this.id) {
       this.clienteService.details(this.id).subscribe({
         next: (response: Cliente) => {
           this.loading = false;
           Object.keys(response).forEach((key: string) => {
+            if (this.verificarTipoDeTelefone(response.telefone) === 'celular') {
+              this.onTipoContatoChange('celular');
+              this.form.get('tipoContato')?.setValue('celular');
+            } else {
+              this.onTipoContatoChange('fixo');
+              this.form.get('tipoContato')?.setValue('fixo');
+            }
             this.form.get(key)?.setValue(response[key as keyof Cliente]);
           })
         }
@@ -145,6 +166,7 @@ export class CadastroClienteComponent {
   updateCliente() {
     let cliente: Cliente;
     cliente = this.form.value;
+    cliente.telefone = this.form.value.celular ?? this.form.value.telefone;
     cliente.id = this.id;
     this.clienteService.update(this.id, cliente).subscribe({
       next: (cliente: Cliente) => {
