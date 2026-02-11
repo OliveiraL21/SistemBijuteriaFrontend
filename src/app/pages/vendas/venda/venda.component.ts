@@ -377,7 +377,7 @@ export class VendaComponent {
     let status: any = 'Em aberto';
 
     if (this.id && summoner === 'atraso') {
-      status = this.status.find(x => x.descricao === 'Em atraso')?.id;
+      status = this.status.find(x => x.descricao === 'Em Atraso')?.id;
       return status;
     }
 
@@ -387,7 +387,7 @@ export class VendaComponent {
     }
 
     if (summoner === 'salvar') {
-      status = this.status.find(x => x.descricao === 'Em aberto')?.id;
+      status = this.status.find(x => x.descricao === 'Em Aberto')?.id;
       return status;
     }
     return status;
