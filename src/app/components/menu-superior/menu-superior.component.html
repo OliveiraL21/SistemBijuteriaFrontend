@@ -2,9 +2,22 @@
   <nav class="m-0 p-0 h-full">
     <ul class="navbar-menulist w-full h-full flex justify-content-end align-items-center px-2">
       <li class="mr-3">
-        <div class="card flex justify-content-center">
-          <i class="pi pi-bell text-xl" pBadge value="2"></i>
+        <div class="card flex justify-content-center cursor-pointer" (click)="op.toggle($event)">
+          <i class="pi pi-bell text-xl" pBadge [value]="badgeCount"></i>
         </div>
+        <p-overlayPanel #op [style]="{'width': '350px'}">
+          <ng-container *ngIf="notificacoes.length > 0; else noNotifications">
+            <div *ngFor="let notificacao of notificacoes" class="p-2 border-bottom cursor-pointer"
+              (click)="lerNotificacao(notificacao); op.hide()">
+              <!-- <div class="font-bold">{{ notificacao.titulo }}</div> -->
+              <div class="text-sm">{{ notificacao.mensagem }}</div>
+              <div class="text-xs text-gray-500">{{ notificacao.createAt | date:'short' }}</div>
+            </div>
+          </ng-container>
+          <ng-template #noNotifications>
+            <div class="p-2 text-center text-gray-500">Nenhuma notificação</div>
+          </ng-template>
+        </p-overlayPanel>
       </li>
       <li class="flex justify-content-center align-items-center mr-2 cursor-pointer" (click)="myAccount()">
         <div *ngIf="userPhoto; then imageAvatar else iconAvatar"></div>

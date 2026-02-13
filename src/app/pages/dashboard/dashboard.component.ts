@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+
   form!: FormGroup;
   maleta: Maleta = new Maleta();
   numberOfVendas: number = 0;
@@ -22,6 +23,9 @@ export class DashboardComponent {
 
   constructor(private fb: FormBuilder, private maletaSeervice: MaletaService, private vendaService: VendaService, private router: Router) {
 
+  }
+  viewVendasAbertas() {
+    this.router.navigateByUrl('/vendas/relatorio');
   }
 
   getMaletaAtual() {

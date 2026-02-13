@@ -49,6 +49,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { DividerModule } from 'primeng/divider';
 import { ChartModule } from 'primeng/chart';
 import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 
 
@@ -104,7 +105,8 @@ import { BadgeModule } from 'primeng/badge';
     SplitButtonModule,
     DividerModule,
     ChartModule,
-    BadgeModule
+    BadgeModule,
+    OverlayPanelModule
   ],
   exports: [
     CommonModule,
@@ -155,7 +157,8 @@ import { BadgeModule } from 'primeng/badge';
     SplitButtonModule,
     DividerModule,
     ChartModule,
-    BadgeModule
+    BadgeModule,
+    OverlayPanelModule
   ],
   providers: [
     MessageService,
