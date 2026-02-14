@@ -40,7 +40,7 @@
           </ng-content>
 
           <ng-content class="w-full"
-            *ngIf="col.field == 'status$descricao' && data['status']['descricao'] === 'Em Aberto'">
+            *ngIf="col.field == 'status$descricao' && (data['status']['descricao'] === 'Em Aberto' || data['status']['descricao'] === 'Em aberto') ">
             <p-tag severity="info" class="p-4" [value]="generateTableValues(data, col.field)">
             </p-tag>
           </ng-content>
