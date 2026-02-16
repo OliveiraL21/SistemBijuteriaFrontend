@@ -2,8 +2,8 @@ import { Cliente } from './../models/entityModels/cliente/Cliente';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment.development';
 import { CreateCliente } from '../models/entityModels/cliente/CreateCliente';
+import { environment } from '../../environments/environment';
 
 const baseUrl = `${environment.api_url}/Cliente`;
 

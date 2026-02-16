@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  api_url: 'lo'
+  production: true,
+  api_url: 'http://192.168.0.132:81/bijus-manu'
 };
