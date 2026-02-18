@@ -44,6 +44,10 @@ app.whenReady().then(() => {
   });
 
   updater.checkForUpdatesAndNotify();
+
+  if (process.platform === 'linux') {
+    app.setDesktopName('bijus-da-manu.desktop');
+  }
 });
 
 updater.on('update-downloaded', (info) => {
