@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" class="h-full">
   <div *ngFor="let control of controls; let i = index; trackBy:trackByFn">
     <div *ngIf="control.type === 'text'" class="w-25rem mt-5 mb-2">
       <app-input-text [controlData]="control.data" [form]="form"
