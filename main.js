@@ -16,7 +16,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    icon: path.join(__dirname, 'dist/sistem-bijuteria-frontend/browser/assets/images/diamond-ring.ico'),
+    icon: app.platform === 'linux' ? path.join(__dirname, 'dist/sistem-bijuteria-frontend/browser/assets/images/diamond-ring.png') : path.join(__dirname, 'dist/sistem-bijuteria-frontend/browser/assets/images/diamond-ring.ico'),
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "dist/sistem-bijuteria-frontend/browser/preload.js"),
