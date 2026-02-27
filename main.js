@@ -50,6 +50,24 @@ app.whenReady().then(() => {
   }
 });
 
+updater.on('checking-for-update', () => {
+  log.info('Verificando atualizações...');
+});
+
+updater.on('update-available', (info) => {
+  log.info('Atualização disponível.');
+  // Opcional: Avisar o usuário que está baixando
+});
+
+updater.on('update-not-available', (info) => {
+  log.info('Nenhuma atualização disponível.');
+});
+
+updater.on('error', (err) => {
+  log.error('Erro na atualização: ', err);
+});
+
+
 updater.on('update-downloaded', (info) => {
   dialog.showMessageBox({
     type: 'info',
