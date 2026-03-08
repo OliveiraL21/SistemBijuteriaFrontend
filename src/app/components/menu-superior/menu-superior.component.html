@@ -7,11 +7,11 @@
         </div>
         <p-overlayPanel #op [style]="{'width': '350px'}">
           <ng-container *ngIf="notificacoes.length > 0; else noNotifications">
-            <div *ngFor="let notificacao of notificacoes" class="p-2 border-bottom cursor-pointer"
-              (click)="lerNotificacao(notificacao); op.hide()">
+            <div *ngFor="let notificacao of notificacoes" class="p-2 border-bottom cursor-pointer">
               <div class="font-bold">{{ notificacao.titulo }}</div>
               <div class="text-sm py-2">{{ notificacao.mensagem }}</div>
               <div class="text-xs text-gray-500">{{ notificacao.createAt | date:'short' }}</div>
+              <div class="text-xs text-blue-300" (click)="lerNotificacao(notificacao); op.hide()">marcar como lido</div>
             </div>
           </ng-container>
           <ng-template #noNotifications>
