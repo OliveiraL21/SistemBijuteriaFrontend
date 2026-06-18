@@ -4,10 +4,12 @@
 const { app, BrowserWindow, autoUpdater, dialog } = require("electron");
 const { autoUpdater: updater } = require('electron-updater');
 const path = require("path");
+const log = require('electron-log');
+
 app.commandLine.appendSwitch('high-dpi-support', 'true');
 app.commandLine.appendSwitch('force-device-scale-factor', '1');
 
-updater.logger = require('electron-log');
+updater.logger = log;
 updater.logger.transports.file.level = 'info';
 
 
